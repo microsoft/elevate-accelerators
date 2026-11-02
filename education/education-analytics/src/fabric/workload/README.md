@@ -107,7 +107,7 @@ npm run build:test
 npm audit
 ```
 
-On the current Windows/NVM development machine, `npm ci` repeatedly remained CPU-bound for more than 20 minutes and was stopped; `npm install` from the same committed lockfile completed, and the subsequent type-check and build passed. Keep `npm ci` as the CI/Linux reproducibility gate and investigate the Windows npm behavior before making it a local release requirement.
+`npm ci` can stay CPU-bound for a long time on some Windows machines. If that happens, use `npm install` from the committed lockfile.
 
 From `src/fabric/workload`:
 
@@ -115,9 +115,7 @@ From `src/fabric/workload`:
 ./scripts/Build/BuildManifestPackage.ps1 -Environment test -ValidateFiles $true
 ```
 
-The reviewed dependency tree has no high or critical advisories. Two moderate advisories remain in a nested `uuid` version used by `@ms-fabric/workload-client`; npm reports no available fix. Recheck when Microsoft publishes a newer compatible client.
-
-Webpack currently reports a 503 KB vendor chunk from Fluent UI. This is a performance warning, not a build failure; keep new dependencies out of the baseline and revisit code splitting before broad publication.
+Webpack reports a large vendor chunk from Fluent UI. This is a performance warning, not a build failure.
 
 ## Build and publish
 
@@ -131,29 +129,22 @@ Webpack currently reports a 503 KB vendor chunk from Fluent UI. This is a perfor
 
 The release contains the static SPA and manifest package. Deploy the SPA to an approved HTTPS endpoint and upload the manifest package through Fabric workload management.
 
-## Tenant testing
-
-### Tenant smoke test
+## Smoke test
 
 1. Keep `StartDevServer.ps1` running and confirm `http://127.0.0.1:60006/manifests_new/metadata` returns HTTP 200.
 2. Run `StartDevGateway.ps1` with its default interactive authentication and complete the Microsoft sign-in window.
 3. In Fabric, enable **Developer settings > Fabric Developer mode**.
 4. Open `https://app.fabric.microsoft.com/workloadhub/detail/Org.EducationAnalytics.Product?experience=fabric-developer`.
-5. Create an **Education Solution** item in workspace `EDUCATION-ANALYTICS`.
+5. Create an **Education Solution** item in your development workspace.
 6. Select **Deploy package** and confirm a folder named after the Education item contains all thirteen prefixed artifacts and the Bronze Lakehouse contains the manifest plus 28 source CSVs.
 7. Save, reopen the item, and verify Overview, Data, and Reports. Do not run end-to-end processing unless Bronze source files are present and the configured reporting period is intended for a new Gold publication.
 
-The local development registration was accepted by Fabric on 2026-09-18. Fabric manifest item files use frontend schema `1.100`, and manifest images are PNG because Fabric rejects SVG files in workload packages.
+Fabric manifest item files use frontend schema `1.100`, and manifest images are PNG because Fabric rejects SVG files in workload packages.
 
-### Verified deployment behavior
+## Deployment behavior
 
-On 2026-09-18 the deployment engine was exercised against live Fabric APIs:
-
-- Existing workspace: reused three Lakehouses and updated seven notebooks plus one pipeline without duplicate managed items. This result predates the folder-owned v2 model and should not be treated as v2 tenant validation.
-- Reporting configuration: preserved `2025-09-01` through `2026-05-09` in the deployed enrichment notebook.
-- Empty workspace: created exactly three Lakehouses, seven notebooks and one Data Pipeline on the assigned Fabric capacity.
-- Bronze cleanup: removes the Fabric-generated `EDU_Bronze_EventhouseEndpoint` Eventhouse and KQL Database while preserving the Lakehouse SQL endpoint.
-- Cleanup: deleted the temporary creation-test workspace after verification.
+- Existing artifacts are reused and updated without creating duplicates.
+- The Fabric-generated `EDU_Bronze_EventhouseEndpoint` Eventhouse and KQL Database are removed while the Lakehouse SQL endpoint is preserved.
 
 The browser package ships the seven artifact definitions and the active synthetic source package. The first deployment uploads all manifest-listed CSVs to the owned Bronze Lakehouse; updates leave them unchanged unless sample refresh is selected. Deployment does not execute notebooks automatically.
 
@@ -170,6 +161,6 @@ Partners should customize only:
 
 Do not introduce a package registry, custom backend, direct OneLake browser access, or custom reporting framework without a concrete requirement and security review.
 
-## Current operational boundary
+## Operational boundary
 
 The deployment package includes three Lakehouses, all seven notebooks, the `EDU_BR_GD_Processing` pipeline, semantic model, report, and an optional refresh of the 28 synthetic source CSVs. It does not execute notebooks automatically. After source data is available, the workload runs all six stages from Bronze schema creation through Gold enrichment in one native Fabric pipeline.

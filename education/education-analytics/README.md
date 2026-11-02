@@ -30,7 +30,6 @@ Source CSV files  ->  Bronze Lakehouse  ->  Silver Lakehouse  ->  Gold Lakehouse
 | [`src/fabric/workload/`](src/fabric/workload/) | React/TypeScript Fabric workload for guided deployment |
 | [`src/power-bi/`](src/power-bi/) | Semantic model and report (PBIP/TMDL) |
 | [`sample-data/`](sample-data/) | Synthetic district: manifest and 28 source CSV files |
-| [`docs/specifications/`](docs/specifications/) | Silver, Bronze-to-Silver, Gold and workload specifications |
 | [`docs/data-models/`](docs/data-models/) | Silver and Gold model, relationship and calculation definitions |
 | [`docs/use-cases/`](docs/use-cases/) | Use cases and report walkthrough |
 

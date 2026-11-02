@@ -66,12 +66,12 @@
         }
       ],
         "supportLink": {
-          "documentation": {"url": "https://github.com/vuhrova_microsoft/education-analytics"},
+          "documentation": {"url": "https://github.com/microsoft/elevate-accelerators/tree/main/education/education-analytics"},
           "certification": {"url": "https://learn.microsoft.com/fabric/extensibility-toolkit/publishing-overview"},
-          "help": {"url": "https://github.com/vuhrova_microsoft/education-analytics/issues"},
+          "help": {"url": "https://github.com/microsoft/elevate-accelerators/issues"},
           "privacy": {"url": "https://privacy.microsoft.com/privacystatement"},
           "terms": {"url": "https://www.microsoft.com/licensing/terms"},
-          "license": {"url": "https://github.com/vuhrova_microsoft/education-analytics"}
+          "license": {"url": "https://github.com/microsoft/elevate-accelerators/blob/main/LICENSE"}
       }
     }
 }
