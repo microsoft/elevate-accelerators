@@ -1,0 +1,15 @@
+{
+  "name": "<accelerator-name>",
+  "title": "<Accelerator title>",
+  "sector": "<education|nonprofit>",
+  "description": "<One or two sentences describing the scenario.>",
+  "technologies": [
+    "<Microsoft Fabric>",
+    "<Power BI>"
+  ],
+  "version": "0.1.0",
+  "status": "Planned",
+  "owners": [
+    "@<github-handle>"
+  ]
+}

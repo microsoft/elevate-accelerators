@@ -1,0 +1,41 @@
+name: New accelerator
+description: Propose a new accelerator before starting work.
+labels: [new-accelerator]
+body:
+  - type: dropdown
+    id: sector
+    attributes:
+      label: Sector
+      options:
+        - Education
+        - Nonprofit
+        - Shared
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      description: Lowercase kebab-case, named after the scenario, for example donor-insights.
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario and business value
+    validations:
+      required: true
+  - type: textarea
+    id: technologies
+    attributes:
+      label: Technologies
+      description: For example Microsoft Fabric, Power BI, Azure, Power Platform, Copilot.
+    validations:
+      required: true
+  - type: input
+    id: owners
+    attributes:
+      label: Maintainers
+      description: At least two Microsoft maintainers.
+    validations:
+      required: true

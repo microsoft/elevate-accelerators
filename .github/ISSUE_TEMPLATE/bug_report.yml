@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a problem with an accelerator.
+labels: [bug]
+body:
+  - type: input
+    id: accelerator
+    attributes:
+      label: Accelerator
+      description: Path of the accelerator, for example education/education-analytics.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected. Do not include secrets or personal data.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Accelerator version
