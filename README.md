@@ -4,11 +4,9 @@ Elevate Accelerators is a Microsoft Elevate open-source collection of reusable s
 
 ## Accelerators
 
-| Accelerator | Sector | Technologies | Status |
-| --- | --- | --- | --- |
-| [Education analytics](education/education-analytics/) | Education | Microsoft Fabric, Power BI, Fabric workload | Planned |
-
-Status values are defined in [Accelerator standards](docs/accelerator-standards.md#status).
+| Accelerator | Sector | Technologies |
+| --- | --- | --- |
+| [Education analytics](education/education-analytics/) | Education | Microsoft Fabric, Power BI |
 
 ## Repository structure
 

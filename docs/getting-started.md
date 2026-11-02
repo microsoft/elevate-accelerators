@@ -2,8 +2,8 @@
 
 ## Choose an accelerator
 
-The [accelerator catalog](../README.md#accelerators) lists every accelerator with its sector,
-technologies and status. Start with accelerators marked **Stable** or **Preview**.
+The [accelerator catalog](../README.md#accelerators) lists every accelerator with its sector
+and technologies.
 
 ## Before you deploy
 

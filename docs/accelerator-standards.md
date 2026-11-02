@@ -23,9 +23,8 @@ consistent experience.
 ├── docs/                   Architecture, use cases, specifications, data model
 ├── deploy/                 Installers, Bicep/ARM templates, setup scripts
 ├── src/
-│   ├── fabric/             Notebooks, pipelines, lakehouse definitions
+│   ├── fabric/             Notebooks, pipelines, lakehouses, Fabric workloads
 │   ├── power-bi/           Semantic models and reports (PBIP/TMDL)
-│   ├── fabric-workload/    Fabric Extensibility Toolkit application
 │   ├── azure/              Functions, Logic Apps, infrastructure
 │   ├── power-platform/     Power Apps and Power Automate solutions
 │   └── copilot/            Copilot Studio or declarative agents
@@ -46,18 +45,8 @@ Include only the `src/` folders the accelerator needs.
 | `sector` | `education`, `nonprofit` or another agreed sector. |
 | `description` | One or two sentences describing the scenario. |
 | `technologies` | Microsoft technologies used, for example `Microsoft Fabric`, `Power BI`. |
-| `version` | Semantic version of the latest release. |
-| `status` | See [Status](#status). |
+| `version` | Semantic version of the accelerator. |
 | `owners` | GitHub handles or teams that maintain the accelerator. |
-
-## Status
-
-| Status | Meaning |
-| --- | --- |
-| Planned | Accepted and in progress. Not ready to deploy. |
-| Preview | Deployable and tested, but may change. |
-| Stable | Tested, documented and maintained. |
-| Deprecated | No longer maintained. Kept for reference. |
 
 ## Security
 
@@ -86,9 +75,3 @@ Include only the `src/` folders the accelerator needs.
 - Document prerequisites, deployment steps, cost drivers and known limits.
 - Provide repeatable validation steps or automated tests.
 - Check user-facing experiences, such as apps and reports, for accessibility.
-
-## Releases
-
-Version each accelerator independently using semantic versioning. Tag releases as
-`<accelerator-name>/v<major>.<minor>.<patch>`, for example `education-analytics/v0.5.0`, and
-record changes in the accelerator's `CHANGELOG.md`.
