@@ -33,8 +33,7 @@ consistent experience.
 └── tests/
 ```
 
-Include only the `src/` folders the accelerator needs. Start from
-[`templates/accelerator`](../templates/accelerator/).
+Include only the `src/` folders the accelerator needs.
 
 ## Metadata
 

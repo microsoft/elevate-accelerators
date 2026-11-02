@@ -15,7 +15,6 @@ Status values are defined in [Accelerator standards](docs/accelerator-standards.
 ```text
 elevate-accelerators/
 ├── docs/          Standards and guidance for all accelerators
-├── templates/     Starting point for a new accelerator
 ├── education/     Accelerators for schools and universities
 ├── nonprofit/     Accelerators for nonprofit organizations
 └── shared/        Assets reused by two or more accelerators
