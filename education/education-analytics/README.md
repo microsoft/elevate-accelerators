@@ -33,7 +33,6 @@ Source CSV files  ->  Bronze Lakehouse  ->  Silver Lakehouse  ->  Gold Lakehouse
 | [`docs/specifications/`](docs/specifications/) | Silver, Bronze-to-Silver, Gold and workload specifications |
 | [`docs/data-models/`](docs/data-models/) | Silver and Gold model, relationship and calculation definitions |
 | [`docs/use-cases/`](docs/use-cases/) | Use cases and report walkthrough |
-| [`docs/research/`](docs/research/) | Source system research and public schema evidence |
 
 Fabric artifacts follow `<solution>_<layer>_<action-or-flow>` naming, using `EDU`, `BR`, `SL` and
 `GD`; for example `EDU_Config`, `EDU_SL_CreateSchema` and `EDU_BR_GD_Processing`.

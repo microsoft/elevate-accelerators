@@ -51,7 +51,7 @@ For a custom volume, run `python "sample-data/generate.py" --schools 3 --average
 | Moodle | Student users, course shells, enrollment instances and user enrollments, assignments, submission states, grades | Selected database XMLDB fields from the research reference release. **Not web-service responses, complete database rows, SQL insert scripts or a restorable dump**. No module placement, completion or staff-role tables in this profile |
 | NWEA | StudentBySchool and AssessmentResults selected fields for three windows in each of two school years | Selected literal Comprehensive dictionary fields. Not a complete vendor CSV/ZIP export; no ambiguous repeated headers are expanded |
 
-Partial records intentionally omit many vendor fields. Field-name and selected primitive-type checks do not establish full requiredness/nullability or API compatibility. PowerSchool proposed fields cannot be checked against a complete official schema. See [the official schema evidence](../docs/research/official-schemas/README.md) for provenance and limitations.
+Partial records intentionally omit many vendor fields. Field-name and selected primitive-type checks do not establish full requiredness/nullability or API compatibility. PowerSchool proposed fields cannot be checked against a complete official schema.
 
 ## Cohort and known answers
 

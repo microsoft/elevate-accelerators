@@ -46,7 +46,7 @@ School 1 uses Moodle; schools 2 and 3 use Canvas. The first school in each three
 
 Organization relationships are carried in the proposed SIS extracts and source identifiers; cross-source mappings must be derived during transformation rather than supplied as additional Bronze tables. Native Canvas account/subaccount records and Moodle category-to-school mappings are **not yet generated**. Source-qualified keys remain necessary even when source numeric IDs happen to match.
 
-See the official evidence guides for [PowerSchool](../docs/research/official-schemas/powerschool-official-schema.md), [Canvas](../docs/research/official-schemas/canvas-official-schema.md), [Moodle](../docs/research/official-schemas/moodle-official-schema.md), and [NWEA](../docs/research/official-schemas/nwea-official-schema.md). The distinction above is organizational; it does not require real data or institutional access for our synthetic tests.
+The distinction above is organizational; it does not require real data or institutional access for our synthetic tests.
 
 ## Generate and check
 
@@ -90,7 +90,7 @@ For a custom size:
 python "sample-data/generate_district.py" --schools 3 --average-students-per-school 600 --days 180
 ```
 
-Requires Python 3.11+ and the two captured official evidence CSVs, with no additional packages, Docker, tenants or real data. Both generator commands stream to the primary `sample-data/<source>/<table>.csv` folders, not the retired `generated/district/` location. Regeneration overwrites this profile's files; there is no automatic cleanup of unrelated files. Check mode reads the saved manifest, ignores sizing flags and rejects missing or extra primary CSV tables. The old 30-student package and small-only completion tables are removed; Git history retains them.
+Requires Python 3.11+ and the two captured official evidence CSVs in [`schema-evidence/`](schema-evidence/), with no additional packages, Docker, tenants or real data. Both generator commands stream to the primary `sample-data/<source>/<table>.csv` folders, not the retired `generated/district/` location. Regeneration overwrites this profile's files; there is no automatic cleanup of unrelated files. Check mode reads the saved manifest, ignores sizing flags and rejects missing or extra primary CSV tables. The old 30-student package and small-only completion tables are removed; Git history retains them.
 
 **Primary outputs are no longer under an ignored directory:** they replace the version-controlled source samples. Only legacy files under `generated/` remain ignored and must not be loaded. The primary manifest includes counts, interface/grain metadata, evidence hashes, file hashes and expected results. CSVs use UTF-8, LF, JSON Boolean values and `\N` for null. Source string identifiers must remain strings. This manifest lists column names, not complete vendor types/nullability.
 

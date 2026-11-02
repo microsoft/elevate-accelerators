@@ -14,7 +14,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 OUTPUT = BASE
-EVIDENCE = BASE.parent / 'docs' / 'research' / 'official-schemas'
+EVIDENCE = BASE / 'schema-evidence'
 NULL = '\\N'
 DISTRICT_NAME = 'Cedar Valley School District'
 GIVEN_NAMES = ('Amelia', 'Oliver', 'Sophia', 'Elijah', 'Maya', 'Lucas', 'Isabella', 'Noah',
