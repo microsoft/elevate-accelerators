@@ -12,8 +12,8 @@ across all repositories that use the Microsoft CLA. See [cla.opensource.microsof
 
 - **Report a bug or request a feature:** open a GitHub Issue and name the accelerator.
 - **Improve an existing accelerator:** open a pull request against its folder.
-- **Propose a new accelerator:** open an issue with the **New accelerator** template before you
-  start work, so maintainers can confirm the sector, scope and owners.
+- **Propose a new accelerator:** open an issue describing the sector, scenario and owners before you
+  start work, so maintainers can confirm the scope.
 
 ## Pull request checklist
 

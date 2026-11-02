@@ -1,6 +1,6 @@
 # Adding an accelerator
 
-1. Open a **New accelerator** issue with the sector, name, scenario, technologies and at least two
+1. Open an issue proposing the accelerator, with the sector, name, scenario, technologies and at least two
    maintainers. Wait for maintainer agreement before you start.
 2. Create `<sector>/<accelerator-name>/` with the layout described in
    [Accelerator standards](accelerator-standards.md#required-layout).
