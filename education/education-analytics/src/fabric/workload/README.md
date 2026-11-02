@@ -107,8 +107,6 @@ npm run build:test
 npm audit
 ```
 
-`npm ci` can stay CPU-bound for a long time on some Windows machines. If that happens, use `npm install` from the committed lockfile.
-
 From `src/fabric/workload`:
 
 ```powershell
