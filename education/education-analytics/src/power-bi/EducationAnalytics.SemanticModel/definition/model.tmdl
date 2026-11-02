@@ -1,0 +1,61 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DimSchool","DimStudent","DimTeacher","DimSection","DimContent","DimAssessment","DimWindow","DimDate","BridgeStudentSection","BridgeTeacherSection","FactAttendanceDay","FactAssessment","FactSubmissionState","FactSubmission","FactStudentAction","FactEnrollment","GoldPublication","GoldSqlEndpoint","GoldDatabase"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DimSchool
+ref table DimStudent
+ref table DimTeacher
+ref table DimSection
+ref table DimContent
+ref table DimAssessment
+ref table DimWindow
+ref table DimGrade
+ref table DimDate
+ref table BridgeStudentSection
+ref table BridgeTeacherSection
+ref table FactAttendanceDay
+ref table FactAssessment
+ref table FactSubmissionState
+ref table FactSubmission
+ref table FactStudentAction
+ref table FactEnrollment
+ref table GoldPublication
+ref table 'Rolling Window'
+ref table 'Chronic Absence Threshold'
+ref table 'Attendance Rule'
+ref table DateTableTemplate_626a3205-7b50-4e73-b0db-9853c38bc9a9
+ref table LocalDateTable_ff6fd6a2-763c-41c6-9bef-7f29ba8934a1
+ref table LocalDateTable_95914168-d8b2-40db-9d6c-3e8ee6534e14
+ref table LocalDateTable_9ee6b2ca-bbc1-4b93-a709-f9259cf134b4
+ref table LocalDateTable_3dd32261-653e-4172-a8a4-35410f71c3fd
+ref table LocalDateTable_16a27b0a-149e-4fc8-b344-af1948bce6c6
+ref table LocalDateTable_23c777bd-55d9-4501-a7db-a4e599b9621d
+ref table LocalDateTable_658d5fba-7760-47b4-a1d8-6d79bdc55420
+ref table LocalDateTable_0c894e12-9d7d-40b2-a7ac-5fd4646a1cb7
+ref table LocalDateTable_af096f5c-378d-4078-be1e-adda0c90cdd1
+ref table LocalDateTable_825b8bb6-2ea2-41c0-92c6-491cf60a2916
+ref table LocalDateTable_5939544e-7f70-4b31-bc30-e02931132165
+ref table LocalDateTable_3cb4cafa-db7f-4964-9ecf-e595df6676e1
+ref table LocalDateTable_7bf806c0-c74c-4821-b0a3-b51d7487efef
+ref table LocalDateTable_bac7b976-4648-4d9c-93bb-1bdf6ff21342
+ref table LocalDateTable_863fd4b8-ad04-4f71-a25f-95aa5353e44b
+ref table LocalDateTable_85ac1dd3-d999-485a-9c9e-840423c8cd7e
+ref table LocalDateTable_222e4759-99d7-45e1-8951-abe04584c8d8
+ref table LocalDateTable_56b6284e-3fdc-458c-a767-8920d8a03ef5
+ref table LocalDateTable_65b8e436-2270-4db6-b241-3dddf6eeaed1
+ref table LocalDateTable_4b7f1a72-c30a-4717-8a93-8e6f5fd5af23
+ref table LocalDateTable_4d34d6da-9278-4248-a2d8-c91af5406575
+ref table LocalDateTable_be5df958-998b-452c-b3b2-13861007cb59
+ref table LocalDateTable_54c8e206-5e1d-406d-8f45-bb02f5b2738a
+

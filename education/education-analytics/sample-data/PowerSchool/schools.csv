@@ -1,0 +1,4 @@
+source_school_id,district_id,school_name,school_code,school_type,street_address,city,state,postal_code,county,language,website
+1,1,Alder Heights Middle School,CV-001,Middle School,2415 Colby Avenue,Everett,WA,98201,Snohomish,en,https://school1.cedarvalley.example
+2,1,Summit Harbor Middle School,CV-002,Middle School,19200 44th Avenue West,Lynnwood,WA,98036,Snohomish,en,https://school2.cedarvalley.example
+3,1,Rainier View Middle School,CV-003,Middle School,7500 212th Street SW,Edmonds,WA,98026,Snohomish,en,https://school3.cedarvalley.example

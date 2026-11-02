@@ -1,0 +1,23 @@
+/// Fully qualified Gold Lakehouse SQL analytics endpoint. Change it in Power BI Desktop under Transform data, Edit
+/// parameters to point the report at a different environment.
+expression GoldSqlEndpoint = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: da7b5d71-c418-4593-a4f4-47d22efb7aa3
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+/// Name of the Gold Lakehouse exposed through the SQL analytics endpoint.
+expression GoldDatabase = "EDU_GD" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: d4e6295c-bc9a-474d-8a3b-f1242357cd1f
+
+	annotation PBI_ResultType = Text
+
+/// Snapshot every Gold table loads. Leave it empty to resolve the newest published snapshot independently per table,
+/// which is only safe when nothing publishes during the refresh; the installer pins the snapshot it resolved once so
+/// that a publication landing mid-refresh cannot leave some tables on the old snapshot and others on the new one.
+expression GoldSnapshotId = "" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=false]
+	lineageTag: 6cf00be4-bd9b-4d0c-9fd6-2f9e0f5b0d41
+
+	annotation PBI_ResultType = Text
+

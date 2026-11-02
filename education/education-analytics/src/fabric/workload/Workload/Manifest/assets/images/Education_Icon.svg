@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Education Analytics</title>
+  <rect width="128" height="128" rx="18" fill="#0f6b57"/>
+  <path d="M22 34c17-5 31-2 42 8v57C53 89 39 86 22 91V34Z" fill="#ffffff"/>
+  <path d="M106 34c-17-5-31-2-42 8v57c11-10 25-13 42-8V34Z" fill="#dff3eb"/>
+  <path d="M64 42v57" stroke="#b7791f" stroke-width="5"/>
+  <path d="M34 52h19M34 64h19M75 52h19M75 64h19" stroke="#0f6b57" stroke-width="4" stroke-linecap="round"/>
+</svg>

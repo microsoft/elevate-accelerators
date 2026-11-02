@@ -1,0 +1,195 @@
+/// One row per test a student sat. If no score was recorded it stays empty rather than being set to zero.
+table FactAssessment
+	lineageTag: 9b5247e2-2575-4795-8ed4-efe12a5640bf
+
+	/// How many tests were sat and recorded. This counts sittings, not students, and it is not a measure of how many
+	/// took part.
+	measure 'Assessment Administrations' = DISTINCTCOUNT ( 'FactAssessment'[result_id] )
+		formatString: #,##0
+		displayFolder: Assessment
+		lineageTag: 71103eb3-66fc-446f-808f-d5168d960c31
+
+		annotation GoldMetricId = assessment_administrations
+
+	/// How many different students sat at least one test.
+	measure 'Students Assessed' = DISTINCTCOUNT ( 'FactAssessment'[student_id] )
+		formatString: #,##0
+		displayFolder: Assessment
+		lineageTag: f768d79b-3ef3-4fab-8a26-55fb8f65318b
+
+	/// How many recorded sittings have a score. The difference is missing scores, which stay missing.
+	measure 'Administrations with a Score' = CALCULATE ( COUNTROWS ( 'FactAssessment' ), 'FactAssessment'[Scored] = TRUE () )
+		formatString: #,##0
+		displayFolder: Assessment
+		lineageTag: a99c2538-a889-41b9-8295-35e4821e4778
+
+	/// The share of recorded sittings that carry a score. A low figure means results are not in yet, not that the tests
+	/// went badly. Read it before reading any mean score.
+	measure 'Assessment Score Coverage' = DIVIDE ( [Administrations with a Score], [Assessment Administrations] )
+		formatString: 0.0%
+		displayFolder: Assessment
+		lineageTag: f4fe2130-68ae-41ed-83fd-3d0c994701cd
+
+	/// Average score for a single test. Left blank on purpose when more than one test is selected, because different
+	/// tests use different scales and cannot be averaged together.
+	measure 'Mean Score (Selected Instrument)' =
+			IF (
+			    DISTINCTCOUNT ( 'DimAssessment'[assessment_id] ) = 1
+			        && DISTINCTCOUNT ( 'DimAssessment'[Score unit] ) = 1,
+			    AVERAGE ( 'FactAssessment'[Score] )
+			)
+		formatString: #,##0.0
+		displayFolder: Assessment
+		lineageTag: 038bf62b-f95a-48ad-91c6-4777df158e31
+
+	/// The score of the sitting in the middle for a single test: half the recorded scores are at or below it. The
+	/// average moves with a few very high or very low results and this does not, so where the two disagree the spread
+	/// is uneven rather than the group. Blank on purpose for more than one test, for the same reason as the average:
+	/// different tests use different scales and cannot be pooled.
+	measure 'Median Score (Selected Instrument)' =
+			IF (
+			    DISTINCTCOUNT ( 'DimAssessment'[assessment_id] ) = 1
+			        && DISTINCTCOUNT ( 'DimAssessment'[Score unit] ) = 1,
+			    MEDIAN ( 'FactAssessment'[Score] )
+			)
+		formatString: #,##0.0
+		displayFolder: Assessment
+		lineageTag: c7f3a806-42b5-4e19-8d60-5b19e2c7a03f
+
+	/// The average margin of error reported with the scores. Differences smaller than this are not meaningful.
+	measure 'Mean Standard Error' =
+			IF (
+			    DISTINCTCOUNT ( 'DimAssessment'[assessment_id] ) = 1,
+			    AVERAGE ( 'FactAssessment'[Standard error] )
+			)
+		formatString: #,##0.0
+		displayFolder: Assessment
+		lineageTag: 2260cef4-807e-4d6a-b8d6-6f5f3700bd0e
+
+	/// Internal ID for one test sitting.
+	column result_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 4387af12-ae96-4a77-b329-f16c1bfa374d
+		summarizeBy: none
+		sourceColumn: result_id
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		lineageTag: d070b23b-dc58-401e-a7df-0cf4f3c87d07
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 339bc66f-dc17-40c9-9d00-c00dc8dc63d9
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// The calendar date.
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: f2940f0c-6c34-4526-827d-869bfab86495
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The year group the student is in.
+	column Grade
+		dataType: string
+		lineageTag: cda5480e-1069-421a-b319-ef5df19a2e71
+		summarizeBy: none
+		sourceColumn: grade
+
+	/// Internal test ID used to join the data together.
+	column assessment_id
+		dataType: string
+		isHidden
+		lineageTag: 73027997-3178-4dbd-a8af-3f616fe22ed5
+		summarizeBy: none
+		sourceColumn: assessment_id
+
+	/// Internal testing-period ID used to join the data together.
+	column window_id
+		dataType: string
+		isHidden
+		lineageTag: 08d0d645-0b12-4407-a086-c31848bcfca2
+		summarizeBy: none
+		sourceColumn: window_id
+
+	/// The score or mark recorded. Empty when nothing was recorded, and empty never means zero.
+	column Score
+		dataType: double
+		formatString: #,##0.#
+		lineageTag: 19526d96-74cc-45e9-9a21-c2147e46a98e
+		summarizeBy: sum
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The margin of error reported with the score. Differences smaller than this are not meaningful.
+	column 'Standard error'
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: cb4cdf36-f8a1-4c8c-9508-1448181bfce0
+		summarizeBy: sum
+		sourceColumn: standard_error
+
+		annotation SummarizationSetBy = Automatic
+
+	/// True when a score is present for the sitting. Stated here so no figure has to decide for itself what a missing
+	/// score means.
+	column Scored
+		dataType: boolean
+		isHidden
+		lineageTag: 8b8f6b5a-2c02-4e6f-9a5f-2b7f1a0e9c34
+		summarizeBy: none
+		sourceColumn: is_scored
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: d2417a16-da19-4288-9268-3726a1770ed5
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 25170299-4b58-4f21-b7e4-44aeb35aa98b
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 9175c480-3f98-43b7-a827-d5b99746a68f
+			defaultHierarchy: LocalDateTable_85ac1dd3-d999-485a-9c9e-840423c8cd7e.'Date Hierarchy'
+
+	partition FactAssessment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactAssessment WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactAssessment WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

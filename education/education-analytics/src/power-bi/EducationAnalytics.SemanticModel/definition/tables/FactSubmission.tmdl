@@ -1,0 +1,401 @@
+/// One row per piece of work actually handed in, so it is smaller than the status table.
+table FactSubmission
+	lineageTag: 13ea5f21-000f-4074-b70d-0b634fe3f995
+
+	/// How many pieces of work were actually handed in.
+	measure 'Recorded Submissions' = COUNTROWS ( 'FactSubmission' )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: e9e789d0-2c2e-4a08-925b-18d18adbed4f
+
+	/// How many handed-in pieces have a mark.
+	measure 'Scored Submissions' = CALCULATE ( COUNTROWS ( 'FactSubmission' ), NOT ISBLANK ( 'FactSubmission'[Score] ) )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 8bb78082-b555-492a-bea3-dc8fd243d616
+
+	/// Average marks awarded. Assignments are out of different totals, so compare within one assignment or check the
+	/// maximum first.
+	measure 'Mean Recorded Score (points)' = AVERAGE ( 'FactSubmission'[Score] )
+		formatString: #,##0.0
+		displayFolder: Recorded work
+		lineageTag: 205159c1-3cd2-443e-97cb-a3277e1aaf4c
+
+	/// The most recent hand-in date.
+	measure 'Latest Recorded Submission' = MAX ( 'FactSubmission'[Submitted at] )
+		formatString: yyyy-mm-dd
+		displayFolder: Recorded work
+		lineageTag: f65da496-2574-4cc5-897f-cb527c0fcc8a
+
+	/// How many pieces of work count towards the marks below, after resubmissions are reduced to the newest attempt.
+	measure 'Pieces of Work' = CALCULATE ( COUNTROWS ( 'FactSubmission' ), 'FactSubmission'[Latest attempt] = TRUE () )
+		formatString: #,##0
+		displayFolder: Marked work
+		lineageTag: 123aef91-2b67-487d-8d75-5332cca4a9f9
+
+	/// How many of those pieces carry both a mark and a usable total to mark it against.
+	measure 'Marked Pieces' =
+			CALCULATE (
+			    COUNTROWS ( 'FactSubmission' ),
+			    'FactSubmission'[Marked] = TRUE (),
+			    'FactSubmission'[Latest attempt] = TRUE ()
+			)
+		formatString: #,##0
+		displayFolder: Marked work
+		lineageTag: 864242e9-8501-4878-aef4-d06569d80a78
+
+	/// How many pieces are handed in but not yet marked. Unmarked work is never scored zero, so it is shown separately
+	/// instead of being folded into the score.
+	measure 'Unmarked Pieces' = [Pieces of Work] - [Marked Pieces]
+		formatString: #,##0
+		displayFolder: Marked work
+		lineageTag: 7f26936c-9d1e-4af4-a42f-b32799df2d40
+
+	/// Marks awarded on marked work, added up.
+	measure 'Marks Earned' =
+			CALCULATE (
+			    SUM ( 'FactSubmission'[Score] ),
+			    'FactSubmission'[Marked] = TRUE (),
+			    'FactSubmission'[Latest attempt] = TRUE ()
+			)
+		formatString: #,##0.#
+		displayFolder: Marked work
+		lineageTag: 1e576288-3123-402c-98fd-2270c2d69fb4
+
+	/// The marks that same work was out of. Shown next to the marks earned so the scale stays visible.
+	measure 'Marks Available' =
+			CALCULATE (
+			    SUM ( 'FactSubmission'[Points possible] ),
+			    'FactSubmission'[Marked] = TRUE (),
+			    'FactSubmission'[Latest attempt] = TRUE ()
+			)
+		formatString: #,##0.#
+		displayFolder: Marked work
+		lineageTag: d60143ad-b28d-4ca8-bf64-4e5bfddf2c58
+
+	/// The share of the available marks that were actually earned, on work that has been marked. The two totals are
+	/// added up first and then divided, so a big assignment is not given the same weight as a small one. Blank when
+	/// nothing in the selection is marked, which means unavailable and never zero. Read it next to Marked Work Coverage,
+	/// and compare it only within one subject: different subjects mark to different schemes.
+	measure 'Marked Work Score' = DIVIDE ( [Marks Earned], [Marks Available] )
+		formatString: 0.0%
+		displayFolder: Marked work
+		lineageTag: def22db7-d126-45e2-826e-43729bab5dde
+
+		annotation GoldMetricId = coursework_score_ratio
+
+	/// The same score for everyone else in what you have selected, so one student can be read against the class rather
+	/// than against a subject they cannot be compared across. The learner in view is taken out of it, because leaving
+	/// them in has them contribute to the figure they are being measured against, which pulls the comparison towards
+	/// them and understates the gap. Blank when nobody else is in the selection, which is what happens if no student is
+	/// filtered: there is then no "everyone else" to compare with. Narrow the Class slicer to compare within one class.
+	measure 'Cohort Marked Work Score' =
+			VAR StudentsInView = VALUES ( 'DimStudent'[student_id] )
+			RETURN
+			    CALCULATE (
+			        [Marked Work Score],
+			        REMOVEFILTERS ( 'DimStudent' ),
+			        NOT 'DimStudent'[student_id] IN StudentsInView
+			    )
+		formatString: 0.0%
+		displayFolder: Marked work
+		lineageTag: 1d2b3209-3c73-4698-9ec6-dfbec6e65efe
+
+	/// How far this student sits above or below the others in the same subject, in percentage points. This is the figure
+	/// to read for where to follow up, because both sides were marked to the same scheme. Blank when either side has no
+	/// marked work, and blank unless exactly one student is in view: comparing a group against itself returns zero, which
+	/// would read as "no difference" when it really means "nothing was compared".
+	measure 'Difference from Cohort (pp)' =
+			VAR StudentScore = [Marked Work Score]
+			VAR CohortScore = [Cohort Marked Work Score]
+			RETURN
+			    IF (
+			        [Students in View] = 1
+			            && NOT ISBLANK ( StudentScore )
+			            && NOT ISBLANK ( CohortScore ),
+			        ( StudentScore - CohortScore ) * 100
+			    )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Marked work
+		lineageTag: e424df2a-e752-451b-a25a-5a0f35403b6d
+
+	/// The share of handed-in work that has actually been marked. A low figure means the marks are not in yet, not that
+	/// the work was failed or missing, so a score taken over a small marked share says very little.
+	measure 'Marked Work Coverage' = DIVIDE ( [Marked Pieces], [Pieces of Work] )
+		formatString: 0.0%
+		displayFolder: Marked work
+		lineageTag: 17807d95-9974-4574-af8f-219ad0d7ce19
+
+		annotation GoldMetricId = graded_work_coverage
+
+	/// How many different learners have at least one marked piece of work behind the score. Read it next to Marked Work
+	/// Score, because a share worked out over three learners is not a school figure however confident it looks.
+	measure 'Students with Marked Work' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FactSubmission'[student_id] ),
+			    'FactSubmission'[Marked] = TRUE (),
+			    'FactSubmission'[Latest attempt] = TRUE ()
+			)
+		formatString: #,##0
+		displayFolder: Marked work
+		lineageTag: 3c81d9f4-5e27-4ab6-91cd-7f0248b6e5a1
+
+	/// The score of the learner in the middle: every learner's own Marked Work Score is worked out first, then the
+	/// middle one is taken. Marked Work Score pools all the marks together instead, so one very large assignment can
+	/// set a school or class figure that no learner in it actually has. Where the two disagree, the work is uneven
+	/// rather than the learners. Blank when nobody in the selection has marked work.
+	measure 'Median Student Marked Work Score' =
+			VAR LearnerScores =
+			    FILTER (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                VALUES ( 'FactSubmission'[student_id] ),
+			                'FactSubmission'[Marked] = TRUE (),
+			                'FactSubmission'[Latest attempt] = TRUE ()
+			            ),
+			            "@LearnerScore", [Marked Work Score]
+			        ),
+			        NOT ISBLANK ( [@LearnerScore] )
+			    )
+			RETURN
+			    MEDIANX ( LearnerScores, [@LearnerScore] )
+		formatString: 0.0%
+		displayFolder: Spread between learners
+		lineageTag: 5d94a0e7-1b38-4c72-a6fe-93b7c1d0482f
+
+	/// The score a quarter of the learners sit at or below. This is the bottom of the middle of the group, not a pass
+	/// mark and not a judgement: a quarter of any group is always below it. Blank under four learners with marked work,
+	/// because a quarter of three people is not a quarter.
+	measure 'Weakest Quarter Student Score' =
+			VAR LearnerScores =
+			    FILTER (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                VALUES ( 'FactSubmission'[student_id] ),
+			                'FactSubmission'[Marked] = TRUE (),
+			                'FactSubmission'[Latest attempt] = TRUE ()
+			            ),
+			            "@LearnerScore", [Marked Work Score]
+			        ),
+			        NOT ISBLANK ( [@LearnerScore] )
+			    )
+			RETURN
+			    IF (
+			        COUNTROWS ( LearnerScores ) >= 4,
+			        PERCENTILEX.INC ( LearnerScores, [@LearnerScore], 0.25 )
+			    )
+		formatString: 0.0%
+		displayFolder: Spread between learners
+		lineageTag: 7a20c6bf-8d41-4f95-b3e2-16c8407da9d3
+
+	/// The score a quarter of the learners sit at or above. Shown next to the weakest quarter so the range the group is
+	/// spread over is visible, not only its middle. Blank under four learners with marked work.
+	measure 'Strongest Quarter Student Score' =
+			VAR LearnerScores =
+			    FILTER (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                VALUES ( 'FactSubmission'[student_id] ),
+			                'FactSubmission'[Marked] = TRUE (),
+			                'FactSubmission'[Latest attempt] = TRUE ()
+			            ),
+			            "@LearnerScore", [Marked Work Score]
+			        ),
+			        NOT ISBLANK ( [@LearnerScore] )
+			    )
+			RETURN
+			    IF (
+			        COUNTROWS ( LearnerScores ) >= 4,
+			        PERCENTILEX.INC ( LearnerScores, [@LearnerScore], 0.75 )
+			    )
+		formatString: 0.0%
+		displayFolder: Spread between learners
+		lineageTag: 9e15b34c-627a-4d08-8f51-b2d7e06fa4c8
+
+	/// How far apart the learners are, in percentage points: the gap between the strongest quarter and the weakest
+	/// quarter. Two schools or two classes can share the same score and be nothing alike, and this is the figure that
+	/// says so. It describes spread only: a wide gap is not a problem and a narrow one is not a success. Blank under
+	/// four learners with marked work.
+	measure 'Student Score Spread (pp)' =
+			VAR UpperQuarter = [Strongest Quarter Student Score]
+			VAR LowerQuarter = [Weakest Quarter Student Score]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( UpperQuarter ) && NOT ISBLANK ( LowerQuarter ),
+			        ( UpperQuarter - LowerQuarter ) * 100
+			    )
+		formatString: #,##0.0
+		displayFolder: Spread between learners
+		lineageTag: b4602f1d-30e9-4a67-95c3-8ad1e7f26b50
+
+	/// How many hand-ins the school system itself flagged as late. A count, not a rate, because the data holds no
+	/// extensions or excuses to measure it against.
+	measure 'Late-Flagged Hand-Ins' = CALCULATE ( COUNTROWS ( 'FactSubmission' ), 'FactSubmission'[Flagged late] = TRUE () )
+		formatString: #,##0
+		displayFolder: Marked work
+		lineageTag: c0859749-6bee-4f56-92e9-0dd4fd94000f
+
+	/// Internal ID for one hand-in.
+	column submission_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 0a33c616-ef62-4a5b-9833-2c441107331d
+		summarizeBy: none
+		sourceColumn: submission_id
+
+	/// Internal ID linking a piece of set work to the hand-in for it.
+	column obligation_id
+		dataType: string
+		isHidden
+		lineageTag: 33174d9d-a798-4e0c-b798-0c2cdf22ee1c
+		summarizeBy: none
+		sourceColumn: obligation_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 164546c0-04dd-4180-b3f5-ac1ed31917de
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Internal assignment ID used to join the data together.
+	column content_id
+		dataType: string
+		isHidden
+		lineageTag: 2a959144-1556-4604-8ac7-795324f7a4ff
+		summarizeBy: none
+		sourceColumn: content_id
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: dc06ca21-4c04-49a0-bb7f-c43efe9b708b
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// Which attempt this was, numbered the way the source system numbers it. Canvas starts at 1 and Moodle at 0, and
+	/// both are kept as they are.
+	column Attempt
+		dataType: int64
+		formatString: 0
+		lineageTag: b92a7719-68a1-434a-8015-c8db9aa1ce35
+		summarizeBy: sum
+		sourceColumn: attempt
+
+		annotation SummarizationSetBy = Automatic
+
+	/// When the work was handed in.
+	column 'Submitted at'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: fece5ce3-cdea-4aa4-ae07-4ba8cd932217
+		summarizeBy: none
+		sourceColumn: submitted_at
+
+		variation Variation
+			isDefault
+			relationship: 6e9fa760-789a-47a1-b3ec-42db6897442a
+			defaultHierarchy: LocalDateTable_56b6284e-3fdc-458c-a767-8920d8a03ef5.'Date Hierarchy'
+
+	/// The score or mark recorded. Empty when nothing was recorded, and empty never means zero.
+	column Score
+		dataType: double
+		formatString: #,##0.#
+		lineageTag: 17c9f64c-f166-4a7c-9834-d69eea60920a
+		summarizeBy: sum
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The status recorded by the school system: marked, handed in, not handed in, or not started.
+	column Status
+		dataType: string
+		lineageTag: 5d24080a-c007-4ba4-9746-a09045caef79
+		summarizeBy: none
+		sourceColumn: state
+
+	/// The subject the work belongs to, taken from the class the task was set in. Held here so the marks can be read by
+	/// subject without walking back through the class.
+	column Subject
+		dataType: string
+		lineageTag: 8b200971-e48b-474a-b21a-ee24074696d5
+		summarizeBy: none
+		sourceColumn: subject
+
+	/// What the piece of work is marked out of, and only when that total is usable. Blank when the assignment carries
+	/// no positive maximum, because nothing can be marked against a total of zero.
+	column 'Points possible'
+		dataType: double
+		formatString: #,##0.##
+		lineageTag: a0f3d3cd-ff73-43cb-9c8f-368b15b8837f
+		summarizeBy: sum
+		sourceColumn: points_possible
+
+		annotation SummarizationSetBy = Automatic
+
+	/// True when a mark and a usable total are both present. Work that is handed in but not yet marked is false, which
+	/// keeps it out of the score rather than scoring it zero.
+	column Marked
+		dataType: boolean
+		lineageTag: 77683fe3-e367-40d7-a45a-ab05f4f4c416
+		summarizeBy: none
+		sourceColumn: is_graded
+
+	/// The school system's own late flag, carried through unchanged. Nothing is worked out from the due date, because
+	/// individual extensions are not in the data.
+	column 'Flagged late'
+		dataType: boolean
+		lineageTag: 646f270a-c1ca-4882-ade7-cfbe5a798c7a
+		summarizeBy: none
+		sourceColumn: is_late
+
+	/// Marks the newest attempt for each piece of set work, so a resubmission is not counted twice.
+	column 'Latest attempt'
+		dataType: boolean
+		isHidden
+		lineageTag: 45acdd8b-6a68-4661-a93a-5d0cbb5e5b1f
+		summarizeBy: none
+		sourceColumn: is_latest_attempt
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 319f2761-fb98-48a4-b906-61766074c373
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 22494a43-2acd-47a1-8945-6298ef30fa25
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 3bd0d473-aa18-45ca-a4ef-73f5b0f722d1
+			defaultHierarchy: LocalDateTable_65b8e436-2270-4db6-b241-3dddf6eeaed1.'Date Hierarchy'
+
+	partition FactSubmission = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactSubmission WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactSubmission WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

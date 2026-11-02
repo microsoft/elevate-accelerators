@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 240" role="img" aria-labelledby="title desc">
+  <title id="title">Education Analytics data solution</title>
+  <desc id="desc">A connected Bronze, Silver and Gold education data flow.</desc>
+  <rect width="1920" height="240" fill="#f7faf8"/>
+  <path d="M0 0h760L560 240H0Z" fill="#dff3eb"/>
+  <path d="M1920 0v240h-620l180-240Z" fill="#172121"/>
+  <g transform="translate(1110 48)">
+    <rect x="0" y="0" width="180" height="144" rx="8" fill="#fff" stroke="#c5d0cb" stroke-width="2"/>
+    <rect x="220" y="0" width="180" height="144" rx="8" fill="#fff" stroke="#c5d0cb" stroke-width="2"/>
+    <rect x="440" y="0" width="180" height="144" rx="8" fill="#fff" stroke="#c5d0cb" stroke-width="2"/>
+    <text x="90" y="66" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#172121">Bronze</text>
+    <text x="310" y="66" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#172121">Silver</text>
+    <text x="530" y="66" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#172121">Gold</text>
+    <text x="90" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#5d6865">Source records</text>
+    <text x="310" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#5d6865">Trusted model</text>
+    <text x="530" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#5d6865">Ready to use</text>
+    <path d="M184 72h30M404 72h30" stroke="#52a88e" stroke-width="6" stroke-linecap="round"/>
+    <path d="m207 63 10 9-10 9M427 63l10 9-10 9" fill="none" stroke="#52a88e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

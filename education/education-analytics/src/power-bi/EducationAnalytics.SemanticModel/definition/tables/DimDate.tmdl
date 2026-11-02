@@ -1,0 +1,173 @@
+/// One row per date. This is the calendar the report uses for all time filters.
+table DimDate
+	lineageTag: adbeed87-ce51-415c-a8eb-3e477ab9432f
+	dataCategory: Time
+
+	/// The cut-off time of the data refresh. This is when the data was prepared, not when something happened at school.
+	measure 'Data As Of (UTC)' = MAX ( 'FactAttendanceDay'[as_of] )
+		formatString: yyyy-mm-dd hh:nn
+		displayFolder: Data status
+		lineageTag: f3b76af6-221f-4d42-91b9-a59e47c75c93
+
+	/// The first and last date you have selected.
+	measure 'Selected Date Range' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( RangeStart ),
+			        FORMAT ( RangeStart, "d MMM yy" ) & " - " & FORMAT ( RangeEnd, "d MMM yy" ),
+			        "No dates selected"
+			    )
+		displayFolder: Data status
+		lineageTag: 242216d5-2857-4fad-bb4b-1be4ee77e3f9
+
+	/// Which version of the data is shown, or a warning if more than one has been mixed in.
+	measure 'Snapshot In Context' =
+			VAR Snapshots = DISTINCTCOUNT ( 'FactAttendanceDay'[snapshot_id] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        Snapshots = 0, "No snapshot in context",
+			        Snapshots > 1, "More than one snapshot is present - the refresh may be incomplete",
+			        LEFT ( MAX ( 'FactAttendanceDay'[snapshot_id] ), 12 )
+			    )
+		displayFolder: Data status
+		lineageTag: 821b897b-591f-4b9a-880f-f6cfa2c39011
+
+	/// The calendar date.
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: 492e9e55-2ad9-499f-9aa5-b351e368eee9
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 2ac2a802-4887-4ef1-9357-ee3c99d22d93
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: e06b63f8-e350-4fa3-9662-b3dcdc704b60
+		summarizeBy: none
+		sourceColumn: as_of
+
+	/// The calendar year.
+	column Year = YEAR ( 'DimDate'[Date] )
+		dataType: int64
+		formatString: 0
+		lineageTag: 3da855c8-186d-4190-874e-2fa6e0c0178b
+		summarizeBy: none
+
+	/// Month number, used to put months in the right order.
+	column 'Month Number' = MONTH ( 'DimDate'[Date] )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bcd66d9f-4c04-48e4-b7e8-87fd9eacbc5f
+		summarizeBy: none
+
+	/// Short month name, sorted in calendar order.
+	column Month = FORMAT ( 'DimDate'[Date], "MMM" )
+		dataType: string
+		lineageTag: 451bcb55-50d1-4ec0-9945-d183b64c4fdb
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Sort key that keeps month and year in calendar order.
+	column 'Month Year Sort' = YEAR ( 'DimDate'[Date] ) * 100 + MONTH ( 'DimDate'[Date] )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 58fe9a9c-4d11-479d-b1a9-06fe3f672d85
+		summarizeBy: none
+
+	/// Month and year together, sorted in calendar order.
+	column 'Month Year' = FORMAT ( 'DimDate'[Date], "MMM yyyy" )
+		dataType: string
+		lineageTag: 4e209bfc-b604-465c-a4f2-26e7c62a55ed
+		summarizeBy: none
+		sortByColumn: 'Month Year Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The Monday of the week the date falls in. Used for weekly trends.
+	column 'Week Starting' = 'DimDate'[Date] - WEEKDAY ( 'DimDate'[Date], 3 )
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: bd2414b0-4d0d-479e-a104-6dddb7ffbf93
+		summarizeBy: none
+
+	/// Weekday number starting at Monday, used to put weekdays in order.
+	column 'Day of week number' = WEEKDAY ( 'DimDate'[Date], 2 )
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2ca6b7d1-1ebd-43fe-b643-5a6abcec376a
+		summarizeBy: none
+
+	/// Day of the week, from Monday to Sunday.
+	column 'Day of week' = FORMAT ( 'DimDate'[Date], "dddd" )
+		dataType: string
+		lineageTag: 8be55106-dda7-4853-a185-874a904d172f
+		summarizeBy: none
+		sortByColumn: 'Day of week number'
+
+		annotation SummarizationSetBy = Automatic
+
+	/// The school year the date falls in, treated as starting in August.
+	column 'School Year' =
+			VAR y = YEAR ( 'DimDate'[Date] )
+			VAR m = MONTH ( 'DimDate'[Date] )
+			RETURN
+			    IF ( m >= 8, y & "-" & ( y + 1 ), ( y - 1 ) & "-" & y )
+		dataType: string
+		lineageTag: ff77cc36-6c8b-4157-879a-c3b1f8321d65
+		summarizeBy: none
+
+	/// Whether the date is in the latest school year with attendance, the one before it, or earlier. Every page is
+	/// filtered to the latest school year; change that filter in the Filters pane to look at an earlier year.
+	column 'School year scope' =
+			VAR LatestDate = MAX ( 'FactAttendanceDay'[date] )
+			VAR LatestYear = IF ( MONTH ( LatestDate ) >= 8, YEAR ( LatestDate ), YEAR ( LatestDate ) - 1 )
+			VAR RowYear = IF ( MONTH ( 'DimDate'[Date] ) >= 8, YEAR ( 'DimDate'[Date] ), YEAR ( 'DimDate'[Date] ) - 1 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        RowYear = LatestYear, "Latest school year",
+			        RowYear = LatestYear - 1, "Previous school year",
+			        RowYear > LatestYear, "After the latest school year",
+			        "Earlier school years"
+			    )
+		dataType: string
+		lineageTag: 0b5b95ef-5a3c-58df-879a-104e8bea2618
+		summarizeBy: none
+
+	partition DimDate = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimDate WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimDate WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

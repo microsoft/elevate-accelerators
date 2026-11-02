@@ -1,0 +1,22 @@
+/// A small helper table holding the choices for the attendance early-warning rule.
+table 'Attendance Rule'
+	lineageTag: 4c38c1ef-418b-5230-97a0-3cd67cc1183b
+
+	/// How many absences in a learner's last 20 school days meet the attendance rule. Defaults to 5. The 20-day window
+	/// is set when the data is prepared; the number of absences is chosen here, so the report flags nobody on its own.
+	measure 'Attendance Rule Absences Value' = SELECTEDVALUE ( 'Attendance Rule'[Absences in 20 school days], 5 )
+		formatString: 0
+		displayFolder: Early warning and follow-up
+		lineageTag: d8844f92-0159-5ddb-bedf-e59d986c6f4d
+
+	/// The attendance rule choices: absences in the learner's last 20 school days.
+	column 'Absences in 20 school days'
+		dataType: int64
+		formatString: 0
+		lineageTag: b7e42749-7d0b-5ade-a478-eb3b75f05826
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition 'Attendance Rule' = calculated
+		mode: import
+		source = GENERATESERIES ( 3, 10, 1 )

@@ -1,0 +1,257 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "5eb1a792d3f8ca6541e2",
+  "position": {
+    "x": 660,
+    "y": 392,
+    "z": 10500,
+    "height": 298,
+    "width": 620,
+    "tabOrder": 10500
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSection"
+                    }
+                  },
+                  "Property": "Class"
+                }
+              },
+              "queryRef": "DimSection.Class",
+              "nativeQueryRef": "Class",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Marked Work Score"
+                }
+              },
+              "queryRef": "FactSubmission.Marked Work Score",
+              "nativeQueryRef": "Marked Work Score"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Marked Work Coverage"
+                }
+              },
+              "queryRef": "FactSubmission.Marked Work Coverage",
+              "nativeQueryRef": "Marked Work Coverage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Students with Marked Work"
+                }
+              },
+              "queryRef": "FactSubmission.Students with Marked Work",
+              "nativeQueryRef": "Students with Marked Work"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Median Student Marked Work Score"
+                }
+              },
+              "queryRef": "FactSubmission.Median Student Marked Work Score",
+              "nativeQueryRef": "Median Student Marked Work Score"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Student Score Spread (pp)"
+                }
+              },
+              "queryRef": "FactSubmission.Student Score Spread (pp)",
+              "nativeQueryRef": "Student Score Spread (pp)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Unmarked Pieces"
+                }
+              },
+              "queryRef": "FactSubmission.Unmarked Pieces",
+              "nativeQueryRef": "Unmarked Pieces"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Marked work score by class - compare within one subject'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'The share of available marks earned on marked work, by class. Each bar is one class at one school, because the same class name is used at more than one school and the label carries the school with it. How much of the work is marked, how many learners stand behind each bar, the score of the learner in the middle, the spread between the strongest and weakest quarter, and how many pieces are still to be marked are all in the tooltip. Each subject marks to its own scheme, so narrow the Subject slicer before reading one bar against another: a higher share in one subject than another does not mean the class is doing better.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

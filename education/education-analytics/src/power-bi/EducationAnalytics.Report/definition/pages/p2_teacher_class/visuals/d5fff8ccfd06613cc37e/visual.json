@@ -1,0 +1,243 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "d5fff8ccfd06613cc37e",
+  "position": {
+    "x": 1300,
+    "y": 392,
+    "z": 11000,
+    "height": 298,
+    "width": 600,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "queryRef": "FactSubmissionState.Status",
+              "nativeQueryRef": "Status",
+              "active": true
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Students with Work Records"
+                }
+              },
+              "queryRef": "FactSubmissionState.Students with Work Records",
+              "nativeQueryRef": "Students with Work Records"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "New States"
+                }
+              },
+              "queryRef": "FactSubmissionState.New States",
+              "nativeQueryRef": "New States"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Source-Flagged Late States"
+                }
+              },
+              "queryRef": "FactSubmissionState.Source-Flagged Late States",
+              "nativeQueryRef": "Source-Flagged Late States"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Source-Flagged Missing States"
+                }
+              },
+              "queryRef": "FactSubmissionState.Source-Flagged Missing States",
+              "nativeQueryRef": "Source-Flagged Missing States"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Recorded Work States"
+                }
+              },
+              "queryRef": "FactSubmissionState.Recorded Work States",
+              "nativeQueryRef": "Recorded Work States"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recorded obligation states'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart counting assignment obligations by their recorded state: graded, submitted, unsubmitted or new.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

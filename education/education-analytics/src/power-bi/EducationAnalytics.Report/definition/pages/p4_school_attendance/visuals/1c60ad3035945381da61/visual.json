@@ -1,0 +1,258 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "1c60ad3035945381da61",
+  "position": {
+    "x": 840,
+    "y": 700,
+    "z": 14100,
+    "height": 340,
+    "width": 440,
+    "tabOrder": 14100
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "Month Year"
+                }
+              },
+              "queryRef": "DimDate.Month Year",
+              "nativeQueryRef": "Month Year",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Action type"
+                }
+              },
+              "queryRef": "FactStudentAction.Action type",
+              "nativeQueryRef": "Action type"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Actions Logged"
+                }
+              },
+              "queryRef": "FactStudentAction.Actions Logged",
+              "nativeQueryRef": "Actions Logged"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Learners with an Action"
+                }
+              },
+              "queryRef": "FactStudentAction.Learners with an Action",
+              "nativeQueryRef": "Learners with an Action"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Attendance Actions"
+                }
+              },
+              "queryRef": "FactStudentAction.Attendance Actions",
+              "nativeQueryRef": "Attendance Actions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Coursework Follow-ups"
+                }
+              },
+              "queryRef": "FactStudentAction.Coursework Follow-ups",
+              "nativeQueryRef": "Coursework Follow-ups"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Completed Actions"
+                }
+              },
+              "queryRef": "FactStudentAction.Completed Actions",
+              "nativeQueryRef": "Completed Actions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Open Actions"
+                }
+              },
+              "queryRef": "FactStudentAction.Open Actions",
+              "nativeQueryRef": "Open Actions"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Actions logged by month and type'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Column chart of the number of actions teachers logged each month, split by action type.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

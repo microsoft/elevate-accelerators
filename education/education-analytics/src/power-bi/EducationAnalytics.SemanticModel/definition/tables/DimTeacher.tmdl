@@ -1,0 +1,63 @@
+/// One row per teacher.
+table DimTeacher
+	lineageTag: c50d7159-ddea-401f-b7c3-27f4106c176b
+
+	/// How many teachers teach the classes you selected.
+	measure Teachers = DISTINCTCOUNT ( 'BridgeTeacherSection'[teacher_id] )
+		formatString: #,##0
+		displayFolder: Class scope
+		lineageTag: 04a0b01b-5bc6-4266-985c-3ed35b005147
+
+	/// Internal teacher ID used to join the data together.
+	column teacher_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: b8592326-2de6-4dd6-aecc-df3f4d1c7167
+		summarizeBy: none
+		sourceColumn: teacher_id
+
+	/// The name shown in the report.
+	column Teacher
+		dataType: string
+		lineageTag: b46e50b2-295a-4f29-baea-73c9175e97db
+		summarizeBy: none
+		sourceColumn: name
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 8b67c8e5-2e87-4ec5-bb57-9d79fa0d816d
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 02a30809-b00b-4ac5-a6e6-99bb9681a450
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: f60331c0-2c16-4675-aa68-20a7b4130ec1
+			defaultHierarchy: LocalDateTable_9ee6b2ca-bbc1-4b93-a709-f9259cf134b4.'Date Hierarchy'
+
+	partition DimTeacher = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimTeacher WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimTeacher WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,96 @@
+/// Which teachers teach which classes, and between which dates.
+table BridgeTeacherSection
+	lineageTag: 1dbf5457-67a1-4fcf-a19a-f573b09277f3
+
+	/// Internal ID of a teacher being assigned to a class.
+	column assignment_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 44439327-3b76-436f-8184-07f8e99bad00
+		summarizeBy: none
+		sourceColumn: assignment_id
+
+	/// Internal teacher ID used to join the data together.
+	column teacher_id
+		dataType: string
+		isHidden
+		lineageTag: b93ae115-2f2d-4a15-ac1c-52e201d22b9f
+		summarizeBy: none
+		sourceColumn: teacher_id
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: f16020b2-b145-4837-b372-786f0104c81b
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// The first day this applies.
+	column 'Valid from'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 2339f408-e895-46bf-9999-9933538cd913
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		variation Variation
+			isDefault
+			relationship: 053fcbf0-8423-4349-9fb6-a34990b2f8d1
+			defaultHierarchy: LocalDateTable_3cb4cafa-db7f-4964-9ecf-e595df6676e1.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The day after the last day this applies.
+	column 'Valid to'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 7de38901-8471-404f-9ec1-054d22d022c5
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		variation Variation
+			isDefault
+			relationship: 92729a18-46da-4e46-ad86-7e5b7de6d170
+			defaultHierarchy: LocalDateTable_7bf806c0-c74c-4821-b0a3-b51d7487efef.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 64acd09f-f4df-4947-8aaf-d2ce3f708973
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 1c47e17e-158c-40d4-96c9-9cb5e5ada6a4
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 66f61361-3c7b-4940-bc7a-c3b855b27ea8
+			defaultHierarchy: LocalDateTable_bac7b976-4648-4d9c-93bb-1bdf6ff21342.'Date Hierarchy'
+
+	partition BridgeTeacherSection = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.BridgeTeacherSection WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.BridgeTeacherSection WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

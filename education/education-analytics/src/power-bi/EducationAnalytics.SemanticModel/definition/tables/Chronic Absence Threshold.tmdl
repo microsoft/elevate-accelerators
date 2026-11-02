@@ -1,0 +1,22 @@
+/// A small helper table holding the choices for the chronic absence threshold.
+table 'Chronic Absence Threshold'
+	lineageTag: 65a788fa-d359-5beb-bc26-131a9209cdee
+
+	/// The share of known school days a learner must miss to count as chronically absent. Defaults to 10%, a common
+	/// definition; choose another on the School briefing page if your district uses one.
+	measure 'Chronic Absence Threshold Value' = SELECTEDVALUE ( 'Chronic Absence Threshold'[Chronic absence threshold (%)], 10 ) / 100
+		formatString: 0%
+		displayFolder: Early warning and follow-up
+		lineageTag: 2529c0a3-0541-527d-9a8e-6782f236810a
+
+	/// The chronic absence threshold choices, in percent of known school days missed.
+	column 'Chronic absence threshold (%)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 642c6450-dd74-554b-9349-cbf15b5d8d57
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition 'Chronic Absence Threshold' = calculated
+		mode: import
+		source = GENERATESERIES ( 5, 30, 1 )

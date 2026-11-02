@@ -1,0 +1,705 @@
+{
+  "synthetic": true,
+  "generator": "generate_district.py",
+  "profile": "middle-school-district",
+  "presentation_version": 6,
+  "assumptions": {
+    "districts": 1,
+    "schools": 3,
+    "average_students_per_school": 600,
+    "school_student_counts": [
+      540,
+      600,
+      660
+    ],
+    "instructional_days": 180,
+    "class_sizes_by_subject": {
+      "Mathematics": 24,
+      "English Language Arts": 26,
+      "Integrated Science": 28,
+      "World History": 30,
+      "Visual Arts": 34,
+      "Physical Education": 48
+    },
+    "homeroom_size": 25,
+    "subjects_per_student": 6,
+    "classes_per_subject": "Varies by subject and year group; see expected_results.classes_by_subject",
+    "assignments_per_section": "Varies by class; see expected_results.assignments",
+    "assessment_windows": 3,
+    "assessment_subjects": 2,
+    "calendar": "Synthetic weekdays only; no real holidays or district calendar",
+    "lms_assignment": "The first school in each three-school group uses Moodle; others use Canvas",
+    "analysis_limits": "LMS assignment is not randomized; do not infer an LMS effect from school comparisons",
+    "grade_bands": "Grades 6-8 assigned by homeroom; stable within a school year",
+    "names": "Deterministic fictional names; student and staff given-name and surname pools are disjoint",
+    "geography": "Fictional institutions at real Snohomish County, Washington localities: real city, state and postal code with synthetic street numbers, so an address geocodes to the locality without identifying a building",
+    "attendance": "Seeded student/day variation with school-specific baseline rates and a year-long pattern per learner",
+    "attendance_trajectories": {
+      "Steady": 0.7,
+      "Mid-year dip": 0.15,
+      "Gradual decline": 0.08,
+      "Improving": 0.07
+    },
+    "early_warning_rules": {
+      "attendance": "Attendance: 5 or more absences in 20 school days",
+      "missing_work": "Coursework: 3 or more of the last 5 pieces of work missing",
+      "chronic_absence_rate": 0.1
+    },
+    "teacher_actions": "Proposed PowerSchool-style log entries. A rule met is logged in 75% of cases; 60% of actions are followed by fewer absences or less missing work. These shares are constructed to give the log both outcomes; they are not evidence that an action works",
+    "coursework_and_absence": "Work due after absence in the 10 instructional days before it is more often missing or late and is marked lower",
+    "assessment_growth": "RIT growth between sittings shrinks with the share of days missed in between",
+    "school_years": "Two synthetic school years. The prior year carries SIS membership (reenrollments), attendance and assessment history only; class rosters, LMS coursework and the action log start in the current year",
+    "enrollment_change": "Learners now in grades 7-8 were one grade lower last year, except about 6% who joined this year; about 3% were at another district school. Last year's grade 8 moved on and about 5% of grades 6-7 left the district",
+    "prior_year_attendance": "Same learner risk, a separately drawn year-long pattern and a prior baseline per school",
+    "contact_domains": "Reserved .example domains; no deliverable real addresses",
+    "assessment_labels": "Illustrative test labels, not official NWEA test catalog names"
+  },
+  "evidence_hashes": {
+    "lms-field-evidence.csv": "1549e15c6e826e108895d76cf6c976325722a1625f74fa81b929ba94ad1b4c9c",
+    "nwea-export-fields.csv": "fae7135e009e30b96025e89b1bfc9d53ee9801518b473fc641745d33923947a0"
+  },
+  "tables": [
+    {
+      "source": "PowerSchool",
+      "entity": "districts",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "district",
+      "path": "PowerSchool/districts.csv",
+      "columns": [
+        "district_id",
+        "district_name"
+      ],
+      "rows": 1,
+      "sha256": "acdd2638092d7589004d3d24ee7cb76fc13b696ab00a3b8c0f71bfee5aa2cb0d"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "schools",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "school",
+      "path": "PowerSchool/schools.csv",
+      "columns": [
+        "source_school_id",
+        "district_id",
+        "school_name",
+        "school_code",
+        "school_type",
+        "street_address",
+        "city",
+        "state",
+        "postal_code",
+        "county",
+        "language",
+        "website"
+      ],
+      "rows": 3,
+      "sha256": "d300e5da8af4f965b55c1f1203d083047a92d32bf5b5fe748c8e064461d177dc"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "students",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "student; a former learner keeps the school and grade they were last enrolled in",
+      "path": "PowerSchool/students.csv",
+      "columns": [
+        "student_number",
+        "source_school_id",
+        "grade_level",
+        "first_name",
+        "last_name",
+        "email",
+        "enrollment_status",
+        "homeroom"
+      ],
+      "rows": 2444,
+      "sha256": "e52c5d007e01727a4788f343744896e4df4a5117cf272dc2ad7bca8e663f96fd"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "teachers",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "teacher",
+      "path": "PowerSchool/teachers.csv",
+      "columns": [
+        "source_teacher_id",
+        "source_school_id",
+        "name",
+        "first_name",
+        "last_name",
+        "email",
+        "department",
+        "role_title"
+      ],
+      "rows": 103,
+      "sha256": "3699476e84a203de2e5d7dad8cec3b05ff9c09127ae17bbe5015da38de737239"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "courses",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "district catalog course",
+      "path": "PowerSchool/courses.csv",
+      "columns": [
+        "source_course_id",
+        "course_name",
+        "course_code",
+        "description"
+      ],
+      "rows": 6,
+      "sha256": "8b0f548e58a0320c4cce54a3d14af9e861b593eed999354fc079d3d2de988750"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "sections",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "school teaching section; one teacher for fixture year",
+      "path": "PowerSchool/sections.csv",
+      "columns": [
+        "source_section_id",
+        "source_school_id",
+        "source_course_id",
+        "source_teacher_id",
+        "grade_level",
+        "section_name",
+        "section_code"
+      ],
+      "rows": 386,
+      "sha256": "2f58754d67c999675de41ff2baab6b71f53b6add7ee642c2b62a568c8680d312"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "enrollments",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "current school-year membership; exit exclusive; year group is the student grade_level",
+      "path": "PowerSchool/enrollments.csv",
+      "columns": [
+        "student_number",
+        "source_school_id",
+        "entry_date",
+        "exit_date"
+      ],
+      "rows": 1800,
+      "sha256": "53f40b077c398da43f0818a80c6b5ee34272b0a3d7953ac9b68ac67f0aec39b9"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "reenrollments",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "earlier school-year membership with the year group then; exit exclusive",
+      "path": "PowerSchool/reenrollments.csv",
+      "columns": [
+        "student_number",
+        "source_school_id",
+        "grade_level",
+        "entry_date",
+        "exit_date"
+      ],
+      "rows": 1753,
+      "sha256": "18c4ac19232c70d5b5fb416b1d773fc46d377788acbcc63c33f35a6ad0233635"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "terms",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "district school year; last_day inclusive",
+      "path": "PowerSchool/terms.csv",
+      "columns": [
+        "source_term_id",
+        "school_year",
+        "first_day",
+        "last_day"
+      ],
+      "rows": 2,
+      "sha256": "c7330951c311c190881363cb70a2fc78734ceb95b6c49e9e5ce077d671d42283"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "section_enrollments",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "student section membership for full fixture year",
+      "path": "PowerSchool/section_enrollments.csv",
+      "columns": [
+        "student_number",
+        "source_section_id"
+      ],
+      "rows": 10800,
+      "sha256": "68a45be19d4af5ae8cf62bc3aab40d554fd7a7853f4efb6880aa1b6c11cfb877"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "calendar",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "school instructional day",
+      "path": "PowerSchool/calendar.csv",
+      "columns": [
+        "source_school_id",
+        "instructional_date",
+        "expected_minutes"
+      ],
+      "rows": 1080,
+      "sha256": "96ded2288a6a676d2d4da3243fbf60f0058a24b5cba9bc11d65290927ca63b8b"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "attendance",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "student instructional day; absence policy is synthetic",
+      "path": "PowerSchool/attendance.csv",
+      "columns": [
+        "student_number",
+        "source_school_id",
+        "attendance_date",
+        "attendance_code",
+        "minutes_absent"
+      ],
+      "rows": 639540,
+      "sha256": "c9c8929d4aeecefb0bf50dbc532ab10c77158a16ca5270f09d74e00f80118a80"
+    },
+    {
+      "source": "PowerSchool",
+      "entity": "log_entries",
+      "interface": "proposed synthetic extract; not vendor verified",
+      "grain": "teacher-logged student action; follow-up observations are descriptive, not causal",
+      "path": "PowerSchool/log_entries.csv",
+      "columns": [
+        "log_id",
+        "student_number",
+        "source_school_id",
+        "source_section_id",
+        "source_teacher_id",
+        "entry_date",
+        "log_type",
+        "reason",
+        "status",
+        "follow_up_date",
+        "completed_date",
+        "outcome_note"
+      ],
+      "rows": 1486,
+      "sha256": "d80a72c30478d2cd2ebb99d81b5959b838dd8a9e2d0da2d1c18f8c8c70b65a99"
+    },
+    {
+      "source": "Canvas",
+      "entity": "users::User",
+      "interface": "REST response model (Swagger)",
+      "grain": "user including teachers",
+      "path": "Canvas/users.csv",
+      "columns": [
+        "id",
+        "name",
+        "sis_user_id",
+        "first_name",
+        "last_name",
+        "email"
+      ],
+      "rows": 1332,
+      "sha256": "9ab2b79a59b7cb9673dbd91b8c300a1c7e76a6cac9b827da212c7b0597719ad3"
+    },
+    {
+      "source": "Canvas",
+      "entity": "courses::Course",
+      "interface": "REST response model (Swagger)",
+      "grain": "LMS shell per teaching section; not catalog course",
+      "path": "Canvas/courses.csv",
+      "columns": [
+        "id",
+        "name",
+        "sis_course_id",
+        "workflow_state",
+        "course_code",
+        "locale",
+        "start_at",
+        "end_at"
+      ],
+      "rows": 270,
+      "sha256": "1546b74c9a5675b765afc630f85b3be06ac6c3398a7c51efd744e0bbb991f999"
+    },
+    {
+      "source": "Canvas",
+      "entity": "sections::Section",
+      "interface": "REST response model (Swagger)",
+      "grain": "class section",
+      "path": "Canvas/sections.csv",
+      "columns": [
+        "id",
+        "course_id",
+        "sis_section_id",
+        "name"
+      ],
+      "rows": 270,
+      "sha256": "207163938f1617b0475543c04cfc7ecb8359b0416263fa30972d50a1803925dd"
+    },
+    {
+      "source": "Canvas",
+      "entity": "enrollments::Enrollment",
+      "interface": "REST response model (Swagger)",
+      "grain": "user section role",
+      "path": "Canvas/enrollments.csv",
+      "columns": [
+        "id",
+        "user_id",
+        "course_id",
+        "course_section_id",
+        "type",
+        "enrollment_state"
+      ],
+      "rows": 7830,
+      "sha256": "4b4cda3a74bdb0890bb5de1e488db05d70dafb5d0e04e36ba8ef6d0a9464ca1c"
+    },
+    {
+      "source": "Canvas",
+      "entity": "assignments::Assignment",
+      "interface": "REST response model (Swagger)",
+      "grain": "assignment",
+      "path": "Canvas/assignments.csv",
+      "columns": [
+        "id",
+        "course_id",
+        "name",
+        "points_possible",
+        "due_at",
+        "published",
+        "grading_type",
+        "submission_types",
+        "description"
+      ],
+      "rows": 6961,
+      "sha256": "a0d14236dc3294b08592f5a603f48ad2d799ee7a196988f621c373cae3afc7df"
+    },
+    {
+      "source": "Canvas",
+      "entity": "submissions::Submission",
+      "interface": "REST response model (Swagger)",
+      "grain": "current student assignment snapshot",
+      "path": "Canvas/submissions.csv",
+      "columns": [
+        "assignment_id",
+        "user_id",
+        "attempt",
+        "submitted_at",
+        "score",
+        "workflow_state",
+        "late",
+        "missing"
+      ],
+      "rows": 187336,
+      "sha256": "3f70f0637b4aa540e255e4c940c08a0189a815f4ae0a05bd6086fcfe8902b0b4"
+    },
+    {
+      "source": "Moodle",
+      "entity": "user",
+      "interface": "database XMLDB",
+      "grain": "student user subset; staff role data remains in proposed SIS",
+      "path": "Moodle/user.csv",
+      "columns": [
+        "id",
+        "idnumber",
+        "username",
+        "firstname",
+        "lastname",
+        "email",
+        "lang",
+        "institution"
+      ],
+      "rows": 540,
+      "sha256": "d4682dbf12c5ed4e73405ffc304aaac060da3204f7af848fb6c27005c12643fc"
+    },
+    {
+      "source": "Moodle",
+      "entity": "course",
+      "interface": "database XMLDB",
+      "grain": "course shell per teaching section",
+      "path": "Moodle/course.csv",
+      "columns": [
+        "id",
+        "fullname",
+        "shortname",
+        "summary",
+        "startdate",
+        "enddate"
+      ],
+      "rows": 116,
+      "sha256": "ba4ae6eac6b9f556b9b07963ae6235b0a8addcbaea6129ba30fd2194bea6fc04"
+    },
+    {
+      "source": "Moodle",
+      "entity": "enrol",
+      "interface": "database XMLDB",
+      "grain": "enrollment plugin instance",
+      "path": "Moodle/enrol.csv",
+      "columns": [
+        "id",
+        "courseid",
+        "enrol"
+      ],
+      "rows": 116,
+      "sha256": "ac98aca54f943ab9b1bffdcc7b9da67049c3c7e521dc557d85daf6b3403fd55c"
+    },
+    {
+      "source": "Moodle",
+      "entity": "user_enrolments",
+      "interface": "database XMLDB",
+      "grain": "user plugin enrollment",
+      "path": "Moodle/user_enrolments.csv",
+      "columns": [
+        "id",
+        "userid",
+        "enrolid",
+        "status"
+      ],
+      "rows": 3240,
+      "sha256": "429292c2f97be6b18a5dd0ecaf06274babe0f6967b3ea27d6a948dbb5fa52d47"
+    },
+    {
+      "source": "Moodle",
+      "entity": "assign",
+      "interface": "database XMLDB",
+      "grain": "assignment",
+      "path": "Moodle/assign.csv",
+      "columns": [
+        "id",
+        "course",
+        "name",
+        "grade",
+        "duedate",
+        "intro"
+      ],
+      "rows": 3008,
+      "sha256": "26365cbf5bcdbb22cff0cb3b0efb9272bf5057f3b43b5e9a99e29c836852a123"
+    },
+    {
+      "source": "Moodle",
+      "entity": "assign_submission",
+      "interface": "database XMLDB",
+      "grain": "submission state; new is not an actual submitted attempt",
+      "path": "Moodle/assign_submission.csv",
+      "columns": [
+        "id",
+        "assignment",
+        "userid",
+        "attemptnumber",
+        "status",
+        "timemodified",
+        "latest"
+      ],
+      "rows": 80757,
+      "sha256": "8edaa67eab36691aaf06207126a4e7a00e5e91b00cc4bab193a353b2eb25662c"
+    },
+    {
+      "source": "Moodle",
+      "entity": "assign_grades",
+      "interface": "database XMLDB",
+      "grain": "graded individual submission attempt",
+      "path": "Moodle/assign_grades.csv",
+      "columns": [
+        "id",
+        "assignment",
+        "userid",
+        "attemptnumber",
+        "grade"
+      ],
+      "rows": 74364,
+      "sha256": "fc71943fbffb906ed2662a8ea64695b142eaf7c7499a8b045010d6c3c59c1b70"
+    },
+    {
+      "source": "NWEA",
+      "entity": "StudentBySchool.csv",
+      "interface": "selected literal export fields",
+      "grain": "student school term roster",
+      "path": "NWEA/StudentBySchool.csv",
+      "columns": [
+        "TermName",
+        "StudentID",
+        "School_StateID",
+        "Grade",
+        "StudentFirstName",
+        "StudentLastName",
+        "SchoolName",
+        "DistrictName",
+        "District_StateID"
+      ],
+      "rows": 10659,
+      "sha256": "e74ceead306b576c01bcd209949edc5a20cd24ee9f361b78a7d372c81f8b2373"
+    },
+    {
+      "source": "NWEA",
+      "entity": "AssessmentResults.csv",
+      "interface": "selected literal export fields",
+      "grain": "synthetic assessment event; no norms or vendor growth projections",
+      "path": "NWEA/AssessmentResults.csv",
+      "columns": [
+        "TestID",
+        "StudentID",
+        "TermName",
+        "School_StateID",
+        "Subject",
+        "TestStartDate",
+        "TestRITScore",
+        "TestStandardError",
+        "TestName",
+        "SchoolName",
+        "DistrictName"
+      ],
+      "rows": 21318,
+      "sha256": "466f8fa60975dac800e783d676b9e38aa268ef8b1977fc2748aa6a1bdf8dd8a1"
+    }
+  ],
+  "expected_results": {
+    "students": 1800,
+    "schools": 3,
+    "teachers": 103,
+    "sections": 386,
+    "section_enrollments": 10800,
+    "attendance_records": 324000,
+    "absent_days": 22675,
+    "attendance_rate": 0.9300154320987655,
+    "attendance_patterns": {
+      "chronically_absent_learners": 416,
+      "learners_meeting_attendance_rule": 629,
+      "learners_absence_rising_5pp": 210,
+      "learners_absence_falling_5pp": 173
+    },
+    "log_entries": {
+      "total": 1486,
+      "by_type": {
+        "Student check-in": 552,
+        "Family contact": 190,
+        "Attendance plan": 57,
+        "Counselor referral": 17,
+        "Missing work follow-up": 670
+      },
+      "learners": 787,
+      "open": 81
+    },
+    "attendance_action_follow_up": {
+      "learners_with_attendance_action": 552,
+      "learners_compared": 536,
+      "fewer_absences_after": 432,
+      "same_or_more_absences_after": 104,
+      "absence_rate_before": 0.2899,
+      "absence_rate_after": 0.1194
+    },
+    "missing_work_by_recent_absence": {
+      "after_attendance_rule_met": 0.1512,
+      "otherwise": 0.0761,
+      "pieces_after_attendance_rule_met": 8212
+    },
+    "coursework_follow_up": {
+      "learners_with_coursework_follow_up": 402,
+      "learners_compared": 310,
+      "fewer_missing_after": 273,
+      "same_or_more_missing_after": 37,
+      "missing_rate_before": 0.6103,
+      "missing_rate_after": 0.2148
+    },
+    "school_years": [
+      "2024-2025",
+      "2025-2026"
+    ],
+    "attendance_rate_by_school": {
+      "Alder Heights Middle School": 0.93,
+      "Summit Harbor Middle School": 0.9111,
+      "Rainier View Middle School": 0.9472
+    },
+    "prior_year": {
+      "school_year": "2024-2025",
+      "learners": 1753,
+      "former_learners": 644,
+      "attendance_records": 315540,
+      "absent_days": 24000,
+      "attendance_rate": 0.9239399125308994,
+      "attendance_rate_by_school": {
+        "Alder Heights Middle School": 0.9129,
+        "Summit Harbor Middle School": 0.9166,
+        "Rainier View Middle School": 0.9397
+      },
+      "chronically_absent_learners": 437,
+      "assessment_results": 10518
+    },
+    "enrollment_changes": {
+      "entry": {
+        "Continuing": 1064,
+        "New": 691,
+        "Transferred in": 45
+      },
+      "exit": {
+        "Completed final grade": 585,
+        "Continuing": 1064,
+        "Left": 59,
+        "Transferred out": 45
+      }
+    },
+    "Canvas": {
+      "students": 1260,
+      "assignment_snapshots": 187336,
+      "missing": 14619,
+      "late": 17483
+    },
+    "Moodle": {
+      "students": 540,
+      "assignment_snapshots": 80757,
+      "missing": 6393,
+      "late": 7434
+    },
+    "coursework_score_by_subject": {
+      "Mathematics": 0.6838,
+      "English Language Arts": 0.7101,
+      "Integrated Science": 0.7009,
+      "World History": 0.7263,
+      "Visual Arts": 0.7611,
+      "Physical Education": 0.7749
+    },
+    "mean_within_student_subject_range": 13.35,
+    "classes_by_subject": {
+      "Mathematics": 80,
+      "English Language Arts": 73,
+      "Integrated Science": 71,
+      "World History": 63,
+      "Visual Arts": 57,
+      "Physical Education": 42
+    },
+    "assignments_by_subject": {
+      "Mathematics": 2620,
+      "English Language Arts": 2181,
+      "Integrated Science": 1855,
+      "World History": 1497,
+      "Visual Arts": 1108,
+      "Physical Education": 708
+    },
+    "assignments": {
+      "total": 9969,
+      "min_per_section": 11,
+      "max_per_section": 38,
+      "distinct_due_date_calendars": 386,
+      "by_format": {
+        "Practice": 3414,
+        "Reflection": 1629,
+        "Application": 2100,
+        "Project": 652,
+        "Review": 1480,
+        "Assessment": 694
+      },
+      "by_max_score": {
+        "10": 1094,
+        "15": 1193,
+        "20": 1691,
+        "25": 988,
+        "30": 1066,
+        "40": 1194,
+        "50": 702,
+        "60": 927,
+        "75": 246,
+        "80": 221,
+        "100": 434,
+        "120": 213
+      }
+    },
+    "assessment_results": 10800
+  },
+  "csv_encoding": {
+    "encoding": "UTF-8",
+    "null": "\\N",
+    "boolean": "true/false",
+    "arrays": "JSON within CSV cell"
+  }
+}

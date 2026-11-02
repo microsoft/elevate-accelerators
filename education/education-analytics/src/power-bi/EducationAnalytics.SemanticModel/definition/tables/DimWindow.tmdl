@@ -1,0 +1,57 @@
+/// One row per testing period, for example autumn, winter or spring.
+table DimWindow
+	lineageTag: 8c0a0688-3f9e-4735-8565-95d326e0840f
+
+	/// Internal testing-period ID used to join the data together.
+	column window_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 55448abd-df8b-49d3-9b8b-7f27d0d70664
+		summarizeBy: none
+		sourceColumn: window_id
+
+	/// The name shown in the report.
+	column Window
+		dataType: string
+		lineageTag: f5ca734b-1285-442e-b97c-ae9475096027
+		summarizeBy: none
+		sourceColumn: name
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: e5ea9f81-b4f4-42e0-be4f-bbdc0afcc98e
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 57dce790-d58b-4cf8-9510-307cdc879ed1
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 1cf9b8ce-2b7a-495b-be0c-a6eeba8b6ba6
+			defaultHierarchy: LocalDateTable_0c894e12-9d7d-40b2-a7ac-5fd4646a1cb7.'Date Hierarchy'
+
+	partition DimWindow = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimWindow WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimWindow WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

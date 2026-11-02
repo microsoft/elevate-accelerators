@@ -1,0 +1,65 @@
+name: Education analytics
+
+on:
+  pull_request:
+    paths:
+      - "education/education-analytics/**"
+      - ".github/workflows/education-analytics.yml"
+  push:
+    branches: [main]
+    paths:
+      - "education/education-analytics/**"
+      - ".github/workflows/education-analytics.yml"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: education/education-analytics
+
+jobs:
+  fabric-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate sample package
+        run: python sample-data/generate.py --check
+      - name: Parse installer
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path "deploy/Install-IntoWorkspace.ps1").Path,
+            [ref]$tokens,
+            [ref]$errors
+          ) > $null
+          if ($errors.Count) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+      - name: Preview installer
+        shell: pwsh
+        run: ./deploy/Install-IntoWorkspace.ps1 -WorkspaceName CI-Validation -PlanOnly
+
+  workload:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: education/education-analytics/src/fabric/workload/Workload
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: education/education-analytics/src/fabric/workload/Workload/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Build frontend
+        run: npx env-cmd -f .env.template webpack --config ./webpack.config.js --output-path ../build/CI

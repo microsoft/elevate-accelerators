@@ -1,0 +1,22 @@
+/// A small helper table holding the choices for the rolling attendance window.
+table 'Rolling Window'
+	lineageTag: c3bf01cc-c2da-42d2-ab21-9887bb30aa95
+
+	/// The number of days currently chosen for the rolling attendance figure. Defaults to 20.
+	measure 'Rolling Window Days Value' = SELECTEDVALUE ( 'Rolling Window'[Rolling Window Days], 20 )
+		formatString: 0
+		displayFolder: Attendance
+		lineageTag: e9a36d82-c6e3-4ce9-8aad-0a3c9f73e8bb
+
+	/// How many days back the rolling attendance figure looks.
+	column 'Rolling Window Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a149f69-de24-4d6a-8e23-cc972d67ca0c
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition 'Rolling Window' = calculated
+		mode: import
+		source = GENERATESERIES ( 5, 60, 5 )
+

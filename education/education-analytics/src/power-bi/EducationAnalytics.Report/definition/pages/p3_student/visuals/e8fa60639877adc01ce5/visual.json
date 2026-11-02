@@ -1,0 +1,252 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e8fa60639877adc01ce5",
+  "position": {
+    "x": 20,
+    "y": 700,
+    "z": 11000,
+    "height": 160,
+    "width": 1160,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Action date"
+                }
+              },
+              "queryRef": "FactStudentAction.Action date",
+              "nativeQueryRef": "Action date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Action type"
+                }
+              },
+              "queryRef": "FactStudentAction.Action type",
+              "nativeQueryRef": "Action type",
+              "displayName": "Action"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Class"
+                }
+              },
+              "queryRef": "FactStudentAction.Class",
+              "nativeQueryRef": "Class"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTeacher"
+                    }
+                  },
+                  "Property": "Teacher"
+                }
+              },
+              "queryRef": "DimTeacher.Teacher",
+              "nativeQueryRef": "Teacher",
+              "displayName": "Logged by"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Outcome note"
+                }
+              },
+              "queryRef": "FactStudentAction.Outcome note",
+              "nativeQueryRef": "Outcome note",
+              "displayName": "Outcome"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Absences before"
+                }
+              },
+              "queryRef": "FactStudentAction.Absences before",
+              "nativeQueryRef": "Absences before",
+              "displayName": "Absent before"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Absences after"
+                }
+              },
+              "queryRef": "FactStudentAction.Absences after",
+              "nativeQueryRef": "Absences after",
+              "displayName": "Absent after"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Work missing before"
+                }
+              },
+              "queryRef": "FactStudentAction.Work missing before",
+              "nativeQueryRef": "Work missing before",
+              "displayName": "Missing before"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Work missing after"
+                }
+              },
+              "queryRef": "FactStudentAction.Work missing after",
+              "nativeQueryRef": "Work missing after",
+              "displayName": "Missing after"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactStudentAction"
+                  }
+                },
+                "Property": "Action date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Actions logged for this student'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'List of the actions teachers logged for this student with the reason, status, the note recorded at follow-up and the absences in the ten school days before and after each action.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

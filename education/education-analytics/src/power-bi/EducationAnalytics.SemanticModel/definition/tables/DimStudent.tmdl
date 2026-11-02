@@ -1,0 +1,84 @@
+/// One row per student. Holds only a name and an ID, nothing about background or needs.
+table DimStudent
+	lineageTag: b49cb9ed-af86-4faa-9726-42518a34cf56
+
+	/// How many different students the figures on screen are covering. One means a single learner is in view; anything
+	/// more means the numbers are a combined total and describe nobody in particular. Counts the identifier rather than
+	/// the name, because two learners can share a display name and would otherwise pass as one.
+	measure 'Students in View' = DISTINCTCOUNT ( 'DimStudent'[student_id] )
+		formatString: #,##0
+		displayFolder: Data status
+		lineageTag: 06da2799-a88e-499f-b804-ed95a7387590
+
+	/// Names the learner a student page is actually showing, and says so plainly when it is showing everybody instead.
+	/// A page meant for one student silently combining a whole district is the easiest mistake to make here, because a
+	/// combined figure still looks like a perfectly ordinary number. Two learners sharing a name is one way that
+	/// happens, and drillthrough carries the name, so the count that decides this must be of identifiers.
+	measure 'Student in View' =
+			VAR StudentCount = [Students in View]
+			VAR DisplayName = SELECTEDVALUE ( 'DimStudent'[Student] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        StudentCount = 1, DisplayName,
+			        NOT ISBLANK ( DisplayName ),
+			            FORMAT ( StudentCount, "#,##0" ) & " learners are named " & DisplayName
+			                & " - these figures combine them",
+			        "Select one student - these figures combine " & FORMAT ( StudentCount, "#,##0" ) & " students"
+			    )
+		displayFolder: Data status
+		lineageTag: cb72af81-1ecc-4018-926e-7c36a9ac1d41
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: ecdf4549-6dfc-4b8e-82f1-3afe03a47dec
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Student name. Shown on teacher and student pages only, never on district pages.
+	column Student
+		dataType: string
+		lineageTag: 7943a7a5-86cd-4f42-8c62-a053e06a8bdf
+		summarizeBy: none
+		sourceColumn: display_name
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 2cd1ffc9-fdef-42ab-ac34-9872c08274b2
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 300c33ce-4ab2-42e2-809c-9f411afd7865
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: aa1702c2-9e43-4355-a208-0d9b9bdd89ce
+			defaultHierarchy: LocalDateTable_95914168-d8b2-40db-9d6c-3e8ee6534e14.'Date Hierarchy'
+
+	partition DimStudent = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimStudent WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimStudent WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

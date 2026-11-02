@@ -1,0 +1,227 @@
+relationship DimSection_school_id_to_DimSchool
+	fromColumn: DimSection.school_id
+	toColumn: DimSchool.school_id
+
+relationship FactAttendanceDay_school_id_to_DimSchool
+	fromColumn: FactAttendanceDay.school_id
+	toColumn: DimSchool.school_id
+
+relationship FactAssessment_school_id_to_DimSchool
+	fromColumn: FactAssessment.school_id
+	toColumn: DimSchool.school_id
+
+relationship FactAttendanceDay_grade_to_DimGrade
+	fromColumn: FactAttendanceDay.Grade
+	toColumn: DimGrade.'Year group'
+
+relationship FactAssessment_grade_to_DimGrade
+	fromColumn: FactAssessment.Grade
+	toColumn: DimGrade.'Year group'
+
+relationship DimSection_grade_to_DimGrade
+	fromColumn: DimSection.Grade
+	toColumn: DimGrade.'Year group'
+
+relationship FactAttendanceDay_student_id_to_DimStudent
+	fromColumn: FactAttendanceDay.student_id
+	toColumn: DimStudent.student_id
+
+relationship FactAssessment_student_id_to_DimStudent
+	fromColumn: FactAssessment.student_id
+	toColumn: DimStudent.student_id
+
+relationship FactSubmissionState_student_id_to_DimStudent
+	fromColumn: FactSubmissionState.student_id
+	toColumn: DimStudent.student_id
+
+relationship BridgeStudentSection_student_id_to_DimStudent
+	fromColumn: BridgeStudentSection.student_id
+	toColumn: DimStudent.student_id
+
+relationship FactAttendanceDay_date_to_DimDate
+	fromColumn: FactAttendanceDay.date
+	toColumn: DimDate.Date
+
+relationship FactAssessment_date_to_DimDate
+	fromColumn: FactAssessment.date
+	toColumn: DimDate.Date
+
+relationship FactAssessment_assessment_id_to_DimAssessment
+	fromColumn: FactAssessment.assessment_id
+	toColumn: DimAssessment.assessment_id
+
+relationship FactAssessment_window_id_to_DimWindow
+	fromColumn: FactAssessment.window_id
+	toColumn: DimWindow.window_id
+
+relationship DimContent_section_id_to_DimSection
+	fromColumn: DimContent.section_id
+	toColumn: DimSection.section_id
+
+relationship BridgeStudentSection_section_id_to_DimSection
+	fromColumn: BridgeStudentSection.section_id
+	toColumn: DimSection.section_id
+
+relationship BridgeTeacherSection_section_id_to_DimSection
+	fromColumn: BridgeTeacherSection.section_id
+	toColumn: DimSection.section_id
+
+relationship BridgeTeacherSection_teacher_id_to_DimTeacher
+	fromColumn: BridgeTeacherSection.teacher_id
+	toColumn: DimTeacher.teacher_id
+
+relationship FactSubmissionState_content_id_to_DimContent
+	fromColumn: FactSubmissionState.content_id
+	toColumn: DimContent.content_id
+
+relationship FactSubmission_obligation_id_to_FactSubmissionState
+	fromColumn: FactSubmission.obligation_id
+	toColumn: FactSubmissionState.obligation_id
+
+relationship FactStudentAction_student_id_to_DimStudent
+	fromColumn: FactStudentAction.student_id
+	toColumn: DimStudent.student_id
+
+relationship FactStudentAction_school_id_to_DimSchool
+	fromColumn: FactStudentAction.school_id
+	toColumn: DimSchool.school_id
+
+relationship FactStudentAction_teacher_id_to_DimTeacher
+	fromColumn: FactStudentAction.teacher_id
+	toColumn: DimTeacher.teacher_id
+
+relationship FactStudentAction_grade_to_DimGrade
+	fromColumn: FactStudentAction.Grade
+	toColumn: DimGrade.'Year group'
+
+relationship FactStudentAction_date_to_DimDate
+	fromColumn: FactStudentAction.'Action date'
+	toColumn: DimDate.Date
+
+relationship FactEnrollment_student_id_to_DimStudent
+	fromColumn: FactEnrollment.student_id
+	toColumn: DimStudent.student_id
+
+relationship FactEnrollment_school_id_to_DimSchool
+	fromColumn: FactEnrollment.school_id
+	toColumn: DimSchool.school_id
+
+relationship FactEnrollment_grade_to_DimGrade
+	fromColumn: FactEnrollment.Grade
+	toColumn: DimGrade.'Year group'
+
+relationship ffc6e01d-3f43-4e31-82e1-acb31b41916e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimSchool.as_of
+	toColumn: LocalDateTable_ff6fd6a2-763c-41c6-9bef-7f29ba8934a1.Date
+
+relationship aa1702c2-9e43-4355-a208-0d9b9bdd89ce
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimStudent.as_of
+	toColumn: LocalDateTable_95914168-d8b2-40db-9d6c-3e8ee6534e14.Date
+
+relationship f60331c0-2c16-4675-aa68-20a7b4130ec1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimTeacher.as_of
+	toColumn: LocalDateTable_9ee6b2ca-bbc1-4b93-a709-f9259cf134b4.Date
+
+relationship db089fee-8be0-43b7-8b0d-666764b3d101
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimSection.as_of
+	toColumn: LocalDateTable_3dd32261-653e-4172-a8a4-35410f71c3fd.Date
+
+relationship 975fd0ac-f7eb-442f-ac8f-1279c60a92da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimContent.'Due date'
+	toColumn: LocalDateTable_16a27b0a-149e-4fc8-b344-af1948bce6c6.Date
+
+relationship 9778c6bc-fc27-4b10-8d82-6b96a9388915
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimContent.as_of
+	toColumn: LocalDateTable_23c777bd-55d9-4501-a7db-a4e599b9621d.Date
+
+relationship 56f7cc96-c538-44b9-90d1-6b677b800ec7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimAssessment.as_of
+	toColumn: LocalDateTable_658d5fba-7760-47b4-a1d8-6d79bdc55420.Date
+
+relationship 1cf9b8ce-2b7a-495b-be0c-a6eeba8b6ba6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimWindow.as_of
+	toColumn: LocalDateTable_0c894e12-9d7d-40b2-a7ac-5fd4646a1cb7.Date
+
+relationship b6af82a1-72b8-46d6-af4b-e12d8358e3b5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeStudentSection.'Valid from'
+	toColumn: LocalDateTable_af096f5c-378d-4078-be1e-adda0c90cdd1.Date
+
+relationship a744018f-56f9-4930-ac0e-f2b40c223f8f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeStudentSection.'Valid to'
+	toColumn: LocalDateTable_825b8bb6-2ea2-41c0-92c6-491cf60a2916.Date
+
+relationship 04fa447c-a956-4853-823f-811bddbfcb15
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeStudentSection.as_of
+	toColumn: LocalDateTable_5939544e-7f70-4b31-bc30-e02931132165.Date
+
+relationship 053fcbf0-8423-4349-9fb6-a34990b2f8d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeTeacherSection.'Valid from'
+	toColumn: LocalDateTable_3cb4cafa-db7f-4964-9ecf-e595df6676e1.Date
+
+relationship 92729a18-46da-4e46-ad86-7e5b7de6d170
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeTeacherSection.'Valid to'
+	toColumn: LocalDateTable_7bf806c0-c74c-4821-b0a3-b51d7487efef.Date
+
+relationship 66f61361-3c7b-4940-bc7a-c3b855b27ea8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BridgeTeacherSection.as_of
+	toColumn: LocalDateTable_bac7b976-4648-4d9c-93bb-1bdf6ff21342.Date
+
+relationship e78e18fe-4c77-4a5e-ad87-abfac5b3c701
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAttendanceDay.as_of
+	toColumn: LocalDateTable_863fd4b8-ad04-4f71-a25f-95aa5353e44b.Date
+
+relationship 9175c480-3f98-43b7-a827-d5b99746a68f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAssessment.as_of
+	toColumn: LocalDateTable_85ac1dd3-d999-485a-9c9e-840423c8cd7e.Date
+
+relationship 13aaa5d9-5e4f-49be-a59d-cf5d7f856b4e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactSubmissionState.as_of
+	toColumn: LocalDateTable_222e4759-99d7-45e1-8951-abe04584c8d8.Date
+
+relationship 6e9fa760-789a-47a1-b3ec-42db6897442a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactSubmission.'Submitted at'
+	toColumn: LocalDateTable_56b6284e-3fdc-458c-a767-8920d8a03ef5.Date
+
+relationship 3bd0d473-aa18-45ca-a4ef-73f5b0f722d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactSubmission.as_of
+	toColumn: LocalDateTable_65b8e436-2270-4db6-b241-3dddf6eeaed1.Date
+
+relationship f17c072b-efb2-4ad9-8b99-2bfd94611bea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: GoldPublication.'As of'
+	toColumn: LocalDateTable_4b7f1a72-c30a-4717-8a93-8e6f5fd5af23.Date
+
+relationship fd53eb66-1ad2-4533-b78a-14b895aea949
+	joinOnDateBehavior: datePartOnly
+	fromColumn: GoldPublication.'Period start'
+	toColumn: LocalDateTable_4d34d6da-9278-4248-a2d8-c91af5406575.Date
+
+relationship ddcd0b23-273f-45ae-82a9-c0ddc4cffe2e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: GoldPublication.'Period end'
+	toColumn: LocalDateTable_be5df958-998b-452c-b3b2-13861007cb59.Date
+
+relationship 1d853253-0aeb-42b5-8f4b-47deb7217f2e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: GoldPublication.'Published at'
+	toColumn: LocalDateTable_54c8e206-5e1d-406d-8f45-bb02f5b2738a.Date
+
