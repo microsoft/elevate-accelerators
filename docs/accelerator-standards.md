@@ -10,7 +10,6 @@ consistent experience.
 - Use lowercase kebab-case folder names.
 - Name the accelerator after its scenario, not its technology, for example `education-analytics`
   rather than `fabric-notebooks`.
-- Put assets in `shared/` only when two or more accelerators use them.
 
 ## Required layout
 

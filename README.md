@@ -14,8 +14,7 @@ Elevate Accelerators is a Microsoft Elevate open-source collection of reusable s
 elevate-accelerators/
 ├── docs/          Standards and guidance for all accelerators
 ├── education/     Accelerators for schools and universities
-├── nonprofit/     Accelerators for nonprofit organizations
-└── shared/        Assets reused by two or more accelerators
+└── nonprofit/     Accelerators for nonprofit organizations
 ```
 
 Accelerators are grouped by sector. Each accelerator is self-contained and can be deployed on its own. Technologies are subfolders inside the accelerator, so one accelerator can combine Fabric, Power BI, Azure, Power Platform and Copilot.
