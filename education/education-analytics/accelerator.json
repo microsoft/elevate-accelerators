@@ -1,0 +1,14 @@
+{
+  "name": "education-analytics",
+  "title": "Education analytics",
+  "sector": "education",
+  "description": "Microsoft Fabric medallion lakehouse and Power BI report for attendance, enrollment and student performance, with a Fabric workload for guided deployment.",
+  "technologies": [
+    "Microsoft Fabric",
+    "Power BI"
+  ],
+  "version": "0.0.0",
+  "owners": [
+    "@vuhrova"
+  ]
+}

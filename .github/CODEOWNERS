@@ -1,0 +1,7 @@
+# Default owners for the whole repository.
+# Replace individual owners with GitHub teams when they are created in the Open Source portal.
+* @vuhrova
+
+# Sector and accelerator owners. Add a line for each new accelerator.
+/education/ @vuhrova
+/nonprofit/ @vuhrova
