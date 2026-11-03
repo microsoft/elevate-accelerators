@@ -33,7 +33,7 @@
     "react-i18next": "^15.0.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^5.3.4",
-    "uuid": "^11.0.5"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.19.43",
