@@ -1,0 +1,271 @@
+id,course_id,sis_section_id,name
+117,117,SYN-SECTION-117,Mathematics 6 - Group 01
+118,118,SYN-SECTION-118,Mathematics 6 - Group 02
+119,119,SYN-SECTION-119,Mathematics 6 - Group 03
+120,120,SYN-SECTION-120,Mathematics 6 - Group 04
+121,121,SYN-SECTION-121,Mathematics 6 - Group 05
+122,122,SYN-SECTION-122,Mathematics 6 - Group 06
+123,123,SYN-SECTION-123,Mathematics 6 - Group 07
+124,124,SYN-SECTION-124,Mathematics 6 - Group 08
+125,125,SYN-SECTION-125,Mathematics 6 - Group 09
+126,126,SYN-SECTION-126,Mathematics 7 - Group 10
+127,127,SYN-SECTION-127,Mathematics 7 - Group 11
+128,128,SYN-SECTION-128,Mathematics 7 - Group 12
+129,129,SYN-SECTION-129,Mathematics 7 - Group 13
+130,130,SYN-SECTION-130,Mathematics 7 - Group 14
+131,131,SYN-SECTION-131,Mathematics 7 - Group 15
+132,132,SYN-SECTION-132,Mathematics 7 - Group 16
+133,133,SYN-SECTION-133,Mathematics 7 - Group 17
+134,134,SYN-SECTION-134,Mathematics 7 - Group 18
+135,135,SYN-SECTION-135,Mathematics 8 - Group 19
+136,136,SYN-SECTION-136,Mathematics 8 - Group 20
+137,137,SYN-SECTION-137,Mathematics 8 - Group 21
+138,138,SYN-SECTION-138,Mathematics 8 - Group 22
+139,139,SYN-SECTION-139,Mathematics 8 - Group 23
+140,140,SYN-SECTION-140,Mathematics 8 - Group 24
+141,141,SYN-SECTION-141,Mathematics 8 - Group 25
+142,142,SYN-SECTION-142,Mathematics 8 - Group 26
+143,143,SYN-SECTION-143,Mathematics 8 - Group 27
+144,144,SYN-SECTION-144,English Language Arts 6 - Group 01
+145,145,SYN-SECTION-145,English Language Arts 6 - Group 02
+146,146,SYN-SECTION-146,English Language Arts 6 - Group 03
+147,147,SYN-SECTION-147,English Language Arts 6 - Group 04
+148,148,SYN-SECTION-148,English Language Arts 6 - Group 05
+149,149,SYN-SECTION-149,English Language Arts 6 - Group 06
+150,150,SYN-SECTION-150,English Language Arts 6 - Group 07
+151,151,SYN-SECTION-151,English Language Arts 6 - Group 08
+152,152,SYN-SECTION-152,English Language Arts 7 - Group 09
+153,153,SYN-SECTION-153,English Language Arts 7 - Group 10
+154,154,SYN-SECTION-154,English Language Arts 7 - Group 11
+155,155,SYN-SECTION-155,English Language Arts 7 - Group 12
+156,156,SYN-SECTION-156,English Language Arts 7 - Group 13
+157,157,SYN-SECTION-157,English Language Arts 7 - Group 14
+158,158,SYN-SECTION-158,English Language Arts 7 - Group 15
+159,159,SYN-SECTION-159,English Language Arts 7 - Group 16
+160,160,SYN-SECTION-160,English Language Arts 8 - Group 17
+161,161,SYN-SECTION-161,English Language Arts 8 - Group 18
+162,162,SYN-SECTION-162,English Language Arts 8 - Group 19
+163,163,SYN-SECTION-163,English Language Arts 8 - Group 20
+164,164,SYN-SECTION-164,English Language Arts 8 - Group 21
+165,165,SYN-SECTION-165,English Language Arts 8 - Group 22
+166,166,SYN-SECTION-166,English Language Arts 8 - Group 23
+167,167,SYN-SECTION-167,English Language Arts 8 - Group 24
+168,168,SYN-SECTION-168,Integrated Science 6 - Group 01
+169,169,SYN-SECTION-169,Integrated Science 6 - Group 02
+170,170,SYN-SECTION-170,Integrated Science 6 - Group 03
+171,171,SYN-SECTION-171,Integrated Science 6 - Group 04
+172,172,SYN-SECTION-172,Integrated Science 6 - Group 05
+173,173,SYN-SECTION-173,Integrated Science 6 - Group 06
+174,174,SYN-SECTION-174,Integrated Science 6 - Group 07
+175,175,SYN-SECTION-175,Integrated Science 6 - Group 08
+176,176,SYN-SECTION-176,Integrated Science 7 - Group 09
+177,177,SYN-SECTION-177,Integrated Science 7 - Group 10
+178,178,SYN-SECTION-178,Integrated Science 7 - Group 11
+179,179,SYN-SECTION-179,Integrated Science 7 - Group 12
+180,180,SYN-SECTION-180,Integrated Science 7 - Group 13
+181,181,SYN-SECTION-181,Integrated Science 7 - Group 14
+182,182,SYN-SECTION-182,Integrated Science 7 - Group 15
+183,183,SYN-SECTION-183,Integrated Science 7 - Group 16
+184,184,SYN-SECTION-184,Integrated Science 8 - Group 17
+185,185,SYN-SECTION-185,Integrated Science 8 - Group 18
+186,186,SYN-SECTION-186,Integrated Science 8 - Group 19
+187,187,SYN-SECTION-187,Integrated Science 8 - Group 20
+188,188,SYN-SECTION-188,Integrated Science 8 - Group 21
+189,189,SYN-SECTION-189,Integrated Science 8 - Group 22
+190,190,SYN-SECTION-190,Integrated Science 8 - Group 23
+191,191,SYN-SECTION-191,Integrated Science 8 - Group 24
+192,192,SYN-SECTION-192,World History 6 - Group 01
+193,193,SYN-SECTION-193,World History 6 - Group 02
+194,194,SYN-SECTION-194,World History 6 - Group 03
+195,195,SYN-SECTION-195,World History 6 - Group 04
+196,196,SYN-SECTION-196,World History 6 - Group 05
+197,197,SYN-SECTION-197,World History 6 - Group 06
+198,198,SYN-SECTION-198,World History 6 - Group 07
+199,199,SYN-SECTION-199,World History 7 - Group 08
+200,200,SYN-SECTION-200,World History 7 - Group 09
+201,201,SYN-SECTION-201,World History 7 - Group 10
+202,202,SYN-SECTION-202,World History 7 - Group 11
+203,203,SYN-SECTION-203,World History 7 - Group 12
+204,204,SYN-SECTION-204,World History 7 - Group 13
+205,205,SYN-SECTION-205,World History 7 - Group 14
+206,206,SYN-SECTION-206,World History 8 - Group 15
+207,207,SYN-SECTION-207,World History 8 - Group 16
+208,208,SYN-SECTION-208,World History 8 - Group 17
+209,209,SYN-SECTION-209,World History 8 - Group 18
+210,210,SYN-SECTION-210,World History 8 - Group 19
+211,211,SYN-SECTION-211,World History 8 - Group 20
+212,212,SYN-SECTION-212,World History 8 - Group 21
+213,213,SYN-SECTION-213,Visual Arts 6 - Group 01
+214,214,SYN-SECTION-214,Visual Arts 6 - Group 02
+215,215,SYN-SECTION-215,Visual Arts 6 - Group 03
+216,216,SYN-SECTION-216,Visual Arts 6 - Group 04
+217,217,SYN-SECTION-217,Visual Arts 6 - Group 05
+218,218,SYN-SECTION-218,Visual Arts 6 - Group 06
+219,219,SYN-SECTION-219,Visual Arts 7 - Group 07
+220,220,SYN-SECTION-220,Visual Arts 7 - Group 08
+221,221,SYN-SECTION-221,Visual Arts 7 - Group 09
+222,222,SYN-SECTION-222,Visual Arts 7 - Group 10
+223,223,SYN-SECTION-223,Visual Arts 7 - Group 11
+224,224,SYN-SECTION-224,Visual Arts 7 - Group 12
+225,225,SYN-SECTION-225,Visual Arts 8 - Group 13
+226,226,SYN-SECTION-226,Visual Arts 8 - Group 14
+227,227,SYN-SECTION-227,Visual Arts 8 - Group 15
+228,228,SYN-SECTION-228,Visual Arts 8 - Group 16
+229,229,SYN-SECTION-229,Visual Arts 8 - Group 17
+230,230,SYN-SECTION-230,Visual Arts 8 - Group 18
+231,231,SYN-SECTION-231,Physical Education 6 - Group 01
+232,232,SYN-SECTION-232,Physical Education 6 - Group 02
+233,233,SYN-SECTION-233,Physical Education 6 - Group 03
+234,234,SYN-SECTION-234,Physical Education 6 - Group 04
+235,235,SYN-SECTION-235,Physical Education 6 - Group 05
+236,236,SYN-SECTION-236,Physical Education 7 - Group 06
+237,237,SYN-SECTION-237,Physical Education 7 - Group 07
+238,238,SYN-SECTION-238,Physical Education 7 - Group 08
+239,239,SYN-SECTION-239,Physical Education 7 - Group 09
+240,240,SYN-SECTION-240,Physical Education 7 - Group 10
+241,241,SYN-SECTION-241,Physical Education 8 - Group 11
+242,242,SYN-SECTION-242,Physical Education 8 - Group 12
+243,243,SYN-SECTION-243,Physical Education 8 - Group 13
+244,244,SYN-SECTION-244,Physical Education 8 - Group 14
+245,245,SYN-SECTION-245,Physical Education 8 - Group 15
+246,246,SYN-SECTION-246,Mathematics 6 - Group 01
+247,247,SYN-SECTION-247,Mathematics 6 - Group 02
+248,248,SYN-SECTION-248,Mathematics 6 - Group 03
+249,249,SYN-SECTION-249,Mathematics 6 - Group 04
+250,250,SYN-SECTION-250,Mathematics 6 - Group 05
+251,251,SYN-SECTION-251,Mathematics 6 - Group 06
+252,252,SYN-SECTION-252,Mathematics 6 - Group 07
+253,253,SYN-SECTION-253,Mathematics 6 - Group 08
+254,254,SYN-SECTION-254,Mathematics 6 - Group 09
+255,255,SYN-SECTION-255,Mathematics 6 - Group 10
+256,256,SYN-SECTION-256,Mathematics 7 - Group 11
+257,257,SYN-SECTION-257,Mathematics 7 - Group 12
+258,258,SYN-SECTION-258,Mathematics 7 - Group 13
+259,259,SYN-SECTION-259,Mathematics 7 - Group 14
+260,260,SYN-SECTION-260,Mathematics 7 - Group 15
+261,261,SYN-SECTION-261,Mathematics 7 - Group 16
+262,262,SYN-SECTION-262,Mathematics 7 - Group 17
+263,263,SYN-SECTION-263,Mathematics 7 - Group 18
+264,264,SYN-SECTION-264,Mathematics 7 - Group 19
+265,265,SYN-SECTION-265,Mathematics 7 - Group 20
+266,266,SYN-SECTION-266,Mathematics 8 - Group 21
+267,267,SYN-SECTION-267,Mathematics 8 - Group 22
+268,268,SYN-SECTION-268,Mathematics 8 - Group 23
+269,269,SYN-SECTION-269,Mathematics 8 - Group 24
+270,270,SYN-SECTION-270,Mathematics 8 - Group 25
+271,271,SYN-SECTION-271,Mathematics 8 - Group 26
+272,272,SYN-SECTION-272,Mathematics 8 - Group 27
+273,273,SYN-SECTION-273,Mathematics 8 - Group 28
+274,274,SYN-SECTION-274,Mathematics 8 - Group 29
+275,275,SYN-SECTION-275,English Language Arts 6 - Group 01
+276,276,SYN-SECTION-276,English Language Arts 6 - Group 02
+277,277,SYN-SECTION-277,English Language Arts 6 - Group 03
+278,278,SYN-SECTION-278,English Language Arts 6 - Group 04
+279,279,SYN-SECTION-279,English Language Arts 6 - Group 05
+280,280,SYN-SECTION-280,English Language Arts 6 - Group 06
+281,281,SYN-SECTION-281,English Language Arts 6 - Group 07
+282,282,SYN-SECTION-282,English Language Arts 6 - Group 08
+283,283,SYN-SECTION-283,English Language Arts 6 - Group 09
+284,284,SYN-SECTION-284,English Language Arts 7 - Group 10
+285,285,SYN-SECTION-285,English Language Arts 7 - Group 11
+286,286,SYN-SECTION-286,English Language Arts 7 - Group 12
+287,287,SYN-SECTION-287,English Language Arts 7 - Group 13
+288,288,SYN-SECTION-288,English Language Arts 7 - Group 14
+289,289,SYN-SECTION-289,English Language Arts 7 - Group 15
+290,290,SYN-SECTION-290,English Language Arts 7 - Group 16
+291,291,SYN-SECTION-291,English Language Arts 7 - Group 17
+292,292,SYN-SECTION-292,English Language Arts 7 - Group 18
+293,293,SYN-SECTION-293,English Language Arts 8 - Group 19
+294,294,SYN-SECTION-294,English Language Arts 8 - Group 20
+295,295,SYN-SECTION-295,English Language Arts 8 - Group 21
+296,296,SYN-SECTION-296,English Language Arts 8 - Group 22
+297,297,SYN-SECTION-297,English Language Arts 8 - Group 23
+298,298,SYN-SECTION-298,English Language Arts 8 - Group 24
+299,299,SYN-SECTION-299,English Language Arts 8 - Group 25
+300,300,SYN-SECTION-300,English Language Arts 8 - Group 26
+301,301,SYN-SECTION-301,English Language Arts 8 - Group 27
+302,302,SYN-SECTION-302,Integrated Science 6 - Group 01
+303,303,SYN-SECTION-303,Integrated Science 6 - Group 02
+304,304,SYN-SECTION-304,Integrated Science 6 - Group 03
+305,305,SYN-SECTION-305,Integrated Science 6 - Group 04
+306,306,SYN-SECTION-306,Integrated Science 6 - Group 05
+307,307,SYN-SECTION-307,Integrated Science 6 - Group 06
+308,308,SYN-SECTION-308,Integrated Science 6 - Group 07
+309,309,SYN-SECTION-309,Integrated Science 6 - Group 08
+310,310,SYN-SECTION-310,Integrated Science 6 - Group 09
+311,311,SYN-SECTION-311,Integrated Science 7 - Group 10
+312,312,SYN-SECTION-312,Integrated Science 7 - Group 11
+313,313,SYN-SECTION-313,Integrated Science 7 - Group 12
+314,314,SYN-SECTION-314,Integrated Science 7 - Group 13
+315,315,SYN-SECTION-315,Integrated Science 7 - Group 14
+316,316,SYN-SECTION-316,Integrated Science 7 - Group 15
+317,317,SYN-SECTION-317,Integrated Science 7 - Group 16
+318,318,SYN-SECTION-318,Integrated Science 7 - Group 17
+319,319,SYN-SECTION-319,Integrated Science 7 - Group 18
+320,320,SYN-SECTION-320,Integrated Science 8 - Group 19
+321,321,SYN-SECTION-321,Integrated Science 8 - Group 20
+322,322,SYN-SECTION-322,Integrated Science 8 - Group 21
+323,323,SYN-SECTION-323,Integrated Science 8 - Group 22
+324,324,SYN-SECTION-324,Integrated Science 8 - Group 23
+325,325,SYN-SECTION-325,Integrated Science 8 - Group 24
+326,326,SYN-SECTION-326,Integrated Science 8 - Group 25
+327,327,SYN-SECTION-327,Integrated Science 8 - Group 26
+328,328,SYN-SECTION-328,World History 6 - Group 01
+329,329,SYN-SECTION-329,World History 6 - Group 02
+330,330,SYN-SECTION-330,World History 6 - Group 03
+331,331,SYN-SECTION-331,World History 6 - Group 04
+332,332,SYN-SECTION-332,World History 6 - Group 05
+333,333,SYN-SECTION-333,World History 6 - Group 06
+334,334,SYN-SECTION-334,World History 6 - Group 07
+335,335,SYN-SECTION-335,World History 6 - Group 08
+336,336,SYN-SECTION-336,World History 7 - Group 09
+337,337,SYN-SECTION-337,World History 7 - Group 10
+338,338,SYN-SECTION-338,World History 7 - Group 11
+339,339,SYN-SECTION-339,World History 7 - Group 12
+340,340,SYN-SECTION-340,World History 7 - Group 13
+341,341,SYN-SECTION-341,World History 7 - Group 14
+342,342,SYN-SECTION-342,World History 7 - Group 15
+343,343,SYN-SECTION-343,World History 7 - Group 16
+344,344,SYN-SECTION-344,World History 8 - Group 17
+345,345,SYN-SECTION-345,World History 8 - Group 18
+346,346,SYN-SECTION-346,World History 8 - Group 19
+347,347,SYN-SECTION-347,World History 8 - Group 20
+348,348,SYN-SECTION-348,World History 8 - Group 21
+349,349,SYN-SECTION-349,World History 8 - Group 22
+350,350,SYN-SECTION-350,World History 8 - Group 23
+351,351,SYN-SECTION-351,Visual Arts 6 - Group 01
+352,352,SYN-SECTION-352,Visual Arts 6 - Group 02
+353,353,SYN-SECTION-353,Visual Arts 6 - Group 03
+354,354,SYN-SECTION-354,Visual Arts 6 - Group 04
+355,355,SYN-SECTION-355,Visual Arts 6 - Group 05
+356,356,SYN-SECTION-356,Visual Arts 6 - Group 06
+357,357,SYN-SECTION-357,Visual Arts 6 - Group 07
+358,358,SYN-SECTION-358,Visual Arts 7 - Group 08
+359,359,SYN-SECTION-359,Visual Arts 7 - Group 09
+360,360,SYN-SECTION-360,Visual Arts 7 - Group 10
+361,361,SYN-SECTION-361,Visual Arts 7 - Group 11
+362,362,SYN-SECTION-362,Visual Arts 7 - Group 12
+363,363,SYN-SECTION-363,Visual Arts 7 - Group 13
+364,364,SYN-SECTION-364,Visual Arts 7 - Group 14
+365,365,SYN-SECTION-365,Visual Arts 8 - Group 15
+366,366,SYN-SECTION-366,Visual Arts 8 - Group 16
+367,367,SYN-SECTION-367,Visual Arts 8 - Group 17
+368,368,SYN-SECTION-368,Visual Arts 8 - Group 18
+369,369,SYN-SECTION-369,Visual Arts 8 - Group 19
+370,370,SYN-SECTION-370,Visual Arts 8 - Group 20
+371,371,SYN-SECTION-371,Visual Arts 8 - Group 21
+372,372,SYN-SECTION-372,Physical Education 6 - Group 01
+373,373,SYN-SECTION-373,Physical Education 6 - Group 02
+374,374,SYN-SECTION-374,Physical Education 6 - Group 03
+375,375,SYN-SECTION-375,Physical Education 6 - Group 04
+376,376,SYN-SECTION-376,Physical Education 6 - Group 05
+377,377,SYN-SECTION-377,Physical Education 7 - Group 06
+378,378,SYN-SECTION-378,Physical Education 7 - Group 07
+379,379,SYN-SECTION-379,Physical Education 7 - Group 08
+380,380,SYN-SECTION-380,Physical Education 7 - Group 09
+381,381,SYN-SECTION-381,Physical Education 7 - Group 10
+382,382,SYN-SECTION-382,Physical Education 8 - Group 11
+383,383,SYN-SECTION-383,Physical Education 8 - Group 12
+384,384,SYN-SECTION-384,Physical Education 8 - Group 13
+385,385,SYN-SECTION-385,Physical Education 8 - Group 14
+386,386,SYN-SECTION-386,Physical Education 8 - Group 15

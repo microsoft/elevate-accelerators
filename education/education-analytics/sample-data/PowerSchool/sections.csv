@@ -1,0 +1,387 @@
+source_section_id,source_school_id,source_course_id,source_teacher_id,grade_level,section_name,section_code
+1,1,1,1,6,Mathematics 6 - Group 01,S01-MATH6-01
+2,1,1,1,6,Mathematics 6 - Group 02,S01-MATH6-02
+3,1,1,1,6,Mathematics 6 - Group 03,S01-MATH6-03
+4,1,1,1,6,Mathematics 6 - Group 04,S01-MATH6-04
+5,1,1,2,6,Mathematics 6 - Group 05,S01-MATH6-05
+6,1,1,2,6,Mathematics 6 - Group 06,S01-MATH6-06
+7,1,1,2,6,Mathematics 6 - Group 07,S01-MATH6-07
+8,1,1,2,6,Mathematics 6 - Group 08,S01-MATH6-08
+9,1,1,3,7,Mathematics 7 - Group 09,S01-MATH7-09
+10,1,1,3,7,Mathematics 7 - Group 10,S01-MATH7-10
+11,1,1,3,7,Mathematics 7 - Group 11,S01-MATH7-11
+12,1,1,3,7,Mathematics 7 - Group 12,S01-MATH7-12
+13,1,1,4,7,Mathematics 7 - Group 13,S01-MATH7-13
+14,1,1,4,7,Mathematics 7 - Group 14,S01-MATH7-14
+15,1,1,4,7,Mathematics 7 - Group 15,S01-MATH7-15
+16,1,1,4,7,Mathematics 7 - Group 16,S01-MATH7-16
+17,1,1,5,8,Mathematics 8 - Group 17,S01-MATH8-17
+18,1,1,5,8,Mathematics 8 - Group 18,S01-MATH8-18
+19,1,1,5,8,Mathematics 8 - Group 19,S01-MATH8-19
+20,1,1,5,8,Mathematics 8 - Group 20,S01-MATH8-20
+21,1,1,6,8,Mathematics 8 - Group 21,S01-MATH8-21
+22,1,1,6,8,Mathematics 8 - Group 22,S01-MATH8-22
+23,1,1,6,8,Mathematics 8 - Group 23,S01-MATH8-23
+24,1,1,6,8,Mathematics 8 - Group 24,S01-MATH8-24
+25,1,2,7,6,English Language Arts 6 - Group 01,S01-ELA6-01
+26,1,2,7,6,English Language Arts 6 - Group 02,S01-ELA6-02
+27,1,2,7,6,English Language Arts 6 - Group 03,S01-ELA6-03
+28,1,2,7,6,English Language Arts 6 - Group 04,S01-ELA6-04
+29,1,2,8,6,English Language Arts 6 - Group 05,S01-ELA6-05
+30,1,2,8,6,English Language Arts 6 - Group 06,S01-ELA6-06
+31,1,2,8,6,English Language Arts 6 - Group 07,S01-ELA6-07
+32,1,2,8,6,English Language Arts 6 - Group 08,S01-ELA6-08
+33,1,2,9,7,English Language Arts 7 - Group 09,S01-ELA7-09
+34,1,2,9,7,English Language Arts 7 - Group 10,S01-ELA7-10
+35,1,2,9,7,English Language Arts 7 - Group 11,S01-ELA7-11
+36,1,2,9,7,English Language Arts 7 - Group 12,S01-ELA7-12
+37,1,2,10,7,English Language Arts 7 - Group 13,S01-ELA7-13
+38,1,2,10,7,English Language Arts 7 - Group 14,S01-ELA7-14
+39,1,2,10,7,English Language Arts 7 - Group 15,S01-ELA7-15
+40,1,2,10,8,English Language Arts 8 - Group 16,S01-ELA8-16
+41,1,2,11,8,English Language Arts 8 - Group 17,S01-ELA8-17
+42,1,2,11,8,English Language Arts 8 - Group 18,S01-ELA8-18
+43,1,2,11,8,English Language Arts 8 - Group 19,S01-ELA8-19
+44,1,2,11,8,English Language Arts 8 - Group 20,S01-ELA8-20
+45,1,2,12,8,English Language Arts 8 - Group 21,S01-ELA8-21
+46,1,2,12,8,English Language Arts 8 - Group 22,S01-ELA8-22
+47,1,3,13,6,Integrated Science 6 - Group 01,S01-SCI6-01
+48,1,3,13,6,Integrated Science 6 - Group 02,S01-SCI6-02
+49,1,3,13,6,Integrated Science 6 - Group 03,S01-SCI6-03
+50,1,3,13,6,Integrated Science 6 - Group 04,S01-SCI6-04
+51,1,3,14,6,Integrated Science 6 - Group 05,S01-SCI6-05
+52,1,3,14,6,Integrated Science 6 - Group 06,S01-SCI6-06
+53,1,3,14,6,Integrated Science 6 - Group 07,S01-SCI6-07
+54,1,3,14,7,Integrated Science 7 - Group 08,S01-SCI7-08
+55,1,3,15,7,Integrated Science 7 - Group 09,S01-SCI7-09
+56,1,3,15,7,Integrated Science 7 - Group 10,S01-SCI7-10
+57,1,3,15,7,Integrated Science 7 - Group 11,S01-SCI7-11
+58,1,3,15,7,Integrated Science 7 - Group 12,S01-SCI7-12
+59,1,3,16,7,Integrated Science 7 - Group 13,S01-SCI7-13
+60,1,3,16,7,Integrated Science 7 - Group 14,S01-SCI7-14
+61,1,3,16,8,Integrated Science 8 - Group 15,S01-SCI8-15
+62,1,3,16,8,Integrated Science 8 - Group 16,S01-SCI8-16
+63,1,3,17,8,Integrated Science 8 - Group 17,S01-SCI8-17
+64,1,3,17,8,Integrated Science 8 - Group 18,S01-SCI8-18
+65,1,3,17,8,Integrated Science 8 - Group 19,S01-SCI8-19
+66,1,3,17,8,Integrated Science 8 - Group 20,S01-SCI8-20
+67,1,3,18,8,Integrated Science 8 - Group 21,S01-SCI8-21
+68,1,4,19,6,World History 6 - Group 01,S01-HIST6-01
+69,1,4,19,6,World History 6 - Group 02,S01-HIST6-02
+70,1,4,19,6,World History 6 - Group 03,S01-HIST6-03
+71,1,4,19,6,World History 6 - Group 04,S01-HIST6-04
+72,1,4,20,6,World History 6 - Group 05,S01-HIST6-05
+73,1,4,20,6,World History 6 - Group 06,S01-HIST6-06
+74,1,4,20,6,World History 6 - Group 07,S01-HIST6-07
+75,1,4,20,7,World History 7 - Group 08,S01-HIST7-08
+76,1,4,21,7,World History 7 - Group 09,S01-HIST7-09
+77,1,4,21,7,World History 7 - Group 10,S01-HIST7-10
+78,1,4,21,7,World History 7 - Group 11,S01-HIST7-11
+79,1,4,21,7,World History 7 - Group 12,S01-HIST7-12
+80,1,4,22,7,World History 7 - Group 13,S01-HIST7-13
+81,1,4,22,8,World History 8 - Group 14,S01-HIST8-14
+82,1,4,22,8,World History 8 - Group 15,S01-HIST8-15
+83,1,4,22,8,World History 8 - Group 16,S01-HIST8-16
+84,1,4,23,8,World History 8 - Group 17,S01-HIST8-17
+85,1,4,23,8,World History 8 - Group 18,S01-HIST8-18
+86,1,4,23,8,World History 8 - Group 19,S01-HIST8-19
+87,1,5,24,6,Visual Arts 6 - Group 01,S01-ART6-01
+88,1,5,24,6,Visual Arts 6 - Group 02,S01-ART6-02
+89,1,5,24,6,Visual Arts 6 - Group 03,S01-ART6-03
+90,1,5,24,6,Visual Arts 6 - Group 04,S01-ART6-04
+91,1,5,25,6,Visual Arts 6 - Group 05,S01-ART6-05
+92,1,5,25,6,Visual Arts 6 - Group 06,S01-ART6-06
+93,1,5,25,7,Visual Arts 7 - Group 07,S01-ART7-07
+94,1,5,25,7,Visual Arts 7 - Group 08,S01-ART7-08
+95,1,5,26,7,Visual Arts 7 - Group 09,S01-ART7-09
+96,1,5,26,7,Visual Arts 7 - Group 10,S01-ART7-10
+97,1,5,26,7,Visual Arts 7 - Group 11,S01-ART7-11
+98,1,5,26,7,Visual Arts 7 - Group 12,S01-ART7-12
+99,1,5,27,8,Visual Arts 8 - Group 13,S01-ART8-13
+100,1,5,27,8,Visual Arts 8 - Group 14,S01-ART8-14
+101,1,5,27,8,Visual Arts 8 - Group 15,S01-ART8-15
+102,1,5,27,8,Visual Arts 8 - Group 16,S01-ART8-16
+103,1,5,28,8,Visual Arts 8 - Group 17,S01-ART8-17
+104,1,5,28,8,Visual Arts 8 - Group 18,S01-ART8-18
+105,1,6,29,6,Physical Education 6 - Group 01,S01-PE6-01
+106,1,6,29,6,Physical Education 6 - Group 02,S01-PE6-02
+107,1,6,29,6,Physical Education 6 - Group 03,S01-PE6-03
+108,1,6,29,6,Physical Education 6 - Group 04,S01-PE6-04
+109,1,6,30,7,Physical Education 7 - Group 05,S01-PE7-05
+110,1,6,30,7,Physical Education 7 - Group 06,S01-PE7-06
+111,1,6,30,7,Physical Education 7 - Group 07,S01-PE7-07
+112,1,6,30,7,Physical Education 7 - Group 08,S01-PE7-08
+113,1,6,31,8,Physical Education 8 - Group 09,S01-PE8-09
+114,1,6,31,8,Physical Education 8 - Group 10,S01-PE8-10
+115,1,6,31,8,Physical Education 8 - Group 11,S01-PE8-11
+116,1,6,31,8,Physical Education 8 - Group 12,S01-PE8-12
+117,2,1,32,6,Mathematics 6 - Group 01,S02-MATH6-01
+118,2,1,32,6,Mathematics 6 - Group 02,S02-MATH6-02
+119,2,1,32,6,Mathematics 6 - Group 03,S02-MATH6-03
+120,2,1,32,6,Mathematics 6 - Group 04,S02-MATH6-04
+121,2,1,33,6,Mathematics 6 - Group 05,S02-MATH6-05
+122,2,1,33,6,Mathematics 6 - Group 06,S02-MATH6-06
+123,2,1,33,6,Mathematics 6 - Group 07,S02-MATH6-07
+124,2,1,33,6,Mathematics 6 - Group 08,S02-MATH6-08
+125,2,1,34,6,Mathematics 6 - Group 09,S02-MATH6-09
+126,2,1,34,7,Mathematics 7 - Group 10,S02-MATH7-10
+127,2,1,34,7,Mathematics 7 - Group 11,S02-MATH7-11
+128,2,1,34,7,Mathematics 7 - Group 12,S02-MATH7-12
+129,2,1,35,7,Mathematics 7 - Group 13,S02-MATH7-13
+130,2,1,35,7,Mathematics 7 - Group 14,S02-MATH7-14
+131,2,1,35,7,Mathematics 7 - Group 15,S02-MATH7-15
+132,2,1,35,7,Mathematics 7 - Group 16,S02-MATH7-16
+133,2,1,36,7,Mathematics 7 - Group 17,S02-MATH7-17
+134,2,1,36,7,Mathematics 7 - Group 18,S02-MATH7-18
+135,2,1,36,8,Mathematics 8 - Group 19,S02-MATH8-19
+136,2,1,36,8,Mathematics 8 - Group 20,S02-MATH8-20
+137,2,1,37,8,Mathematics 8 - Group 21,S02-MATH8-21
+138,2,1,37,8,Mathematics 8 - Group 22,S02-MATH8-22
+139,2,1,37,8,Mathematics 8 - Group 23,S02-MATH8-23
+140,2,1,37,8,Mathematics 8 - Group 24,S02-MATH8-24
+141,2,1,38,8,Mathematics 8 - Group 25,S02-MATH8-25
+142,2,1,38,8,Mathematics 8 - Group 26,S02-MATH8-26
+143,2,1,38,8,Mathematics 8 - Group 27,S02-MATH8-27
+144,2,2,39,6,English Language Arts 6 - Group 01,S02-ELA6-01
+145,2,2,39,6,English Language Arts 6 - Group 02,S02-ELA6-02
+146,2,2,39,6,English Language Arts 6 - Group 03,S02-ELA6-03
+147,2,2,39,6,English Language Arts 6 - Group 04,S02-ELA6-04
+148,2,2,40,6,English Language Arts 6 - Group 05,S02-ELA6-05
+149,2,2,40,6,English Language Arts 6 - Group 06,S02-ELA6-06
+150,2,2,40,6,English Language Arts 6 - Group 07,S02-ELA6-07
+151,2,2,40,6,English Language Arts 6 - Group 08,S02-ELA6-08
+152,2,2,41,7,English Language Arts 7 - Group 09,S02-ELA7-09
+153,2,2,41,7,English Language Arts 7 - Group 10,S02-ELA7-10
+154,2,2,41,7,English Language Arts 7 - Group 11,S02-ELA7-11
+155,2,2,41,7,English Language Arts 7 - Group 12,S02-ELA7-12
+156,2,2,42,7,English Language Arts 7 - Group 13,S02-ELA7-13
+157,2,2,42,7,English Language Arts 7 - Group 14,S02-ELA7-14
+158,2,2,42,7,English Language Arts 7 - Group 15,S02-ELA7-15
+159,2,2,42,7,English Language Arts 7 - Group 16,S02-ELA7-16
+160,2,2,43,8,English Language Arts 8 - Group 17,S02-ELA8-17
+161,2,2,43,8,English Language Arts 8 - Group 18,S02-ELA8-18
+162,2,2,43,8,English Language Arts 8 - Group 19,S02-ELA8-19
+163,2,2,43,8,English Language Arts 8 - Group 20,S02-ELA8-20
+164,2,2,44,8,English Language Arts 8 - Group 21,S02-ELA8-21
+165,2,2,44,8,English Language Arts 8 - Group 22,S02-ELA8-22
+166,2,2,44,8,English Language Arts 8 - Group 23,S02-ELA8-23
+167,2,2,44,8,English Language Arts 8 - Group 24,S02-ELA8-24
+168,2,3,45,6,Integrated Science 6 - Group 01,S02-SCI6-01
+169,2,3,45,6,Integrated Science 6 - Group 02,S02-SCI6-02
+170,2,3,45,6,Integrated Science 6 - Group 03,S02-SCI6-03
+171,2,3,45,6,Integrated Science 6 - Group 04,S02-SCI6-04
+172,2,3,46,6,Integrated Science 6 - Group 05,S02-SCI6-05
+173,2,3,46,6,Integrated Science 6 - Group 06,S02-SCI6-06
+174,2,3,46,6,Integrated Science 6 - Group 07,S02-SCI6-07
+175,2,3,46,6,Integrated Science 6 - Group 08,S02-SCI6-08
+176,2,3,47,7,Integrated Science 7 - Group 09,S02-SCI7-09
+177,2,3,47,7,Integrated Science 7 - Group 10,S02-SCI7-10
+178,2,3,47,7,Integrated Science 7 - Group 11,S02-SCI7-11
+179,2,3,47,7,Integrated Science 7 - Group 12,S02-SCI7-12
+180,2,3,48,7,Integrated Science 7 - Group 13,S02-SCI7-13
+181,2,3,48,7,Integrated Science 7 - Group 14,S02-SCI7-14
+182,2,3,48,7,Integrated Science 7 - Group 15,S02-SCI7-15
+183,2,3,48,7,Integrated Science 7 - Group 16,S02-SCI7-16
+184,2,3,49,8,Integrated Science 8 - Group 17,S02-SCI8-17
+185,2,3,49,8,Integrated Science 8 - Group 18,S02-SCI8-18
+186,2,3,49,8,Integrated Science 8 - Group 19,S02-SCI8-19
+187,2,3,49,8,Integrated Science 8 - Group 20,S02-SCI8-20
+188,2,3,50,8,Integrated Science 8 - Group 21,S02-SCI8-21
+189,2,3,50,8,Integrated Science 8 - Group 22,S02-SCI8-22
+190,2,3,50,8,Integrated Science 8 - Group 23,S02-SCI8-23
+191,2,3,50,8,Integrated Science 8 - Group 24,S02-SCI8-24
+192,2,4,51,6,World History 6 - Group 01,S02-HIST6-01
+193,2,4,51,6,World History 6 - Group 02,S02-HIST6-02
+194,2,4,51,6,World History 6 - Group 03,S02-HIST6-03
+195,2,4,51,6,World History 6 - Group 04,S02-HIST6-04
+196,2,4,52,6,World History 6 - Group 05,S02-HIST6-05
+197,2,4,52,6,World History 6 - Group 06,S02-HIST6-06
+198,2,4,52,6,World History 6 - Group 07,S02-HIST6-07
+199,2,4,52,7,World History 7 - Group 08,S02-HIST7-08
+200,2,4,53,7,World History 7 - Group 09,S02-HIST7-09
+201,2,4,53,7,World History 7 - Group 10,S02-HIST7-10
+202,2,4,53,7,World History 7 - Group 11,S02-HIST7-11
+203,2,4,53,7,World History 7 - Group 12,S02-HIST7-12
+204,2,4,54,7,World History 7 - Group 13,S02-HIST7-13
+205,2,4,54,7,World History 7 - Group 14,S02-HIST7-14
+206,2,4,54,8,World History 8 - Group 15,S02-HIST8-15
+207,2,4,54,8,World History 8 - Group 16,S02-HIST8-16
+208,2,4,55,8,World History 8 - Group 17,S02-HIST8-17
+209,2,4,55,8,World History 8 - Group 18,S02-HIST8-18
+210,2,4,55,8,World History 8 - Group 19,S02-HIST8-19
+211,2,4,55,8,World History 8 - Group 20,S02-HIST8-20
+212,2,4,56,8,World History 8 - Group 21,S02-HIST8-21
+213,2,5,57,6,Visual Arts 6 - Group 01,S02-ART6-01
+214,2,5,57,6,Visual Arts 6 - Group 02,S02-ART6-02
+215,2,5,57,6,Visual Arts 6 - Group 03,S02-ART6-03
+216,2,5,57,6,Visual Arts 6 - Group 04,S02-ART6-04
+217,2,5,58,6,Visual Arts 6 - Group 05,S02-ART6-05
+218,2,5,58,6,Visual Arts 6 - Group 06,S02-ART6-06
+219,2,5,58,7,Visual Arts 7 - Group 07,S02-ART7-07
+220,2,5,58,7,Visual Arts 7 - Group 08,S02-ART7-08
+221,2,5,59,7,Visual Arts 7 - Group 09,S02-ART7-09
+222,2,5,59,7,Visual Arts 7 - Group 10,S02-ART7-10
+223,2,5,59,7,Visual Arts 7 - Group 11,S02-ART7-11
+224,2,5,59,7,Visual Arts 7 - Group 12,S02-ART7-12
+225,2,5,60,8,Visual Arts 8 - Group 13,S02-ART8-13
+226,2,5,60,8,Visual Arts 8 - Group 14,S02-ART8-14
+227,2,5,60,8,Visual Arts 8 - Group 15,S02-ART8-15
+228,2,5,60,8,Visual Arts 8 - Group 16,S02-ART8-16
+229,2,5,61,8,Visual Arts 8 - Group 17,S02-ART8-17
+230,2,5,61,8,Visual Arts 8 - Group 18,S02-ART8-18
+231,2,6,62,6,Physical Education 6 - Group 01,S02-PE6-01
+232,2,6,62,6,Physical Education 6 - Group 02,S02-PE6-02
+233,2,6,62,6,Physical Education 6 - Group 03,S02-PE6-03
+234,2,6,62,6,Physical Education 6 - Group 04,S02-PE6-04
+235,2,6,63,6,Physical Education 6 - Group 05,S02-PE6-05
+236,2,6,63,7,Physical Education 7 - Group 06,S02-PE7-06
+237,2,6,63,7,Physical Education 7 - Group 07,S02-PE7-07
+238,2,6,63,7,Physical Education 7 - Group 08,S02-PE7-08
+239,2,6,64,7,Physical Education 7 - Group 09,S02-PE7-09
+240,2,6,64,7,Physical Education 7 - Group 10,S02-PE7-10
+241,2,6,64,8,Physical Education 8 - Group 11,S02-PE8-11
+242,2,6,64,8,Physical Education 8 - Group 12,S02-PE8-12
+243,2,6,65,8,Physical Education 8 - Group 13,S02-PE8-13
+244,2,6,65,8,Physical Education 8 - Group 14,S02-PE8-14
+245,2,6,65,8,Physical Education 8 - Group 15,S02-PE8-15
+246,3,1,66,6,Mathematics 6 - Group 01,S03-MATH6-01
+247,3,1,66,6,Mathematics 6 - Group 02,S03-MATH6-02
+248,3,1,66,6,Mathematics 6 - Group 03,S03-MATH6-03
+249,3,1,66,6,Mathematics 6 - Group 04,S03-MATH6-04
+250,3,1,67,6,Mathematics 6 - Group 05,S03-MATH6-05
+251,3,1,67,6,Mathematics 6 - Group 06,S03-MATH6-06
+252,3,1,67,6,Mathematics 6 - Group 07,S03-MATH6-07
+253,3,1,67,6,Mathematics 6 - Group 08,S03-MATH6-08
+254,3,1,68,6,Mathematics 6 - Group 09,S03-MATH6-09
+255,3,1,68,6,Mathematics 6 - Group 10,S03-MATH6-10
+256,3,1,68,7,Mathematics 7 - Group 11,S03-MATH7-11
+257,3,1,68,7,Mathematics 7 - Group 12,S03-MATH7-12
+258,3,1,69,7,Mathematics 7 - Group 13,S03-MATH7-13
+259,3,1,69,7,Mathematics 7 - Group 14,S03-MATH7-14
+260,3,1,69,7,Mathematics 7 - Group 15,S03-MATH7-15
+261,3,1,69,7,Mathematics 7 - Group 16,S03-MATH7-16
+262,3,1,70,7,Mathematics 7 - Group 17,S03-MATH7-17
+263,3,1,70,7,Mathematics 7 - Group 18,S03-MATH7-18
+264,3,1,70,7,Mathematics 7 - Group 19,S03-MATH7-19
+265,3,1,70,7,Mathematics 7 - Group 20,S03-MATH7-20
+266,3,1,71,8,Mathematics 8 - Group 21,S03-MATH8-21
+267,3,1,71,8,Mathematics 8 - Group 22,S03-MATH8-22
+268,3,1,71,8,Mathematics 8 - Group 23,S03-MATH8-23
+269,3,1,71,8,Mathematics 8 - Group 24,S03-MATH8-24
+270,3,1,72,8,Mathematics 8 - Group 25,S03-MATH8-25
+271,3,1,72,8,Mathematics 8 - Group 26,S03-MATH8-26
+272,3,1,72,8,Mathematics 8 - Group 27,S03-MATH8-27
+273,3,1,72,8,Mathematics 8 - Group 28,S03-MATH8-28
+274,3,1,73,8,Mathematics 8 - Group 29,S03-MATH8-29
+275,3,2,74,6,English Language Arts 6 - Group 01,S03-ELA6-01
+276,3,2,74,6,English Language Arts 6 - Group 02,S03-ELA6-02
+277,3,2,74,6,English Language Arts 6 - Group 03,S03-ELA6-03
+278,3,2,74,6,English Language Arts 6 - Group 04,S03-ELA6-04
+279,3,2,75,6,English Language Arts 6 - Group 05,S03-ELA6-05
+280,3,2,75,6,English Language Arts 6 - Group 06,S03-ELA6-06
+281,3,2,75,6,English Language Arts 6 - Group 07,S03-ELA6-07
+282,3,2,75,6,English Language Arts 6 - Group 08,S03-ELA6-08
+283,3,2,76,6,English Language Arts 6 - Group 09,S03-ELA6-09
+284,3,2,76,7,English Language Arts 7 - Group 10,S03-ELA7-10
+285,3,2,76,7,English Language Arts 7 - Group 11,S03-ELA7-11
+286,3,2,76,7,English Language Arts 7 - Group 12,S03-ELA7-12
+287,3,2,77,7,English Language Arts 7 - Group 13,S03-ELA7-13
+288,3,2,77,7,English Language Arts 7 - Group 14,S03-ELA7-14
+289,3,2,77,7,English Language Arts 7 - Group 15,S03-ELA7-15
+290,3,2,77,7,English Language Arts 7 - Group 16,S03-ELA7-16
+291,3,2,78,7,English Language Arts 7 - Group 17,S03-ELA7-17
+292,3,2,78,7,English Language Arts 7 - Group 18,S03-ELA7-18
+293,3,2,78,8,English Language Arts 8 - Group 19,S03-ELA8-19
+294,3,2,78,8,English Language Arts 8 - Group 20,S03-ELA8-20
+295,3,2,79,8,English Language Arts 8 - Group 21,S03-ELA8-21
+296,3,2,79,8,English Language Arts 8 - Group 22,S03-ELA8-22
+297,3,2,79,8,English Language Arts 8 - Group 23,S03-ELA8-23
+298,3,2,79,8,English Language Arts 8 - Group 24,S03-ELA8-24
+299,3,2,80,8,English Language Arts 8 - Group 25,S03-ELA8-25
+300,3,2,80,8,English Language Arts 8 - Group 26,S03-ELA8-26
+301,3,2,80,8,English Language Arts 8 - Group 27,S03-ELA8-27
+302,3,3,81,6,Integrated Science 6 - Group 01,S03-SCI6-01
+303,3,3,81,6,Integrated Science 6 - Group 02,S03-SCI6-02
+304,3,3,81,6,Integrated Science 6 - Group 03,S03-SCI6-03
+305,3,3,81,6,Integrated Science 6 - Group 04,S03-SCI6-04
+306,3,3,82,6,Integrated Science 6 - Group 05,S03-SCI6-05
+307,3,3,82,6,Integrated Science 6 - Group 06,S03-SCI6-06
+308,3,3,82,6,Integrated Science 6 - Group 07,S03-SCI6-07
+309,3,3,82,6,Integrated Science 6 - Group 08,S03-SCI6-08
+310,3,3,83,6,Integrated Science 6 - Group 09,S03-SCI6-09
+311,3,3,83,7,Integrated Science 7 - Group 10,S03-SCI7-10
+312,3,3,83,7,Integrated Science 7 - Group 11,S03-SCI7-11
+313,3,3,83,7,Integrated Science 7 - Group 12,S03-SCI7-12
+314,3,3,84,7,Integrated Science 7 - Group 13,S03-SCI7-13
+315,3,3,84,7,Integrated Science 7 - Group 14,S03-SCI7-14
+316,3,3,84,7,Integrated Science 7 - Group 15,S03-SCI7-15
+317,3,3,84,7,Integrated Science 7 - Group 16,S03-SCI7-16
+318,3,3,85,7,Integrated Science 7 - Group 17,S03-SCI7-17
+319,3,3,85,7,Integrated Science 7 - Group 18,S03-SCI7-18
+320,3,3,85,8,Integrated Science 8 - Group 19,S03-SCI8-19
+321,3,3,85,8,Integrated Science 8 - Group 20,S03-SCI8-20
+322,3,3,86,8,Integrated Science 8 - Group 21,S03-SCI8-21
+323,3,3,86,8,Integrated Science 8 - Group 22,S03-SCI8-22
+324,3,3,86,8,Integrated Science 8 - Group 23,S03-SCI8-23
+325,3,3,86,8,Integrated Science 8 - Group 24,S03-SCI8-24
+326,3,3,87,8,Integrated Science 8 - Group 25,S03-SCI8-25
+327,3,3,87,8,Integrated Science 8 - Group 26,S03-SCI8-26
+328,3,4,88,6,World History 6 - Group 01,S03-HIST6-01
+329,3,4,88,6,World History 6 - Group 02,S03-HIST6-02
+330,3,4,88,6,World History 6 - Group 03,S03-HIST6-03
+331,3,4,88,6,World History 6 - Group 04,S03-HIST6-04
+332,3,4,89,6,World History 6 - Group 05,S03-HIST6-05
+333,3,4,89,6,World History 6 - Group 06,S03-HIST6-06
+334,3,4,89,6,World History 6 - Group 07,S03-HIST6-07
+335,3,4,89,6,World History 6 - Group 08,S03-HIST6-08
+336,3,4,90,7,World History 7 - Group 09,S03-HIST7-09
+337,3,4,90,7,World History 7 - Group 10,S03-HIST7-10
+338,3,4,90,7,World History 7 - Group 11,S03-HIST7-11
+339,3,4,90,7,World History 7 - Group 12,S03-HIST7-12
+340,3,4,91,7,World History 7 - Group 13,S03-HIST7-13
+341,3,4,91,7,World History 7 - Group 14,S03-HIST7-14
+342,3,4,91,7,World History 7 - Group 15,S03-HIST7-15
+343,3,4,91,7,World History 7 - Group 16,S03-HIST7-16
+344,3,4,92,8,World History 8 - Group 17,S03-HIST8-17
+345,3,4,92,8,World History 8 - Group 18,S03-HIST8-18
+346,3,4,92,8,World History 8 - Group 19,S03-HIST8-19
+347,3,4,92,8,World History 8 - Group 20,S03-HIST8-20
+348,3,4,93,8,World History 8 - Group 21,S03-HIST8-21
+349,3,4,93,8,World History 8 - Group 22,S03-HIST8-22
+350,3,4,93,8,World History 8 - Group 23,S03-HIST8-23
+351,3,5,94,6,Visual Arts 6 - Group 01,S03-ART6-01
+352,3,5,94,6,Visual Arts 6 - Group 02,S03-ART6-02
+353,3,5,94,6,Visual Arts 6 - Group 03,S03-ART6-03
+354,3,5,94,6,Visual Arts 6 - Group 04,S03-ART6-04
+355,3,5,95,6,Visual Arts 6 - Group 05,S03-ART6-05
+356,3,5,95,6,Visual Arts 6 - Group 06,S03-ART6-06
+357,3,5,95,6,Visual Arts 6 - Group 07,S03-ART6-07
+358,3,5,95,7,Visual Arts 7 - Group 08,S03-ART7-08
+359,3,5,96,7,Visual Arts 7 - Group 09,S03-ART7-09
+360,3,5,96,7,Visual Arts 7 - Group 10,S03-ART7-10
+361,3,5,96,7,Visual Arts 7 - Group 11,S03-ART7-11
+362,3,5,96,7,Visual Arts 7 - Group 12,S03-ART7-12
+363,3,5,97,7,Visual Arts 7 - Group 13,S03-ART7-13
+364,3,5,97,7,Visual Arts 7 - Group 14,S03-ART7-14
+365,3,5,97,8,Visual Arts 8 - Group 15,S03-ART8-15
+366,3,5,97,8,Visual Arts 8 - Group 16,S03-ART8-16
+367,3,5,98,8,Visual Arts 8 - Group 17,S03-ART8-17
+368,3,5,98,8,Visual Arts 8 - Group 18,S03-ART8-18
+369,3,5,98,8,Visual Arts 8 - Group 19,S03-ART8-19
+370,3,5,98,8,Visual Arts 8 - Group 20,S03-ART8-20
+371,3,5,99,8,Visual Arts 8 - Group 21,S03-ART8-21
+372,3,6,100,6,Physical Education 6 - Group 01,S03-PE6-01
+373,3,6,100,6,Physical Education 6 - Group 02,S03-PE6-02
+374,3,6,100,6,Physical Education 6 - Group 03,S03-PE6-03
+375,3,6,100,6,Physical Education 6 - Group 04,S03-PE6-04
+376,3,6,101,6,Physical Education 6 - Group 05,S03-PE6-05
+377,3,6,101,7,Physical Education 7 - Group 06,S03-PE7-06
+378,3,6,101,7,Physical Education 7 - Group 07,S03-PE7-07
+379,3,6,101,7,Physical Education 7 - Group 08,S03-PE7-08
+380,3,6,102,7,Physical Education 7 - Group 09,S03-PE7-09
+381,3,6,102,7,Physical Education 7 - Group 10,S03-PE7-10
+382,3,6,102,8,Physical Education 8 - Group 11,S03-PE8-11
+383,3,6,102,8,Physical Education 8 - Group 12,S03-PE8-12
+384,3,6,103,8,Physical Education 8 - Group 13,S03-PE8-13
+385,3,6,103,8,Physical Education 8 - Group 14,S03-PE8-14
+386,3,6,103,8,Physical Education 8 - Group 15,S03-PE8-15

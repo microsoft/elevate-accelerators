@@ -1,0 +1,346 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "6df631a21371ff847c1d",
+  "position": {
+    "x": 20,
+    "y": 240,
+    "z": 8000,
+    "height": 140,
+    "width": 614,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate",
+              "nativeQueryRef": "Attendance Rate",
+              "displayName": "Attendance"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Change vs Prior Year (pp)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Change vs Prior Year (pp)",
+              "nativeQueryRef": "Attendance Change vs Prior Year (pp)",
+              "displayName": "vs last year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Chronic Absence Share"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Chronic Absence Share",
+              "nativeQueryRef": "Chronic Absence Share",
+              "displayName": "Chronic share"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Chronic Absence Change vs Prior Year (pp)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Chronic Absence Change vs Prior Year (pp)",
+              "nativeQueryRef": "Chronic Absence Change vs Prior Year (pp)",
+              "displayName": "vs last year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Coverage"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Coverage",
+              "nativeQueryRef": "Attendance Coverage",
+              "displayName": "Coverage"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Attendance this school year, change vs last year in points'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Attendance rate and chronic absence share for the selected schools and period, each with the change against the same dates a year earlier in percentage points, and how much attendance was recorded.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5bc8b24d7ad2ddab277b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selection"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb095ad10a12830e118d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "23272ef54ad806535d27",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7f00e087d43706560be6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Present Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ff9ff62021884d4b2da",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Known Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24c8adb65e910cc7dc90",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Expected Student-Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

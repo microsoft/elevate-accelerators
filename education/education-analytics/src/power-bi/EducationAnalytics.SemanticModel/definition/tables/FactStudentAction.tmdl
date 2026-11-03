@@ -1,0 +1,502 @@
+/// One row per action a teacher logged for a learner, with the learner's attendance in the same number of school days
+/// before and after it. The before and after figures describe what was observed; they do not show what caused it.
+table FactStudentAction
+	lineageTag: 340a9944-2d93-5d60-8a19-ea417b793402
+
+	/// How many actions teachers logged for learners: check-ins, family contacts, plans, referrals and missing-work follow-ups.
+	measure 'Actions Logged' = COUNTROWS ( 'FactStudentAction' )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 884e4f98-5982-5fa7-9125-c0409be27c82
+
+		annotation GoldMetricId = actions_logged
+
+	/// How many different learners have at least one logged action. Do not add these figures up across schools or periods.
+	measure 'Learners with an Action' = DISTINCTCOUNT ( 'FactStudentAction'[student_id] )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: c3b976e0-e863-5d7f-b006-c10581aa4308
+
+		annotation GoldMetricId = learners_with_action
+
+	/// Actions logged because of attendance.
+	measure 'Attendance Actions' = CALCULATE ( COUNTROWS ( 'FactStudentAction' ), 'FactStudentAction'[Reason category] = "Attendance" )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: a9b2fc86-f9f3-5bce-9cb9-d5f1a38e8cff
+
+	/// Actions logged because work was missing.
+	measure 'Coursework Follow-ups' = CALCULATE ( COUNTROWS ( 'FactStudentAction' ), 'FactStudentAction'[Reason category] = "Coursework" )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 3070af5b-b2ff-5f1f-8261-7f4c9505c169
+
+	/// Actions whose follow-up has not been recorded yet.
+	measure 'Open Actions' = CALCULATE ( COUNTROWS ( 'FactStudentAction' ), 'FactStudentAction'[Status] = "open" )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: c5dce413-eece-505e-8a40-dcf19affe75d
+
+	/// Actions with a recorded follow-up and outcome note.
+	measure 'Completed Actions' = CALCULATE ( COUNTROWS ( 'FactStudentAction' ), 'FactStudentAction'[Status] = "completed" )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 78b023c0-f142-58df-8c9b-35f287667018
+
+	/// Learners whose first attendance action has a full window of school days both before and after it, so the two can be compared.
+	measure 'Learners Compared After First Attendance Action' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FactStudentAction'[student_id] ),
+			    'FactStudentAction'[Reason category] = "Attendance",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable windows] = TRUE ()
+			)
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: ebb867ec-5c00-5800-8338-cf05836615bd
+
+		annotation GoldMetricId = action_followup_learners
+
+	/// Absence rate in the school days just before each learner's first attendance action. Read it with the rate after: it describes what was observed, not the effect of the action.
+	measure 'Absence Rate Before Action' =
+			CALCULATE (
+			    DIVIDE ( SUM ( 'FactStudentAction'[Absences before] ), SUM ( 'FactStudentAction'[before_known_days] ) ),
+			    'FactStudentAction'[Reason category] = "Attendance",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable windows] = TRUE ()
+			)
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: 2db861ca-1ca9-56b5-8923-722f4603338e
+
+		annotation GoldMetricId = action_absence_before
+
+	/// Absence rate in the same number of school days just after each learner's first attendance action. Part of any fall is expected anyway, because the action followed an unusually bad run.
+	measure 'Absence Rate After Action' =
+			CALCULATE (
+			    DIVIDE ( SUM ( 'FactStudentAction'[Absences after] ), SUM ( 'FactStudentAction'[after_known_days] ) ),
+			    'FactStudentAction'[Reason category] = "Attendance",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable windows] = TRUE ()
+			)
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: 732c95b6-91d9-5540-bc4c-0849c94f69bd
+
+		annotation GoldMetricId = action_absence_after
+
+	/// How far the absence rate moved after the first attendance action, in percentage points. Observed after, not caused by.
+	measure 'Absence Change After Action (pp)' =
+			VAR BeforeValue = [Absence Rate Before Action]
+			VAR AfterValue = [Absence Rate After Action]
+			RETURN
+			    IF ( NOT ISBLANK ( BeforeValue ) && NOT ISBLANK ( AfterValue ), ( AfterValue - BeforeValue ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Early warning and follow-up
+		lineageTag: a4721409-6213-5094-a62e-f64fa158cd35
+
+		annotation GoldMetricId = action_absence_change
+
+	/// Learners compared who had fewer absences in the window after their first attendance action than in the window before it.
+	measure 'Learners with Fewer Absences After' =
+			COUNTROWS (
+			    FILTER (
+			        CALCULATETABLE (
+			            'FactStudentAction',
+			            'FactStudentAction'[Reason category] = "Attendance",
+			            'FactStudentAction'[First for learner] = TRUE (),
+			            'FactStudentAction'[Comparable windows] = TRUE ()
+			        ),
+			        'FactStudentAction'[Absences after] < 'FactStudentAction'[Absences before]
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 4acc02a9-4689-57f7-84cc-40b26bd84ef0
+
+	/// Learners compared whose absences did not fall after their first attendance action. Shown so the follow-up never reads as if every action worked.
+	measure 'Learners with Same or More Absences After' = [Learners Compared After First Attendance Action] - [Learners with Fewer Absences After]
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 2006d33e-fbfb-56fc-9274-082b5e31f19b
+
+	/// Learners whose first missing-work follow-up has a full set of pieces of work in that class due both before and
+	/// after it, so the two can be compared.
+	measure 'Learners Compared After First Coursework Follow-up' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FactStudentAction'[student_id] ),
+			    'FactStudentAction'[Reason category] = "Coursework",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable work] = TRUE ()
+			)
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: f7f97dee-2fa3-5368-b210-24c2f4abb1b0
+
+		annotation GoldMetricId = coursework_followup_learners
+
+	/// Share of the pieces of work due in that class just before a learner's first missing-work follow-up that have no
+	/// recorded hand-in. The follow-up was prompted by missing work, so this is high by design.
+	measure 'Work Missing Before Follow-up' =
+			CALCULATE (
+			    DIVIDE ( SUM ( 'FactStudentAction'[Work missing before] ), SUM ( 'FactStudentAction'[before_work_due] ) ),
+			    'FactStudentAction'[Reason category] = "Coursework",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable work] = TRUE ()
+			)
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: 1994b804-5e27-570e-a816-c6f39f3e6e3b
+
+		annotation GoldMetricId = coursework_missing_before
+
+	/// Share of the same number of pieces due just after it that have no recorded hand-in. Observed after, not caused by.
+	measure 'Work Missing After Follow-up' =
+			CALCULATE (
+			    DIVIDE ( SUM ( 'FactStudentAction'[Work missing after] ), SUM ( 'FactStudentAction'[after_work_due] ) ),
+			    'FactStudentAction'[Reason category] = "Coursework",
+			    'FactStudentAction'[First for learner] = TRUE (),
+			    'FactStudentAction'[Comparable work] = TRUE ()
+			)
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: 79d5d563-68fd-5dcd-a905-c9fe0dba3fae
+
+		annotation GoldMetricId = coursework_missing_after
+
+	/// How far the share of missing work moved after the first follow-up, in percentage points.
+	measure 'Missing Work Change After Follow-up (pp)' =
+			VAR BeforeValue = [Work Missing Before Follow-up]
+			VAR AfterValue = [Work Missing After Follow-up]
+			RETURN
+			    IF ( NOT ISBLANK ( BeforeValue ) && NOT ISBLANK ( AfterValue ), ( AfterValue - BeforeValue ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Early warning and follow-up
+		lineageTag: 25b5de1e-b4c1-50de-8542-38d735b7abf5
+
+		annotation GoldMetricId = coursework_missing_change
+
+	/// Learners compared who missed fewer pieces after their first follow-up than before it.
+	measure 'Learners with Less Missing Work After' =
+			COUNTROWS (
+			    FILTER (
+			        CALCULATETABLE (
+			            'FactStudentAction',
+			            'FactStudentAction'[Reason category] = "Coursework",
+			            'FactStudentAction'[First for learner] = TRUE (),
+			            'FactStudentAction'[Comparable work] = TRUE ()
+			        ),
+			        'FactStudentAction'[Work missing after] < 'FactStudentAction'[Work missing before]
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 93830168-612c-5c51-b9fb-8b3a27ad982a
+
+	/// Learners compared whose missing work did not fall. Shown so the follow-up never reads as if every action worked.
+	measure 'Learners with Same or More Missing Work After' = [Learners Compared After First Coursework Follow-up] - [Learners with Less Missing Work After]
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 29a23380-527a-52d7-b106-14f4ae17ffcd
+
+	/// Actions logged for the learners in the classes you selected, in any of their classes.
+	measure 'Actions Logged (Selected Classes)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR StudentsInScope =
+			    CALCULATETABLE (
+			        VALUES ( 'BridgeStudentSection'[student_id] ),
+			        'BridgeStudentSection'[Valid from] <= RangeEnd,
+			        'BridgeStudentSection'[Valid to] > RangeStart
+			    )
+			RETURN
+			    CALCULATE (
+			        [Actions Logged],
+			        TREATAS ( StudentsInScope, 'DimStudent'[student_id] )
+			    )
+		formatString: #,##0
+		displayFolder: Class scope
+		lineageTag: 1d1796c3-3620-51ec-a398-81cb7866f146
+
+	/// Internal ID for one logged action.
+	column action_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: b04a3765-02af-5704-9fc8-ef55c435749e
+		summarizeBy: none
+		sourceColumn: action_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 3983adb4-80cd-5dcd-b414-fffd2c8c8ff5
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		lineageTag: d668f6eb-126a-5261-90f8-594775234c64
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// Internal class ID. Blank for an action that does not belong to one class.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: 1af01012-56ae-5732-840b-fc43ad584d45
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// Internal teacher ID used to join the data together.
+	column teacher_id
+		dataType: string
+		isHidden
+		lineageTag: e29261bf-996b-596e-aaca-c780246782f4
+		summarizeBy: none
+		sourceColumn: teacher_id
+
+	/// The day the action was logged.
+	column 'Action date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 5b9cc176-c70f-50d0-bd70-0ace9139473b
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The year group the learner was in on the day of the action.
+	column Grade
+		dataType: string
+		lineageTag: 8b275e3a-f1a5-5f4b-be3e-3ccec6a4497a
+		summarizeBy: none
+		sourceColumn: grade
+
+	/// The class the action was logged for. Blank for a school-wide action.
+	column Class
+		dataType: string
+		lineageTag: f7e76151-cdb1-5540-af30-5cbf67d6a5cc
+		summarizeBy: none
+		sourceColumn: class_name
+
+	/// The subject of that class.
+	column Subject
+		dataType: string
+		lineageTag: 5d02ac88-e8c3-509c-a1cf-1f8cf39eee8a
+		summarizeBy: none
+		sourceColumn: subject
+
+	/// What the teacher did: a check-in, a family contact, an attendance plan, a counselor referral or a missing-work follow-up.
+	column 'Action type'
+		dataType: string
+		lineageTag: 6b62d8de-5a81-5fcb-bf31-caeff8606c83
+		summarizeBy: none
+		sourceColumn: action_type
+
+	/// The rule the school applies that prompted the action, as recorded.
+	column Reason
+		dataType: string
+		lineageTag: 97ff292a-cfd2-5c2a-b698-c1d2d6a11810
+		summarizeBy: none
+		sourceColumn: reason
+
+	/// Attendance or Coursework: the part of the reason before its colon.
+	column 'Reason category'
+		dataType: string
+		lineageTag: 10a488ea-0d82-58ce-b5c1-18403adef1d4
+		summarizeBy: none
+		sourceColumn: reason_category
+
+	/// open until the follow-up is recorded, then completed.
+	column Status
+		dataType: string
+		lineageTag: e621ad4e-ede9-5dda-8606-31c744489c18
+		summarizeBy: none
+		sourceColumn: status
+
+	/// When the follow-up is due.
+	column 'Follow-up date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: b7f03777-d4f0-53db-b301-e17768a7ac69
+		summarizeBy: none
+		sourceColumn: follow_up_date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// When the follow-up was recorded. Blank while the action is open.
+	column 'Completed date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: d75883e8-a8e9-5a8c-a04a-9708d0d26e8e
+		summarizeBy: none
+		sourceColumn: completed_date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// What the teacher recorded at the follow-up, read from the records. Descriptive, never a judgement.
+	column 'Outcome note'
+		dataType: string
+		lineageTag: 401c67ac-5408-57ad-bddd-7262e5077132
+		summarizeBy: none
+		sourceColumn: outcome_note
+
+	/// True when the follow-up has been recorded.
+	column 'Is completed'
+		dataType: boolean
+		isHidden
+		lineageTag: 191f9f06-6f6f-5629-a12d-a00d14ed5db0
+		summarizeBy: none
+		sourceColumn: is_completed
+
+	/// True for the learner's first action for this kind of reason in the period, so a follow-up figure counts each learner once.
+	column 'First for learner'
+		dataType: boolean
+		isHidden
+		lineageTag: 5a14e971-c7bd-5dc6-afce-19dd6256550e
+		summarizeBy: none
+		sourceColumn: is_first_in_category
+
+	/// How many school days each comparison window holds.
+	column 'Window days'
+		dataType: int64
+		isHidden
+		lineageTag: 7453c380-2b1c-52fe-929b-2c819eff9906
+		summarizeBy: none
+		sourceColumn: window_days
+
+	/// School days the learner was expected in the window before the action.
+	column before_expected_days
+		dataType: int64
+		isHidden
+		lineageTag: 1f5d9a11-8e80-512d-b8b8-078f7ee4faf3
+		summarizeBy: sum
+		sourceColumn: before_expected_days
+
+	/// Of those, days with an attendance record.
+	column before_known_days
+		dataType: int64
+		isHidden
+		lineageTag: 5b84048f-7539-5dcf-8b4b-cdc1179bc37e
+		summarizeBy: sum
+		sourceColumn: before_known_days
+
+	/// Absences in the window of school days just before this action.
+	column 'Absences before'
+		dataType: int64
+		lineageTag: 1dcbe375-1114-5a96-805a-074ff293e927
+		summarizeBy: none
+		sourceColumn: before_absent_days
+
+	/// School days the learner was expected in the window after the action.
+	column after_expected_days
+		dataType: int64
+		isHidden
+		lineageTag: 0b1d0681-327e-5bd2-b392-885733803c0e
+		summarizeBy: sum
+		sourceColumn: after_expected_days
+
+	/// Of those, days with an attendance record.
+	column after_known_days
+		dataType: int64
+		isHidden
+		lineageTag: 2fa613e1-f0a2-58ee-8a15-9582a49c9931
+		summarizeBy: sum
+		sourceColumn: after_known_days
+
+	/// Absences in the window of school days just after this action.
+	column 'Absences after'
+		dataType: int64
+		lineageTag: f20ba93a-3139-5799-8ed3-229385487d8a
+		summarizeBy: none
+		sourceColumn: after_absent_days
+
+	/// True when both windows hold the full number of school days, so before and after compare like with like.
+	column 'Comparable windows'
+		dataType: boolean
+		isHidden
+		lineageTag: 50c343c3-055b-5556-acc5-28b1de47c5e5
+		summarizeBy: none
+		sourceColumn: is_comparable
+
+	/// How many pieces of work each coursework window holds.
+	column 'Work window pieces'
+		dataType: int64
+		isHidden
+		lineageTag: dd1e8bcb-22a2-5407-99a0-12bd6c65075e
+		summarizeBy: none
+		sourceColumn: work_window_pieces
+
+	/// Pieces of work in the action's class due just before it.
+	column before_work_due
+		dataType: int64
+		isHidden
+		lineageTag: a8391b8d-1495-5127-b68b-376880110b47
+		summarizeBy: none
+		sourceColumn: before_work_due
+
+	/// Of those, pieces with no recorded hand-in.
+	column 'Work missing before'
+		dataType: int64
+		lineageTag: 35cacf82-2c74-51b0-8e02-5ca415ce315e
+		summarizeBy: none
+		sourceColumn: before_work_missing
+
+	/// Pieces of work in the action's class due just after it.
+	column after_work_due
+		dataType: int64
+		isHidden
+		lineageTag: 793fe674-6b15-5ff9-9b8f-d34ac901632e
+		summarizeBy: none
+		sourceColumn: after_work_due
+
+	/// Of those, pieces with no recorded hand-in.
+	column 'Work missing after'
+		dataType: int64
+		lineageTag: 7cd64406-3c0f-57d9-93fc-d79a3b45c53f
+		summarizeBy: none
+		sourceColumn: after_work_missing
+
+	/// True when both sides hold the full number of pieces.
+	column 'Comparable work'
+		dataType: boolean
+		isHidden
+		lineageTag: ce7ec04d-02d4-5c56-8dda-e4edc7da00dd
+		summarizeBy: none
+		sourceColumn: is_work_comparable
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: a71840df-3436-5ef2-bc20-4b78adb83b91
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 9053f845-72b7-53f9-9299-ab96b119c5a9
+		summarizeBy: none
+		sourceColumn: as_of
+
+	partition FactStudentAction = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactStudentAction WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactStudentAction WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception

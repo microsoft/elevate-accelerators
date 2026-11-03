@@ -1,0 +1,346 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "f8cdab5dc7ed7bee3a6d",
+  "position": {
+    "x": 20,
+    "y": 240,
+    "z": 8000,
+    "height": 140,
+    "width": 740,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate",
+              "nativeQueryRef": "Attendance Rate",
+              "displayName": "Attendance"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Rolling Attendance Rate"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Rolling Attendance Rate",
+              "nativeQueryRef": "Rolling Attendance Rate",
+              "displayName": "Rolling rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Change (pp)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Change (pp)",
+              "nativeQueryRef": "Attendance Change (pp)",
+              "displayName": "Change (pp)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Coverage"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Coverage",
+              "nativeQueryRef": "Attendance Coverage",
+              "displayName": "Coverage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Students in Selection"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Students in Selection",
+              "nativeQueryRef": "Students in Selection",
+              "displayName": "Learners"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Attendance for the selected period'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Attendance rate for the period, the trailing rolling rate, the change in percentage points against the equal-length prior period, coverage, and distinct students.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "83546fed641537b2c224",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "90b8e93c8156e9200c3b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Rolling Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8b6c4815823da24dd748",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Change (pp)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5ba5e0065955d0957a43",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5db65e9069bade0dd493",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selection"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0cbb5d11a20270de7848",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Selected Date Range"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

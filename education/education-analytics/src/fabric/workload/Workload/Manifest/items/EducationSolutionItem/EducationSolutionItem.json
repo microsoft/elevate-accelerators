@@ -1,0 +1,34 @@
+{
+  "name": "EducationSolution",
+  "version": "1.100",
+  "displayName": "EducationSolutionItem_DisplayName",
+  "displayNamePlural": "EducationSolutionItem_DisplayName_Plural",
+  "editor": {
+    "path": "/EducationSolutionItem-editor"
+  },
+  "icon": {
+    "name": "assets/images/Education_Icon.png"
+  },
+  "activeIcon": {
+    "name": "assets/images/Education_Icon.png"
+  },
+  "contextMenuItems": [],
+  "quickActionItems": [],
+  "supportedInMonitoringHub": false,
+  "supportedInDatahubL1": true,
+  "editorTab": {
+    "onDeactivate": "item.tab.onDeactivate",
+    "canDeactivate": "item.tab.canDeactivate",
+    "canDestroy": "item.tab.canDestroy",
+    "onDestroy": "item.tab.onDestroy",
+    "onDelete": "item.tab.onDelete"
+  },
+  "createItemDialogConfig": {
+    "onCreationFailure": {
+      "action": "item.onCreationFailure"
+    },
+    "onCreationSuccess": {
+      "action": "item.onCreationSuccess"
+    }
+  }
+}

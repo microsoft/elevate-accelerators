@@ -1,0 +1,356 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "b3ccd69446ffedd7f137",
+  "position": {
+    "x": 1390,
+    "y": 392,
+    "z": 11000,
+    "height": 298,
+    "width": 510,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "Month Year"
+                }
+              },
+              "queryRef": "DimDate.Month Year",
+              "nativeQueryRef": "Month Year",
+              "active": true
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Coverage"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Coverage",
+              "nativeQueryRef": "Attendance Coverage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Present Student-Days"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Present Student-Days",
+              "nativeQueryRef": "Present Student-Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Known Student-Days"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Known Student-Days",
+              "nativeQueryRef": "Known Student-Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "School Days"
+                }
+              },
+              "queryRef": "FactAttendanceDay.School Days",
+              "nativeQueryRef": "School Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Unknown Day Share"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Unknown Day Share",
+              "nativeQueryRef": "Unknown Day Share"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate",
+              "nativeQueryRef": "Attendance Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate (Prior Year)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate (Prior Year)",
+              "nativeQueryRef": "Attendance Rate (Prior Year)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Attendance by month, this school year against last'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Line chart of the monthly attendance rate this school year and on the same dates a year earlier. The tooltip shows how much attendance was recorded.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3bcf62245774be08d414",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Month Year"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c7688e3ed70d373ec20e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3c339787730405139028",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a097a8805771c79c2dae",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Present Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "84d8fdbe03706d06b4dc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Known Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "05936638d01448d8ac97",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "School Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5635fbe6b28b52606ed1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Unknown Day Share"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+/// One row per class: a group of students taught a subject at a school.
+table DimSection
+	lineageTag: 57c7039a-bb07-40a8-928a-9ab10d2b36fc
+
+	/// How many classes are in what you selected.
+	measure Classes = DISTINCTCOUNT ( 'DimSection'[section_id] )
+		formatString: #,##0
+		displayFolder: Curriculum
+		lineageTag: a72233d6-3188-4e1f-96a2-59c4184070c0
+
+	/// How many subjects are in what you selected.
+	measure Subjects = DISTINCTCOUNT ( 'DimSection'[Subject] )
+		formatString: #,##0
+		displayFolder: Curriculum
+		lineageTag: 72b92c08-9363-410f-83d9-a1812fa93106
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 15d54fbf-a242-4e2b-8f8c-9779dc8ab3bd
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		lineageTag: 13dcecc8-27f1-4a80-b0f7-9b3585b2f771
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// Internal course ID.
+	column course_id
+		dataType: string
+		isHidden
+		lineageTag: 0ae2bfc8-cc8b-4cf1-be96-ff385d09c714
+		summarizeBy: none
+		sourceColumn: course_id
+
+	/// The name the school gives the class. Class names repeat across schools — more than one school runs a class
+	/// called English Language Arts 6 - Group 01 — so this is the label behind Class rather than the label shown.
+	column 'Class name'
+		dataType: string
+		isHidden
+		lineageTag: 3f1d90b7-04c5-4a2e-9f6b-7a0c58e2d413
+		summarizeBy: none
+		sourceColumn: name
+
+	/// The name shown in the report: the class, and the school that runs it. The school has to be part of the label,
+	/// because a class name on its own can belong to three different classes in three different schools, and a slicer
+	/// selection or a chart bar would then quietly combine them.
+	column Class =
+			VAR SchoolName = RELATED ( 'DimSchool'[School] )
+			RETURN
+			    IF (
+			        ISBLANK ( SchoolName ),
+			        'DimSection'[Class name],
+			        'DimSection'[Class name] & " (" & SchoolName & ")"
+			    )
+		dataType: string
+		lineageTag: 9cafe45a-ac1a-4be7-84f6-359a380ad118
+		summarizeBy: none
+
+	/// The subject taught, such as Mathematics or Science.
+	column Subject
+		dataType: string
+		lineageTag: 2f184447-d61a-4141-8d09-ff730db19d33
+		summarizeBy: none
+		sourceColumn: subject
+
+	/// The year group the student is in.
+	column Grade
+		dataType: string
+		lineageTag: 724e59fe-eb5d-4d2c-b94f-65c0d50ec291
+		summarizeBy: none
+		sourceColumn: grade
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 45746815-990f-4331-8db9-c080da362e7d
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 0f98e686-3dda-43a0-8008-796b1f02afd8
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: db089fee-8be0-43b7-8b0d-666764b3d101
+			defaultHierarchy: LocalDateTable_3dd32261-653e-4172-a8a4-35410f71c3fd.'Date Hierarchy'
+
+	/// The teacher who takes the class. Where a class has had more than one teacher, all of them are listed rather than
+	/// one being picked.
+	column 'Class teacher' =
+			VAR SectionKey = 'DimSection'[section_id]
+			VAR TeacherRows =
+			    FILTER ( ALL ( 'BridgeTeacherSection' ), 'BridgeTeacherSection'[section_id] = SectionKey )
+			RETURN
+			    CONCATENATEX (
+			    TeacherRows,
+			        RELATED ( 'DimTeacher'[Teacher] ),
+			        ", ",
+			        RELATED ( 'DimTeacher'[Teacher] )
+			    )
+		dataType: string
+		lineageTag: cdda7819-a6f8-450f-8d5f-c3788a17c9f8
+		summarizeBy: none
+
+	partition DimSection = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimSection WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimSection WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

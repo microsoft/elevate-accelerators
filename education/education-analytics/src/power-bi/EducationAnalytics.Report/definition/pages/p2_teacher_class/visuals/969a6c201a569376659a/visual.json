@@ -1,0 +1,391 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "969a6c201a569376659a",
+  "position": {
+    "x": 20,
+    "y": 240,
+    "z": 8000,
+    "height": 140,
+    "width": 1160,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSection"
+                    }
+                  },
+                  "Property": "Classes"
+                }
+              },
+              "queryRef": "DimSection.Classes",
+              "nativeQueryRef": "Classes",
+              "displayName": "Classes"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Students in Selected Classes"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Students in Selected Classes",
+              "nativeQueryRef": "Students in Selected Classes",
+              "displayName": "Learners"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate (Selected Classes)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate (Selected Classes)",
+              "nativeQueryRef": "Attendance Rate (Selected Classes)",
+              "displayName": "Attendance"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Coverage (Selected Classes)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Coverage (Selected Classes)",
+              "nativeQueryRef": "Attendance Coverage (Selected Classes)",
+              "displayName": "Coverage"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimContent"
+                    }
+                  },
+                  "Property": "Assignments"
+                }
+              },
+              "queryRef": "DimContent.Assignments",
+              "nativeQueryRef": "Assignments",
+              "displayName": "Assignments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Recorded Work States"
+                }
+              },
+              "queryRef": "FactSubmissionState.Recorded Work States",
+              "nativeQueryRef": "Recorded Work States",
+              "displayName": "Work states"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Learners Meeting Attendance Rule (Selected Classes)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Learners Meeting Attendance Rule (Selected Classes)",
+              "nativeQueryRef": "Learners Meeting Attendance Rule (Selected Classes)",
+              "displayName": "Met the rule"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Actions Logged (Selected Classes)"
+                }
+              },
+              "queryRef": "FactStudentAction.Actions Logged (Selected Classes)",
+              "nativeQueryRef": "Actions Logged (Selected Classes)",
+              "displayName": "Actions"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Selected classes at a glance'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Classes, distinct students enrolled in them, the attendance rate and coverage of that roster, assignments published, and recorded assignment obligations.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e80d6bc02202a6d0c027",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimSection"
+              }
+            },
+            "Property": "Classes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "66a94380bb8ae4ca7823",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selected Classes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "53b73d9f3aa8ac227cb8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate (Selected Classes)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7f6753960483950ed9b5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage (Selected Classes)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "81472de3a02389cc3c09",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimContent"
+              }
+            },
+            "Property": "Assignments"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ded26b2850ae53ba2bb0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactSubmissionState"
+              }
+            },
+            "Property": "Recorded Work States"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

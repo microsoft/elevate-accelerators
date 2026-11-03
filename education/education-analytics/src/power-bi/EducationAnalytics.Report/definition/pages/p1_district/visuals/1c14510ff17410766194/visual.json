@@ -1,0 +1,361 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "1c14510ff17410766194",
+  "position": {
+    "x": 644,
+    "y": 240,
+    "z": 8500,
+    "height": 140,
+    "width": 736,
+    "tabOrder": 8500
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Learners Enrolled"
+                }
+              },
+              "queryRef": "FactEnrollment.Learners Enrolled",
+              "nativeQueryRef": "Learners Enrolled",
+              "displayName": "Enrolled"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Enrollment Change"
+                }
+              },
+              "queryRef": "FactEnrollment.Enrollment Change",
+              "nativeQueryRef": "Enrollment Change",
+              "displayName": "vs last year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "New Learners"
+                }
+              },
+              "queryRef": "FactEnrollment.New Learners",
+              "nativeQueryRef": "New Learners",
+              "displayName": "New"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Transferred In"
+                }
+              },
+              "queryRef": "FactEnrollment.Transferred In",
+              "nativeQueryRef": "Transferred In",
+              "displayName": "Transfer in"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Learners Who Left"
+                }
+              },
+              "queryRef": "FactEnrollment.Learners Who Left",
+              "nativeQueryRef": "Learners Who Left",
+              "displayName": "Left district"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Completed Final Grade"
+                }
+              },
+              "queryRef": "FactEnrollment.Completed Final Grade",
+              "nativeQueryRef": "Completed Final Grade",
+              "displayName": "Completed"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Enrollment against last school year'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Learners enrolled this school year, the change since last year, how many are new or transferred in from another school, and how many of last year's learners left or moved on after their final year group.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5bc8b24d7ad2ddab277b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selection"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb095ad10a12830e118d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "23272ef54ad806535d27",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7f00e087d43706560be6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Present Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ff9ff62021884d4b2da",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Known Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24c8adb65e910cc7dc90",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Expected Student-Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

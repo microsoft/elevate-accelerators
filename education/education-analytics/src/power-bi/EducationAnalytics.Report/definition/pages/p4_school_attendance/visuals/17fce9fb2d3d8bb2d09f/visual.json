@@ -1,0 +1,361 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "17fce9fb2d3d8bb2d09f",
+  "position": {
+    "x": 1290,
+    "y": 700,
+    "z": 14200,
+    "height": 165,
+    "width": 610,
+    "tabOrder": 14200
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Learners Compared After First Attendance Action"
+                }
+              },
+              "queryRef": "FactStudentAction.Learners Compared After First Attendance Action",
+              "nativeQueryRef": "Learners Compared After First Attendance Action",
+              "displayName": "Compared"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Absence Rate Before Action"
+                }
+              },
+              "queryRef": "FactStudentAction.Absence Rate Before Action",
+              "nativeQueryRef": "Absence Rate Before Action",
+              "displayName": "Before"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Absence Rate After Action"
+                }
+              },
+              "queryRef": "FactStudentAction.Absence Rate After Action",
+              "nativeQueryRef": "Absence Rate After Action",
+              "displayName": "After"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Absence Change After Action (pp)"
+                }
+              },
+              "queryRef": "FactStudentAction.Absence Change After Action (pp)",
+              "nativeQueryRef": "Absence Change After Action (pp)",
+              "displayName": "pp change"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Learners with Fewer Absences After"
+                }
+              },
+              "queryRef": "FactStudentAction.Learners with Fewer Absences After",
+              "nativeQueryRef": "Learners with Fewer Absences After",
+              "displayName": "Fewer"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactStudentAction"
+                    }
+                  },
+                  "Property": "Learners with Same or More Absences After"
+                }
+              },
+              "queryRef": "FactStudentAction.Learners with Same or More Absences After",
+              "nativeQueryRef": "Learners with Same or More Absences After",
+              "displayName": "Same/more"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'After a first attendance action: absence, 10 school days each side'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Absence rate in the ten school days before and after each learner's first attendance action, and how many learners had fewer or the same or more absences afterwards. Observed after, not caused by.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5bc8b24d7ad2ddab277b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selection"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb095ad10a12830e118d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "23272ef54ad806535d27",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7f00e087d43706560be6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Present Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ff9ff62021884d4b2da",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Known Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24c8adb65e910cc7dc90",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Expected Student-Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

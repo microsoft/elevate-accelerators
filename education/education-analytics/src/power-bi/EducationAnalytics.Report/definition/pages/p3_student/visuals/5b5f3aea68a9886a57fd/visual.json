@@ -1,0 +1,156 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "5b5f3aea68a9886a57fd",
+  "position": {
+    "x": 20,
+    "y": 870,
+    "z": 12000,
+    "height": 170,
+    "width": 590,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimContent"
+                    }
+                  },
+                  "Property": "Assignment"
+                }
+              },
+              "queryRef": "DimContent.Assignment",
+              "nativeQueryRef": "Assignment"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmissionState"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "queryRef": "FactSubmissionState.Status",
+              "nativeQueryRef": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimContent"
+                    }
+                  },
+                  "Property": "Due date"
+                }
+              },
+              "queryRef": "DimContent.Due date",
+              "nativeQueryRef": "Due date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Score"
+                }
+              },
+              "queryRef": "FactSubmission.Score",
+              "nativeQueryRef": "Score"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recorded assignments for this student'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Each assignment set for this student, with the recorded state, the class due date and the points awarded. Missing and unsubmitted work shows here by due date.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

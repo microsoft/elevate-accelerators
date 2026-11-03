@@ -1,0 +1,314 @@
+/// One row per learner, school and school year, saying how the learner arrived and how they left compared with the
+/// years either side. It describes membership only; it never says why a learner arrived or left.
+table FactEnrollment
+	lineageTag: 87683f5e-5d7f-5d6d-a376-adf4ac5a8761
+
+	/// Different learners enrolled at any time in the dates you selected. Do not add these up across schools or years.
+	measure 'Learners Enrolled' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= RangeEnd,
+			        'FactEnrollment'[valid_to] > RangeStart
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: 3ba99fee-f51c-5432-9c5e-2d51fa28cc83
+
+		annotation GoldMetricId = learners_enrolled
+
+	/// Different learners enrolled at any time on the same dates one year earlier, in the same schools and year groups.
+	measure 'Learners Enrolled (Prior Year)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= EDATE ( RangeEnd, -12 ),
+			        'FactEnrollment'[valid_to] > EDATE ( RangeStart, -12 )
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: 3d501b05-a978-5327-aaff-23d138c7383e
+
+		annotation GoldMetricId = learners_enrolled_prior_year
+
+	/// Learners enrolled now minus a year earlier. A year group holds a different cohort each year.
+	measure 'Enrollment Change' =
+			VAR EnrolledNow = [Learners Enrolled]
+			VAR BeforeValue = [Learners Enrolled (Prior Year)]
+			RETURN IF ( NOT ISBLANK ( BeforeValue ), EnrolledNow - BeforeValue )
+		formatString: +#,##0;-#,##0;0
+		displayFolder: Enrollment
+		lineageTag: d31c5931-8500-562b-8b7c-2eb26976f969
+
+	/// Enrollment change as a share of the earlier year's learners.
+	measure 'Enrollment Change %' = DIVIDE ( [Enrollment Change], [Learners Enrolled (Prior Year)] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Enrollment
+		lineageTag: 01b33283-2467-55ee-ab20-9686ef0aeab1
+
+	/// Learners enrolled now who were in none of the schools in the data the year before. With one school selected, this
+	/// counts arrivals from outside the district only; transfers between its schools are counted separately.
+	measure 'New Learners' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= RangeEnd,
+			        'FactEnrollment'[valid_to] > RangeStart,
+			        'FactEnrollment'[Arrived as] = "New"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: 41b9b203-d9c3-5990-9f2c-8bae49953911
+
+		annotation GoldMetricId = enrollment_new
+
+	/// Learners enrolled now who were at the same school the year before.
+	measure 'Continuing Learners' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= RangeEnd,
+			        'FactEnrollment'[valid_to] > RangeStart,
+			        'FactEnrollment'[Arrived as] = "Continuing"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: f035dd65-f57b-5236-b3f9-675080fbfc65
+
+	/// Learners enrolled now who were at another of the schools the year before.
+	measure 'Transferred In' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= RangeEnd,
+			        'FactEnrollment'[valid_to] > RangeStart,
+			        'FactEnrollment'[Arrived as] = "Transferred in"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: eee33832-9ce4-5a7d-8ffb-f5eea332bf0d
+
+	/// Learners enrolled a year earlier in their school's highest year group who are not enrolled now. They moved on, as expected.
+	measure 'Completed Final Grade' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= EDATE ( RangeEnd, -12 ),
+			        'FactEnrollment'[valid_to] > EDATE ( RangeStart, -12 ),
+			        'FactEnrollment'[Left as] = "Completed final grade"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: 526e3795-1aba-56f5-9b74-a57e21a8e1b7
+
+	/// Learners enrolled a year earlier, below their school's highest year group, who are in none of the schools now. The
+	/// data does not say why.
+	measure 'Learners Who Left' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= EDATE ( RangeEnd, -12 ),
+			        'FactEnrollment'[valid_to] > EDATE ( RangeStart, -12 ),
+			        'FactEnrollment'[Left as] = "Left"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: c919e504-9fdf-5e20-a4f9-5628418589fd
+
+		annotation GoldMetricId = enrollment_left
+
+	/// Learners enrolled a year earlier who are at another of the schools now.
+	measure 'Transferred Out' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactEnrollment'[student_id] ),
+			        'FactEnrollment'[valid_from] <= EDATE ( RangeEnd, -12 ),
+			        'FactEnrollment'[valid_to] > EDATE ( RangeStart, -12 ),
+			        'FactEnrollment'[Left as] = "Transferred out"
+			    )
+		formatString: #,##0
+		displayFolder: Enrollment
+		lineageTag: dfbc8fbc-9d1e-529e-8639-4f0fb9f7e613
+
+	/// Internal ID for one membership in one school year.
+	column enrollment_term_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 8a06f952-b9f1-5d6c-81d0-8cd0a8267128
+		summarizeBy: none
+		sourceColumn: enrollment_term_id
+
+	/// Internal ID of the school membership.
+	column enrollment_id
+		dataType: string
+		isHidden
+		lineageTag: f991526c-209e-5360-9326-78e27aca2852
+		summarizeBy: none
+		sourceColumn: enrollment_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 6a39dbd4-cd4d-5d3c-826b-3d1c7e755af1
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		lineageTag: 36df06b0-e50a-504b-b352-2fda3ab74c8a
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// The year group the learner was in that school year.
+	column Grade
+		dataType: string
+		lineageTag: 28d1ffd7-ce56-55cc-b6a6-da43c5ebf965
+		summarizeBy: none
+		sourceColumn: grade
+
+	/// Internal ID of the school year.
+	column term_id
+		dataType: string
+		isHidden
+		lineageTag: 5c8ae72c-5391-5c09-9f0d-d7c2e7a42721
+		summarizeBy: none
+		sourceColumn: term_id
+
+	/// The school year, as recorded in the school calendar.
+	column 'School year'
+		dataType: string
+		lineageTag: 1cc4fe55-0254-56ab-b137-d762f5fc2b0f
+		summarizeBy: none
+		sourceColumn: school_year
+
+	/// First day of the school year.
+	column 'Year start'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 46266b23-5af5-56a9-a408-ae2db12faebd
+		summarizeBy: none
+		sourceColumn: term_start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The day after the last day of the school year.
+	column 'Year end'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: fe086c77-a882-5c8c-9102-5e37ba0d0632
+		summarizeBy: none
+		sourceColumn: term_end
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// First day of the membership.
+	column valid_from
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 5d595ae9-64c6-578b-9323-6311fef650a7
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The day after the membership ended.
+	column valid_to
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 958453d8-6b99-582b-8e2c-15434efcaf50
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// How the learner arrived compared with the year before: Continuing, Transferred in, New, or First year in data.
+	column 'Arrived as'
+		dataType: string
+		lineageTag: a3a0e5d3-fe75-5f51-b548-7f0712770285
+		summarizeBy: none
+		sourceColumn: entry_type
+
+	/// How the learner left compared with the year after: Continuing, Transferred out, Completed final grade, Left, or Latest year in data.
+	column 'Left as'
+		dataType: string
+		lineageTag: 430f94fd-b406-5940-b6d3-d25872e3407b
+		summarizeBy: none
+		sourceColumn: exit_type
+
+	/// True when this was the highest year group the school had that year.
+	column 'Final grade'
+		dataType: boolean
+		isHidden
+		lineageTag: 02cef467-7b83-5051-bb4b-1cc375833e62
+		summarizeBy: none
+		sourceColumn: is_final_grade
+
+	/// True when the membership started after the school year began.
+	column 'Joined mid-year'
+		dataType: boolean
+		lineageTag: fb988dae-dba5-5c57-a79f-04acd6622f16
+		summarizeBy: none
+		sourceColumn: joined_mid_year
+
+	/// True when the membership ended before the school year ended.
+	column 'Left mid-year'
+		dataType: boolean
+		lineageTag: a940c7ad-bba1-5cbc-b492-57e1cabe79dd
+		summarizeBy: none
+		sourceColumn: left_mid_year
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: c057a549-3816-5793-b3ff-6a543b187cb0
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: ce66df21-8f23-5b50-af79-37b9c7e840f3
+		summarizeBy: none
+		sourceColumn: as_of
+
+	partition FactEnrollment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactEnrollment WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactEnrollment WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception

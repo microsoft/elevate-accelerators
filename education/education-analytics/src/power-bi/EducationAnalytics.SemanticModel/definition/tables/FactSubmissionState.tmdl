@@ -1,0 +1,153 @@
+/// One row per student per assignment, showing its status. Every expected piece of work appears here, even if
+/// nothing was handed in.
+table FactSubmissionState
+	lineageTag: 5ad217fd-1962-4b67-9b99-aafe0750a8f3
+
+	/// How many pieces of set work have a status recorded. One row per student per assignment.
+	measure 'Recorded Work States' = COUNTROWS ( 'FactSubmissionState' )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 36480880-8dd5-4ff6-9d02-fe176706774d
+
+	/// Work that has been marked.
+	measure 'Graded States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Status] = "graded" )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 25f96ecc-e2f6-4983-9906-f7c1844eae35
+
+	/// Work handed in but not marked yet.
+	measure 'Submitted States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Status] = "submitted" )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 2031e0b9-ebea-4b9e-8cc3-a2e4d7d9e0ee
+
+	/// Work recorded as not handed in. This is what the school system recorded, not a guess made from missing data.
+	measure 'Unsubmitted States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Status] = "unsubmitted" )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: f0f8faca-db3f-4660-9f75-7715e2158fdc
+
+	/// Work that has been set but not started in the school system yet.
+	measure 'New States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Status] = "new" )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 90cf1e32-9b5f-43e5-a29b-ae7be2ca2677
+
+	/// Work the school system itself flagged as late. Shown as a count rather than a percentage, because the data holds
+	/// no extensions or excuses to measure against.
+	measure 'Source-Flagged Late States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Flagged late] = TRUE () )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 028dbcfc-8df7-45f6-8f97-9e0451887ad3
+
+	/// Work the school system itself flagged as missing. Shown as a count for the same reason as late work.
+	measure 'Source-Flagged Missing States' = CALCULATE ( COUNTROWS ( 'FactSubmissionState' ), 'FactSubmissionState'[Flagged missing] = TRUE () )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: 56a604d5-1922-4d43-8085-fd250bb528ca
+
+	/// How many different students have work recorded.
+	measure 'Students with Work Records' = DISTINCTCOUNT ( 'FactSubmissionState'[student_id] )
+		formatString: #,##0
+		displayFolder: Recorded work
+		lineageTag: c1b25687-62ab-4884-a03d-7dcf34b3a3a1
+
+	/// Internal ID for the status of one assignment for one student.
+	column state_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 22a168c9-823b-4e45-a17d-9e7bd9833687
+		summarizeBy: none
+		sourceColumn: state_id
+
+	/// Internal ID linking a piece of set work to the hand-in for it.
+	column obligation_id
+		dataType: string
+		isHidden
+		lineageTag: 74dab6e0-6f8d-4eef-b62a-ffab3626f84b
+		summarizeBy: none
+		sourceColumn: obligation_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 3a198f5e-c67b-4f7d-b227-b63b3b13062f
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Internal assignment ID used to join the data together.
+	column content_id
+		dataType: string
+		isHidden
+		lineageTag: 9b85515e-8456-431c-9588-f25b63859fbe
+		summarizeBy: none
+		sourceColumn: content_id
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: 7b200c28-3d74-4a5e-85cc-875758fefc1e
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// The status recorded by the school system: marked, handed in, not handed in, or not started.
+	column Status
+		dataType: string
+		lineageTag: 6cc8c564-82e2-482d-adb6-74e02a545b66
+		summarizeBy: none
+		sourceColumn: state
+
+	/// True when the school system itself flagged the work as missing.
+	column 'Flagged missing'
+		dataType: boolean
+		lineageTag: f8fcf127-9af6-49d8-8a1b-6e9ba1d97ba7
+		summarizeBy: none
+		sourceColumn: source_missing
+
+	/// True when the school system itself flagged the work as late.
+	column 'Flagged late'
+		dataType: boolean
+		lineageTag: d3eb92fa-aea3-4af2-ad8c-53142457bcde
+		summarizeBy: none
+		sourceColumn: source_late
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 2af5ecc0-2cff-4b7d-b06f-de432ec005f0
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: befb0142-f44b-42f7-a401-9b3abf387d24
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 13aaa5d9-5e4f-49be-a59d-cf5d7f856b4e
+			defaultHierarchy: LocalDateTable_222e4759-99d7-45e1-8951-abe04584c8d8.'Date Hierarchy'
+
+	partition FactSubmissionState = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactSubmissionState WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactSubmissionState WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

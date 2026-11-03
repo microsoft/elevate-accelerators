@@ -1,0 +1,223 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "cbf93c74de68a50133b9",
+  "position": {
+    "x": 1200,
+    "y": 700,
+    "z": 12000,
+    "height": 340,
+    "width": 700,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Subject"
+                }
+              },
+              "queryRef": "FactSubmission.Subject",
+              "nativeQueryRef": "Subject"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimContent"
+                    }
+                  },
+                  "Property": "Topic"
+                }
+              },
+              "queryRef": "DimContent.Topic",
+              "nativeQueryRef": "Topic"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Marked Work Score"
+                }
+              },
+              "queryRef": "FactSubmission.Marked Work Score",
+              "nativeQueryRef": "Marked Work Score",
+              "displayName": "Student"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Cohort Marked Work Score"
+                }
+              },
+              "queryRef": "FactSubmission.Cohort Marked Work Score",
+              "nativeQueryRef": "Cohort Marked Work Score",
+              "displayName": "Class"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Difference from Cohort (pp)"
+                }
+              },
+              "queryRef": "FactSubmission.Difference from Cohort (pp)",
+              "nativeQueryRef": "Difference from Cohort (pp)",
+              "displayName": "Gap (pp)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactSubmission"
+                    }
+                  },
+                  "Property": "Marked Work Coverage"
+                }
+              },
+              "queryRef": "FactSubmission.Marked Work Coverage",
+              "nativeQueryRef": "Marked Work Coverage",
+              "displayName": "Coverage"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Where to follow up: marked work by topic'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'One row per teaching topic, showing the share of available marks this student earned, the same share for the rest of the selection, the gap between them in percentage points, how many pieces are marked and unmarked, how many the school system flagged as late, and how much of the topic has been marked. Sort by the gap to bring the topics to follow up on to the top. The topic is read from the assignment title, not carried from the source as a curriculum field.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

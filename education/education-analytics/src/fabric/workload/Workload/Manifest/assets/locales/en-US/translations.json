@@ -1,0 +1,13 @@
+{
+    "Workload_Display_Name": "Education Analytics",
+    "Workload_Full_Display_Name": "Education Analytics",
+    "Workload_Description": "Connect, monitor, and operate an education medallion solution in Microsoft Fabric.",
+    "Workload_Hub_Slogan": "One clear home for your education data solution.",
+    "Workload_Hub_Description": "Bring Bronze, Silver, Gold, and managed Power BI reporting together in one Fabric-native education experience.",
+    "Workload_Hub_GetStarted_1_Title": "Connect your solution",
+    "Workload_Hub_GetStarted_1_Sub_Title": "Deploy an owned Fabric solution",
+    "Workload_Hub_GetStarted_1_Description": "Create an Education Solution item and deploy its Lakehouses, processing pipeline, semantic model, and report.",
+    "EducationSolutionItem_DisplayName": "Education Solution",
+    "EducationSolutionItem_DisplayName_Plural": "Education Solutions",
+    "EducationSolutionItem_Description": "A simple operational home for the Education Analytics Fabric solution."
+}

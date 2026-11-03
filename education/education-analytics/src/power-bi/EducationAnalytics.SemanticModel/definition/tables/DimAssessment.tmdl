@@ -1,0 +1,71 @@
+/// One row per test, for example a reading test scored on the RIT scale.
+table DimAssessment
+	lineageTag: 244fb900-ae50-45fa-8839-c75695840209
+
+	/// Internal test ID used to join the data together.
+	column assessment_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: c07776e7-5461-4377-b455-48d86b9fab32
+		summarizeBy: none
+		sourceColumn: assessment_id
+
+	/// The name shown in the report.
+	column Instrument
+		dataType: string
+		lineageTag: c1f21a17-bad0-47b6-b62e-08f927cb761a
+		summarizeBy: none
+		sourceColumn: name
+
+	/// The subject taught, such as Mathematics or Science.
+	column 'Assessment subject'
+		dataType: string
+		lineageTag: 12811438-aaf3-41cd-8fbb-b261feb0d459
+		summarizeBy: none
+		sourceColumn: subject
+
+	/// The scale the test is scored on, such as RIT. Scores on different scales cannot be compared.
+	column 'Score unit'
+		dataType: string
+		lineageTag: 54b8e8f2-4162-44be-a7b3-e29b6e4a9ebc
+		summarizeBy: none
+		sourceColumn: unit
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 7fff4358-1fd8-4f6e-a386-289ee35eadf5
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: dd5f9f5a-8640-4bce-af81-d827573891f3
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 56f7cc96-c538-44b9-90d1-6b677b800ec7
+			defaultHierarchy: LocalDateTable_658d5fba-7760-47b4-a1d8-6d79bdc55420.'Date Hierarchy'
+
+	partition DimAssessment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimAssessment WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimAssessment WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,135 @@
+/// Append-only audit history of completed refreshes. Retry publications may repeat a snapshot ID.
+table GoldPublication
+	lineageTag: e685b8d5-fba0-4620-aa1b-e96b0bfa14a3
+
+	/// When the data was last refreshed.
+	measure 'Latest Publication' = MAX ( 'GoldPublication'[Published at] )
+		formatString: yyyy-mm-dd hh:nn
+		displayFolder: Data status
+		lineageTag: b19b8978-840d-4d69-b469-1b1c7da7c8e2
+
+	/// A short code identifying the version of the data you are looking at.
+	measure 'Published Snapshot' =
+			VAR LatestRow =
+			    TOPN ( 1, ALL ( 'GoldPublication' ), 'GoldPublication'[Published at], DESC, 'GoldPublication'[snapshot_id], DESC )
+			RETURN
+			    LEFT ( MAXX ( LatestRow, 'GoldPublication'[snapshot_id] ), 12 )
+		displayFolder: Data status
+		lineageTag: 24e944d2-0419-4e99-909d-54d4e7dd7db6
+
+	/// The dates this data covers.
+	measure 'Reporting Period' =
+			VAR LatestRow =
+			    TOPN ( 1, ALL ( 'GoldPublication' ), 'GoldPublication'[Published at], DESC, 'GoldPublication'[snapshot_id], DESC )
+			VAR PeriodStart = MAXX ( LatestRow, 'GoldPublication'[Period start] )
+			VAR PeriodEnd = MAXX ( LatestRow, 'GoldPublication'[Period end] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( PeriodStart ),
+			        FORMAT ( PeriodStart, "d MMM yyyy" ) & " to " & FORMAT ( PeriodEnd - 1, "d MMM yyyy" ),
+			        "No published refresh"
+			    )
+		displayFolder: Data status
+		lineageTag: c3c57ff0-0b85-4124-8230-fda1f647f5cd
+
+	/// How many times the data has been refreshed.
+	measure 'Refresh Count' = COUNTROWS ( 'GoldPublication' )
+		formatString: #,##0
+		displayFolder: Data status
+		lineageTag: 68dd2cac-062c-40ef-a192-857029762e47
+
+	/// Which version of the data this refresh published. This table is append-only, so a refresh that finds nothing
+	/// changed in the source republishes the same version and this value repeats. Use Published at to tell two refreshes
+	/// apart.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 41065e71-c5bd-445a-961a-049650f00e7f
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column 'As of'
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: d691425a-902d-430e-b0c3-da2ffabc7569
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: f17c072b-efb2-4ad9-8b99-2bfd94611bea
+			defaultHierarchy: LocalDateTable_4b7f1a72-c30a-4717-8a93-8e6f5fd5af23.'Date Hierarchy'
+
+	/// First day of the reporting period.
+	column 'Period start'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c7732f37-6059-4bd9-88ce-32894dcd4b23
+		summarizeBy: none
+		sourceColumn: period_start
+
+		variation Variation
+			isDefault
+			relationship: fd53eb66-1ad2-4533-b78a-14b895aea949
+			defaultHierarchy: LocalDateTable_4d34d6da-9278-4248-a2d8-c91af5406575.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The day after the last day of the reporting period.
+	column 'Period end'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 0767c361-baca-4217-ada2-73d3f6ddee2c
+		summarizeBy: none
+		sourceColumn: period_end
+
+		variation Variation
+			isDefault
+			relationship: ddcd0b23-273f-45ae-82a9-c0ddc4cffe2e
+			defaultHierarchy: LocalDateTable_be5df958-998b-452c-b3b2-13861007cb59.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Which source store the refresh read from.
+	column silver_lakehouse_name
+		dataType: string
+		isHidden
+		lineageTag: 8b23ad22-866b-4c16-9ecc-ee1384e2d841
+		summarizeBy: none
+		sourceColumn: silver_lakehouse_name
+
+	/// Row counts per table at the time of the refresh.
+	column table_row_counts
+		dataType: string
+		isHidden
+		lineageTag: 5050fa51-618c-4aae-b7ca-679640916e13
+		summarizeBy: none
+		sourceColumn: table_row_counts
+
+	/// When this refresh finished.
+	column 'Published at'
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: b52dbdff-0b9d-4370-a571-dc327cd7a02d
+		summarizeBy: none
+		sourceColumn: published_at
+
+		variation Variation
+			isDefault
+			relationship: 1d853253-0aeb-42b5-8f4b-47deb7217f2e
+			defaultHierarchy: LocalDateTable_54c8e206-5e1d-406d-8f45-bb02f5b2738a.'Date Hierarchy'
+
+	partition GoldPublication = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Data = Source{[Schema = "dbo", Item = "GoldPublication"]}[Data]
+				in
+				    Data
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

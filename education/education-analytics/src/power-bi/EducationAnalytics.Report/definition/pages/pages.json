@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "p1_district",
+    "p4_school_attendance",
+    "p5_school_schedule",
+    "p2_teacher_class",
+    "p3_student",
+    "p7_definitions"
+  ],
+  "activePageName": "p1_district"
+}

@@ -1,0 +1,295 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "9f0d54f16b5d52163b79",
+  "position": {
+    "x": 1080,
+    "y": 710,
+    "z": 13500,
+    "height": 330,
+    "width": 820,
+    "tabOrder": 13500
+  },
+  "visual": {
+    "visualType": "azureMap",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSchool"
+                    }
+                  },
+                  "Property": "Full address"
+                }
+              },
+              "queryRef": "DimSchool.Full address",
+              "nativeQueryRef": "Full address",
+              "active": true
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Learners Enrolled"
+                }
+              },
+              "queryRef": "FactEnrollment.Learners Enrolled",
+              "nativeQueryRef": "Learners Enrolled"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSchool"
+                    }
+                  },
+                  "Property": "School"
+                }
+              },
+              "queryRef": "DimSchool.School",
+              "nativeQueryRef": "School"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Rate"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Rate",
+              "nativeQueryRef": "Attendance Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAttendanceDay"
+                    }
+                  },
+                  "Property": "Attendance Change vs Prior Year (pp)"
+                }
+              },
+              "queryRef": "FactAttendanceDay.Attendance Change vs Prior Year (pp)",
+              "nativeQueryRef": "Attendance Change vs Prior Year (pp)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Learners Enrolled (Prior Year)"
+                }
+              },
+              "queryRef": "FactEnrollment.Learners Enrolled (Prior Year)",
+              "nativeQueryRef": "Learners Enrolled (Prior Year)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Enrollment Change"
+                }
+              },
+              "queryRef": "FactEnrollment.Enrollment Change",
+              "nativeQueryRef": "Enrollment Change"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Enrollment Change %"
+                }
+              },
+              "queryRef": "FactEnrollment.Enrollment Change %",
+              "nativeQueryRef": "Enrollment Change %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Continuing Learners"
+                }
+              },
+              "queryRef": "FactEnrollment.Continuing Learners",
+              "nativeQueryRef": "Continuing Learners"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactEnrollment"
+                    }
+                  },
+                  "Property": "Transferred Out"
+                }
+              },
+              "queryRef": "FactEnrollment.Transferred Out",
+              "nativeQueryRef": "Transferred Out"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Schools - bubble size is learners enrolled; hover for the change since last year'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Map of the schools placed by postal address. Bubble size is the number of learners enrolled; the tooltip shows attendance, enrollment and the change since last school year.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5bc8b24d7ad2ddab277b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Students in Selection"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb095ad10a12830e118d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "23272ef54ad806535d27",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Attendance Coverage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7f00e087d43706560be6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Present Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2ff9ff62021884d4b2da",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Known Student-Days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24c8adb65e910cc7dc90",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAttendanceDay"
+              }
+            },
+            "Property": "Expected Student-Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

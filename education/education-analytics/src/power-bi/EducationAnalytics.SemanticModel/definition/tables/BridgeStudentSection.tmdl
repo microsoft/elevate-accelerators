@@ -1,0 +1,96 @@
+/// Which students are in which classes, and between which dates.
+table BridgeStudentSection
+	lineageTag: 9af2e369-16e4-44b7-ba2c-2839756c66bf
+
+	/// Internal ID of a student being placed in a class.
+	column enrollment_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 43d06728-4d62-4cb3-8f03-6e46c4538a95
+		summarizeBy: none
+		sourceColumn: enrollment_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: d2174d9b-3c94-4b8c-a252-20cfea7f1acd
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: 152c7f20-9a80-4bae-a877-9c0824174334
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// The first day this applies.
+	column 'Valid from'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: cbebc054-1937-4459-8666-bf4a0ad13370
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		variation Variation
+			isDefault
+			relationship: b6af82a1-72b8-46d6-af4b-e12d8358e3b5
+			defaultHierarchy: LocalDateTable_af096f5c-378d-4078-be1e-adda0c90cdd1.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The day after the last day this applies.
+	column 'Valid to'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: da197849-1ce1-430d-9add-409baafd1e0f
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		variation Variation
+			isDefault
+			relationship: a744018f-56f9-4930-ac0e-f2b40c223f8f
+			defaultHierarchy: LocalDateTable_825b8bb6-2ea2-41c0-92c6-491cf60a2916.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: eab8883a-c5e1-476c-9eb8-5f64791492e0
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: cf442728-76a4-481c-a398-3c2bbc9d27ad
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 04fa447c-a956-4853-823f-811bddbfcb15
+			defaultHierarchy: LocalDateTable_5939544e-7f70-4b31-bc30-e02931132165.'Date Hierarchy'
+
+	partition BridgeStudentSection = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.BridgeStudentSection WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.BridgeStudentSection WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

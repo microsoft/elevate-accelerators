@@ -1,0 +1,42 @@
+/// The year groups, held once so that one Year group choice means the same thing to attendance, to tests and to marked
+/// work. Attendance, test sittings and classes each carry their own year group label; without a shared list a year
+/// group could be chosen and quietly change only one of the three.
+table DimGrade
+	lineageTag: 1f2c47ab-9d16-4e8f-9a3b-7c05d61e4f28
+
+	/// The year group a student is in, taken from whichever records hold one: attendance days, test sittings and
+	/// classes. A year group appears here if any of the three recorded it.
+	column 'Year group'
+		dataType: string
+		lineageTag: 6b3d5210-4a7c-4c9e-b8d2-0e41f9a7c3b6
+		summarizeBy: none
+		sourceColumn: [Year group]
+		sortByColumn: 'Year group order'
+
+	/// Puts the year groups in number order rather than alphabetical order, so 10 follows 9 instead of 1. Labels that
+	/// are not a number sort last, in their own order.
+	column 'Year group order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a58e7c94-2f60-4b13-8d7a-c216b0f3e5d9
+		summarizeBy: none
+		sourceColumn: [Year group order]
+
+	partition DimGrade = calculated
+		mode: import
+		source =
+				VAR RecordedYearGroups =
+				    DISTINCT (
+				        UNION (
+				            SELECTCOLUMNS ( 'FactAttendanceDay', "Year group", 'FactAttendanceDay'[Grade] ),
+				            SELECTCOLUMNS ( 'FactAssessment', "Year group", 'FactAssessment'[Grade] ),
+				            SELECTCOLUMNS ( 'DimSection', "Year group", 'DimSection'[Grade] )
+				        )
+				    )
+				RETURN
+				    ADDCOLUMNS (
+				        FILTER ( RecordedYearGroups, NOT ISBLANK ( [Year group] ) ),
+				        "Year group order", IFERROR ( VALUE ( [Year group] ), 9999 )
+				    )
+

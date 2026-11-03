@@ -1,0 +1,180 @@
+file,group,field,type_declared,format_declared,source_cell,evidence_url
+ComboStudentAssessment.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,DistrictName,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,District_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,SchoolName,String,100 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,School_StateID,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentLastName,String,100 characters,F2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentFirstName,String,100 characters,G2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentMI,String,100 characters,H2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentID,String,100 characters,I2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Student_StateID,String,100 characters,J2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentDateOfBirth,String,10 characters,K2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentEthnicGroup,String,100 characters,L2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,NWEAStandard_EthnicGroup,String,50 characters,M2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,StudentGender,String,50 characters,N2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Grade,String,2 characters,O2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,NWEAStandard_Grade,String,2 characters,P2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Subject,String,65 characters,Q2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Course,String,100 characters,R2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,NormsReferenceData,String,4 characters,S2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WISelectedAYFall,Integer,2 characters,T2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WISelectedAYWinter,Integer,2 characters,U2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WISelectedAYSpring,Integer,2 characters,V2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WIPreviousAYFall,Integer,2 characters,W2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WIPreviousAYWinter,Integer,2 characters,X2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,WIPreviousAYSpring,Integer,2 characters,Y2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestType,String,50 characters,Z2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestName,String,100 characters,AA2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestStartDate,String,10 characters,AB2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestStartTime,String,8 characters,AC2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestDurationMinutes,Integer,13 characters,AD2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestRITScore,Integer,3 characters,AE2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestStandardError,Number,"3 characters, 1 decimal",AF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TestPercentile,Integer,2 characters,AG2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,AchievementQuintile,String,12 characters,AH2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,PercentCorrect,Integer,2 characters,AI2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,RapidGuessingPercentage,Number,"9 characters, 4 decimals",AJ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FallToFallProjectedGrowth,Integer,3 characters,AK2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FalltoFallObservedGrowth,Integer,3 characters,AL2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FalltoFallObservedGrowthSE,Number,"3 characters, 2 decimal",AM2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FalltoFallMetProjectedGrowth,String,4 characters,AN2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FalltoFallConditionalGrowthIndex,Number,"3 characters, 2 decimal",AO2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FalltoFallConditionalGrowthPercentile,Integer,2 characters,AP2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,FallToFallGrowthQuintile,String,12 characters,AQ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,FalltoWinter: . . .,Same as prior 7 columns.,,AR2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,FalltoSpring: . . .,Same as prior 7 columns.,,AY2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,WintertoWinter: . . .,Same as prior 7 columns.,,BF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,WintertoSpring: . . .,Same as prior 7 columns.,,BM2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,SpringtoSpring: . . .,Same as prior 7 columns.,,BT2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,LexileScore,String,6 characters,CA2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,LexileMin,String,6 characters,CB2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,LexileMax,String,6 characters,CC2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,QuantileScore,String,6 characters,CD2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,QuantileMin,String,6 characters,CE2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,QuantileMax,String,6 characters,CF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Goal1Name,String,100 characters,CG2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Goal1RitScore,Integer,3 characters,CH2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Goal1StdErr,Number,"9 characters, 1 decimal",CI2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Goal1Range,String,7 characters,CJ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Goal1Adjective,String,12 characters,CK2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,"Goal2-8: Name, RitScore, StdErr, Range, Adjective",Same five fields as for Goal 1. See the prior 5 columns.,,CL2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,AccommodationCategories,String,Unlimited,DU2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,Accommodations,String,Unlimited,DV2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalFallToFallGrowth,Integer,3 characters,DW2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalFallToWinterGrowth,Integer,3 characters,DX2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalFallToSpringGrowth,Integer,3 characters,DY2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalWintertoWinterGrowth,Integer,3 characters,DZ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalWintertoSpringGrowth,Integer,3 characters,EA2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,TypicalSpringToSpringGrowth,Integer,3 characters,EB2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyStudy1,String,100 characters,EC2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyLevel1,String,100 characters,ED2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyStudy2,String,100 characters,EE2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyLevel2,String,100 characters,EF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyStudy3,String,100 characters,EG2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,literal_field,ProjectedProficiencyLevel3,String,100 characters,EH2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ComboStudentAssessment.csv,repeated_family,ProjectedProficiency…4 to 10,Same as prior columns. ,,EI2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,DistrictName,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,District_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,SchoolName,String,100 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,School_StateID,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,StudentID,String,100 characters,F2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Student_StateID,String,100 characters,G2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Subject,String,65 characters,H2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Course,String,100 characters,I2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,GrowthMeasureYN,String,5 characters,J2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,NormsReferenceData,Integer,4 characters,K2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WISelectedAYFall,Integer,2 characters,L2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WISelectedAYWinter,Integer,2 characters,M2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WISelectedAYSpring,Integer,2 characters,N2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WIPreviousAYFall,Integer,2 characters,O2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WIPreviousAYWinter,Integer,2 characters,P2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,WIPreviousAYSpring,Integer,2 characters,Q2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestType,String,50 characters,R2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestName,String,100 characters,S2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestID,Integer,10 characters,T2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestStartDate,String,10 characters,U2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestStartTime,String,8 characters,V2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestDurationMinutes,Integer,13 characters,W2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestRITScore,Integer,3 characters,X2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestStandardError,Number,"3 characters, 1 decimal",Y2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TestPercentile,Integer,2 characters,Z2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,AchievementQuintile,String,12 characters,AA2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,PercentCorrect,Integer,2 characters,AB2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,RapidGuessingPercentage,Number,"9 characters, 4 decimals",AC2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FallToFallProjectedGrowth,Integer,3 characters,AD2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FalltoFallObservedGrowth,Integer,3 characters,AE2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FalltoFallObservedGrowthSE,Number,"3 characters, 2 decimal",AF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FalltoFallMetProjectedGrowth,String,4 characters,AG2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FalltoFallConditionalGrowthIndex,Number,"3 characters, 2 decimal",AH2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FalltoFallConditionalGrowthPercentile,Number,2 characters,AI2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,FallToFallGrowthQuintile,String,12 characters,AJ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,FalltoWinter: . . .,Same as prior 7 columns.,,AK2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,FalltoSpring: . . .,Same as prior 7 columns.,,AR2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,WintertoWinter: . . .,Same as prior 7 columns.,,AY2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,WintertoSpring: . . .,Same as prior 7 columns.,,BF2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,SpringtoSpring: . . .,Same as prior 7 columns.,,BM2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,LexileScore,String,6 characters,BT2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,LexileMin,String,6 characters,BU2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,LexileMax,String,6 characters,BV2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,QuantileScore,String,6 characters,BW2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,QuantileMin,String,6 characters,BX2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,QuantileMax,String,6 characters,BY2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Goal1Name,String,100 characters,BZ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Goal1RitScore,Integer,3 characters,CA2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Goal1StdErr,Number,"9 characters, 1 decimal",CB2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Goal1Range,String,7 characters,CC2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,Goal1Adjective,String,12 characters,CD2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,"Goal2-8: Name, RitScore, StdErr, Range, Adjective",Same five fields as for Goal 1. See the prior 5 columns.,,CE2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalFallToFallGrowth,Integer,3 characters,DN2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalFallToWinterGrowth,Integer,3 characters,DO2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalFallToSpringGrowth,Integer,3 characters,DP2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalWintertoWinterGrowth,Integer,3 characters,DQ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalWintertoSpringGrowth,Integer,3 characters,DR2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,TypicalSpringToSpringGrowth,Integer,3 characters,DS2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyStudy1,String,100 characters,DT2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyLevel1,String,100 characters,DU2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyStudy2,String,100 characters,DV2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyLevel2,String,100 characters,DW2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyStudy3,String,100 characters,DX2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,literal_field,ProjectedProficiencyLevel3,String,100 characters,DY2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AssessmentResults.csv,repeated_family,ProjectedProficiency…4 to 10,Same as prior columns. ,,DZ2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,DistrictName,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,District_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,SchoolName,String,100 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,School_StateID,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentLastName,String,100 characters,F2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentFirstName,String,100 characters,G2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentMI,String,100 characters,H2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentID,String,100 characters,I2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,Student_StateID,String,100 characters,J2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentDateOfBirth,String,10 characters,K2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentEthnicGroup,String,100 characters,L2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,NWEAStandard_EthnicGroup,String,50 characters,M2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,StudentGender,String,50 characters,N2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,Grade,String,2 characters,O2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+StudentBySchool.csv,literal_field,NWEAStandard_Grade,String,2 characters,P2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,StudentID,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,Student_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,TestID,Integer,10 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,AccommodationCategory,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+AccommodationAssignment.csv,literal_field,Accommodation,String,100 characters,F2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,DistrictName,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,District_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,SchoolName,String,100 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,School_StateID,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,StudentID,String,100 characters,F2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,Student_StateID,String,100 characters,G2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,ClassName,String,100 characters,H2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,TeacherName,String,303 characters,I2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,TeacherID,String,100 characters,J2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ClassAssignments.csv,literal_field,Teacher_StateID,String,100 characters,K2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ProgramAssignments.csv,literal_field,TermName,String,100 characters,A2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ProgramAssignments.csv,literal_field,StudentID,String,100 characters,B2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ProgramAssignments.csv,literal_field,Student_StateID,String,100 characters,C2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ProgramAssignments.csv,literal_field,Program,String,100 characters,D2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx
+ProgramAssignments.csv,literal_field,NWEAStandard_Program,String,100 characters,E2,https://teach.mapnwea.org/assist/doc/MAP_Export_Field_Descriptions.xlsx

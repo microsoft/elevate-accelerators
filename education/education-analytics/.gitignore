@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# Power BI Desktop writes machine-local state beside a PBIP project.
+**/.pbi/
+node_modules/
+
+# Local Fabric workload outputs and configuration
+src/fabric/workload/build/
+src/fabric/workload/release/
+src/fabric/workload/tools/
+src/fabric/workload/Workload/.env.*
+!src/fabric/workload/Workload/.env.template

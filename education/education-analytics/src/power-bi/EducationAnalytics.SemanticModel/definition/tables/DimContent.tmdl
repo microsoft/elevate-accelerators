@@ -1,0 +1,134 @@
+/// One row per assignment or task set to a class.
+table DimContent
+	lineageTag: f0297650-9117-446a-8355-cade1f99f37d
+
+	/// How many assignments or other set tasks are in what you selected.
+	measure Assignments = DISTINCTCOUNT ( 'DimContent'[content_id] )
+		formatString: #,##0
+		displayFolder: Curriculum
+		lineageTag: 02e32c17-31b1-4c47-ab5a-e207506cb07b
+
+	/// How many assignments have a due date. Individual extensions are not held in the data.
+	measure 'Assignments with a Due Date' = CALCULATE ( DISTINCTCOUNT ( 'DimContent'[content_id] ), NOT ISBLANK ( 'DimContent'[Due date] ) )
+		formatString: #,##0
+		displayFolder: Curriculum
+		lineageTag: 4c38388e-9bff-4044-b700-ecddbc40acbc
+
+	/// The average total an assignment is marked out of. Shown so different marking scales stay visible.
+	measure 'Mean Assignment Max Score' = AVERAGE ( 'DimContent'[Max score] )
+		formatString: #,##0.#
+		displayFolder: Curriculum
+		lineageTag: 6f39f69a-deb9-4db2-82f5-fed2094ad7c7
+
+	/// Internal assignment ID used to join the data together.
+	column content_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: fb6da70d-233c-47e4-b91e-cb9a784807df
+		summarizeBy: none
+		sourceColumn: content_id
+
+	/// Internal class ID used to join the data together.
+	column section_id
+		dataType: string
+		isHidden
+		lineageTag: 78839450-387b-4f8e-adce-6e91d74aa440
+		summarizeBy: none
+		sourceColumn: section_id
+
+	/// The name shown in the report.
+	column Assignment
+		dataType: string
+		lineageTag: 88cdaaf3-a1f5-4868-8a90-c64a590bb49e
+		summarizeBy: none
+		sourceColumn: name
+
+	/// The assignment description, exactly as the teacher wrote it.
+	column Description
+		dataType: string
+		lineageTag: c0439d1b-2e1b-489d-9743-ca4a2109746b
+		summarizeBy: none
+		sourceColumn: description
+
+	/// Which system the assignment came from, such as Canvas or Moodle.
+	column 'Source name'
+		dataType: string
+		lineageTag: e6a71f05-2c76-40cb-8a26-12563fcdc760
+		summarizeBy: none
+		sourceColumn: source_name
+
+	/// The date the assignment is due. Extensions for individual students are not held in the data.
+	column 'Due date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 5394f33a-17c0-4a1e-8c34-5fc4167361a6
+		summarizeBy: none
+		sourceColumn: due_at
+
+		variation Variation
+			isDefault
+			relationship: 975fd0ac-f7eb-442f-ac8f-1279c60a92da
+			defaultHierarchy: LocalDateTable_16a27b0a-149e-4fc8-b344-af1948bce6c6.'Date Hierarchy'
+
+	/// The total marks the assignment is out of. Scores cannot be compared between assignments without it.
+	column 'Max score'
+		dataType: double
+		formatString: #,##0.##
+		lineageTag: 73ec8e1e-850a-4cbc-96be-8641dd7bb2ef
+		summarizeBy: sum
+		sourceColumn: max_score
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: d84c84b5-bc8f-49e0-8aa8-7c7e4193bf90
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 3c8d6fce-2557-432a-9346-e4871c12beaf
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: 9778c6bc-fc27-4b10-8d82-6b96a9388915
+			defaultHierarchy: LocalDateTable_23c777bd-55d9-4501-a7db-a4e599b9621d.'Date Hierarchy'
+
+	/// The teaching topic, read from the part of the assignment title before the dash, so that "Unit 3: Fractions -
+	/// Practice" and "Unit 3: Fractions - Review" group together. This is a reading of the title, not a curriculum
+	/// field: the source systems carry no topic, unit or standard for an assignment. A title with no dash in it is left
+	/// whole and becomes its own topic, so a school that names assignments differently gets one topic per assignment
+	/// rather than a wrong grouping.
+	column Topic =
+			VAR Title = 'DimContent'[Assignment]
+			VAR Separator = SEARCH ( " - ", Title, 1, 0 )
+			RETURN
+			    IF ( Separator > 0, TRIM ( LEFT ( Title, Separator - 1 ) ), Title )
+		dataType: string
+		lineageTag: e482c23e-da8e-4e2b-8093-fdb6a7287122
+		summarizeBy: none
+
+	partition DimContent = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimContent WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimContent WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

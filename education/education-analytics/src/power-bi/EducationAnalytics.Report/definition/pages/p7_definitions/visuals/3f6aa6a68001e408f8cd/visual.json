@@ -1,0 +1,327 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "3f6aa6a68001e408f8cd",
+  "position": {
+    "x": 20.185174123409595,
+    "y": 174.32650379308285,
+    "z": 4000,
+    "height": 112.85347350815364,
+    "width": 1879.9737172211935,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GoldPublication"
+                    }
+                  },
+                  "Property": "Reporting Period"
+                }
+              },
+              "queryRef": "GoldPublication.Reporting Period",
+              "nativeQueryRef": "Reporting Period"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "Data As Of (UTC)"
+                }
+              },
+              "queryRef": "DimDate.Data As Of (UTC)",
+              "nativeQueryRef": "Data As Of (UTC)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GoldPublication"
+                    }
+                  },
+                  "Property": "Latest Publication"
+                }
+              },
+              "queryRef": "GoldPublication.Latest Publication",
+              "nativeQueryRef": "Latest Publication"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GoldPublication"
+                    }
+                  },
+                  "Property": "Published Snapshot"
+                }
+              },
+              "queryRef": "GoldPublication.Published Snapshot",
+              "nativeQueryRef": "Published Snapshot"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GoldPublication"
+                    }
+                  },
+                  "Property": "Refresh Count"
+                }
+              },
+              "queryRef": "GoldPublication.Refresh Count",
+              "nativeQueryRef": "Refresh Count"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "outline": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0078D4'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Data freshness'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'The reporting period covered by the latest Gold refresh, the refresh cutoff, when it was published, its snapshot identifier and how many refreshes have completed.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5dd7796569aab03eae38",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "GoldPublication"
+              }
+            },
+            "Property": "Reporting Period"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ba144061a200e8c963e8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Data As Of (UTC)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "cdb247cb2d6edd9602ea",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "GoldPublication"
+              }
+            },
+            "Property": "Latest Publication"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0f8f31177cd53079e13a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "GoldPublication"
+              }
+            },
+            "Property": "Published Snapshot"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb602c218613d1a4d970",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "GoldPublication"
+              }
+            },
+            "Property": "Refresh Count"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,443 @@
+/// One row per student per school day. The day counts add up: expected = recorded + missing, and recorded = present
+/// + absent.
+table FactAttendanceDay
+	lineageTag: 2250e41d-449f-44ac-8d0c-08518c0f143e
+
+	/// How many school days students were expected to attend.
+	measure 'Expected Student-Days' = SUM ( 'FactAttendanceDay'[expected_days] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: 8ab3510a-e7a3-4bd1-a5ed-a8d416db311c
+
+	/// How many of those days actually have an attendance record.
+	measure 'Known Student-Days' = SUM ( 'FactAttendanceDay'[known_days] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: b728529d-5b5e-42f0-825b-3ae2b52f7b55
+
+	/// How many days students were marked present.
+	measure 'Present Student-Days' = SUM ( 'FactAttendanceDay'[present_days] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: 42aff669-1d27-4044-a1fe-81f6b368e209
+
+	/// How many days students were marked absent. Authorised absences are included here because the data does not
+	/// separate them, but an absence is never counted as being present.
+	measure 'Absent Student-Days' = SUM ( 'FactAttendanceDay'[absent_days] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: b3cd2a1e-091e-4258-bb02-7e87a8cba5eb
+
+	/// Expected days with no attendance record at all. Missing is not the same as absent.
+	measure 'Unknown Student-Days' = SUM ( 'FactAttendanceDay'[unknown_days] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: c1dfc74b-a9a6-4237-869f-9349c364820b
+
+	/// Days present out of the days that have a record. Blank when nothing was recorded, because no record does not
+	/// mean nobody came in.
+	measure 'Attendance Rate' = DIVIDE ( [Present Student-Days], [Known Student-Days] )
+		formatString: 0.0%
+		displayFolder: Attendance
+		lineageTag: 29edc423-87fd-4333-b0f4-cb8d1367bf7f
+
+		annotation GoldMetricId = attendance_rate
+
+	/// How much of the expected attendance was actually recorded. Always read the attendance rate alongside this.
+	measure 'Attendance Coverage' = DIVIDE ( [Known Student-Days], [Expected Student-Days] )
+		formatString: 0.0%
+		displayFolder: Attendance
+		lineageTag: 61daab48-1605-4c82-a6f5-ae9ebd921e85
+
+		annotation GoldMetricId = attendance_coverage
+
+	/// The share of expected days with no record. The opposite of coverage, shown so gaps stay visible.
+	measure 'Unknown Day Share' = DIVIDE ( [Unknown Student-Days], [Expected Student-Days] )
+		formatString: 0.0%
+		displayFolder: Attendance
+		lineageTag: 3aeae8be-c26b-4f33-a62e-c9989db2d67e
+
+	/// How many different students are in what you have selected. Do not add these figures up across schools or
+	/// periods.
+	measure 'Students in Selection' = DISTINCTCOUNT ( 'FactAttendanceDay'[student_id] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: 5e6026b8-3294-493e-a22b-e20e87252948
+
+		annotation GoldMetricId = selected_cohort_students
+
+	/// How many school days are in what you have selected. This counts dates, not students, so it is much smaller than
+	/// the student-day figures.
+	measure 'School Days' = DISTINCTCOUNT ( 'FactAttendanceDay'[date] )
+		formatString: #,##0
+		displayFolder: Attendance
+		lineageTag: 2bfeb62f-7f7e-4f0b-a94f-fed6d9b3468e
+
+	/// Attendance rate over the last few days, using the window you choose on the School briefing page.
+	measure 'Rolling Attendance Rate' =
+			VAR WindowDays = [Rolling Window Days Value]
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR RangeStart = RangeEnd - WindowDays + 1
+			RETURN
+			    CALCULATE (
+			        DIVIDE ( [Present Student-Days], [Known Student-Days] ),
+			        DATESBETWEEN ( 'DimDate'[Date], RangeStart, RangeEnd )
+			    )
+		formatString: 0.0%
+		displayFolder: Attendance
+		lineageTag: be3aeb04-3a16-4f87-8442-bc53319f931c
+
+		annotation GoldMetricId = rolling_attendance
+
+	/// Attendance rate for the period just before the one you selected, of the same length. Blank if there is nothing
+	/// to compare with.
+	measure 'Attendance Rate (Prior Period)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR PeriodLength = DATEDIFF ( RangeStart, RangeEnd, DAY ) + 1
+			VAR PriorEnd = RangeStart - 1
+			VAR PriorStart = PriorEnd - PeriodLength + 1
+			RETURN
+			    CALCULATE (
+			        DIVIDE ( [Present Student-Days], [Known Student-Days] ),
+			        DATESBETWEEN ( 'DimDate'[Date], PriorStart, PriorEnd )
+			    )
+		formatString: 0.0%
+		displayFolder: Attendance
+		lineageTag: 0c185163-b3d3-42a3-8819-64121c5c2491
+
+	/// How far the attendance rate moved against the period just before, in percentage points. Blank when either period
+	/// has no records, so a missing comparison never looks like no change.
+	measure 'Attendance Change (pp)' =
+			VAR CurrentRate = [Attendance Rate]
+			VAR PriorRate = [Attendance Rate (Prior Period)]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( CurrentRate ) && NOT ISBLANK ( PriorRate ),
+			        ( CurrentRate - PriorRate ) * 100
+			    )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Attendance
+		lineageTag: e4317a67-ca1e-4998-9e8f-c0c52b4bf6c4
+
+		annotation GoldMetricId = attendance_comparison
+
+	/// How many different students are in the classes you selected.
+	measure 'Students in Selected Classes' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'BridgeStudentSection'[student_id] ),
+			        'BridgeStudentSection'[Valid from] <= RangeEnd,
+			        'BridgeStudentSection'[Valid to] > RangeStart
+			    )
+		formatString: #,##0
+		displayFolder: Class scope
+		lineageTag: 7495d536-64f7-4479-8787-8fe513880aaa
+
+	/// Attendance rate for the students in the classes you selected. Attendance is taken for the whole school day
+	/// rather than per lesson, so this is their attendance overall.
+	measure 'Attendance Rate (Selected Classes)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR StudentsInScope =
+			    CALCULATETABLE (
+			        VALUES ( 'BridgeStudentSection'[student_id] ),
+			        'BridgeStudentSection'[Valid from] <= RangeEnd,
+			        'BridgeStudentSection'[Valid to] > RangeStart
+			    )
+			RETURN
+			    CALCULATE (
+			        [Attendance Rate],
+			        TREATAS ( StudentsInScope, 'DimStudent'[student_id] )
+			    )
+		formatString: 0.0%
+		displayFolder: Class scope
+		lineageTag: 5149bf25-94ed-4537-9047-8227906e3f77
+
+	/// How much attendance was recorded for the students in the classes you selected.
+	measure 'Attendance Coverage (Selected Classes)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR StudentsInScope =
+			    CALCULATETABLE (
+			        VALUES ( 'BridgeStudentSection'[student_id] ),
+			        'BridgeStudentSection'[Valid from] <= RangeEnd,
+			        'BridgeStudentSection'[Valid to] > RangeStart
+			    )
+			RETURN
+			    CALCULATE (
+			        [Attendance Coverage],
+			        TREATAS ( StudentsInScope, 'DimStudent'[student_id] )
+			    )
+		formatString: 0.0%
+		displayFolder: Class scope
+		lineageTag: e7b8fd75-e9b9-49f5-b86e-add9e293b58c
+
+	/// How many learners in the selection missed at least the chosen share of their known school days. The threshold is
+	/// chosen on the School briefing page and defaults to 10%. A learner with no attendance record is not counted.
+	measure 'Chronically Absent Learners' =
+			VAR Threshold = [Chronic Absence Threshold Value]
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            VALUES ( 'FactAttendanceDay'[student_id] ),
+			            VAR Known = CALCULATE ( SUM ( 'FactAttendanceDay'[known_days] ) )
+			            VAR Absent = CALCULATE ( SUM ( 'FactAttendanceDay'[absent_days] ) )
+			            RETURN Known > 0 && DIVIDE ( Absent, Known ) >= Threshold
+			        )
+			    )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: a0a5eb07-ed4b-53e4-aada-c870bc04c8f7
+
+		annotation GoldMetricId = attendance_threshold
+
+	/// Chronically absent learners as a share of the learners in the selection.
+	measure 'Chronic Absence Share' = DIVIDE ( [Chronically Absent Learners], [Students in Selection] )
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: e3664239-335d-5561-9516-135b0abfde27
+
+		annotation GoldMetricId = chronic_absence_share
+
+	/// How many learners met the attendance rule on at least one day in the selection: at least the chosen number of
+	/// absences in their last 20 school days. A plain count of a visible rule, not a risk score.
+	measure 'Learners Meeting Attendance Rule' =
+			VAR Threshold = [Attendance Rule Absences Value]
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( 'FactAttendanceDay'[student_id] ),
+			        'FactAttendanceDay'[rolling_window_complete] = TRUE (),
+			        'FactAttendanceDay'[rolling_absent_days] >= Threshold
+			    )
+		formatString: #,##0
+		displayFolder: Early warning and follow-up
+		lineageTag: 6f63c7d6-34b7-5048-bc51-0c05c5f854af
+
+		annotation GoldMetricId = learners_meeting_attendance_rule
+
+	/// Learners meeting the attendance rule as a share of the learners in the selection.
+	measure 'Share Meeting Attendance Rule' = DIVIDE ( [Learners Meeting Attendance Rule], [Students in Selection] )
+		formatString: 0.0%
+		displayFolder: Early warning and follow-up
+		lineageTag: a2bd5065-704b-5bd2-8cb1-64aa381e37c8
+
+	/// Attendance rate on the same dates one year earlier. Blank when the earlier year has no records.
+	measure 'Attendance Rate (Prior Year)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        [Attendance Rate],
+			        REMOVEFILTERS ( 'DimDate' ),
+			        DATESBETWEEN ( 'DimDate'[Date], EDATE ( RangeStart, -12 ), EDATE ( RangeEnd, -12 ) )
+			    )
+		formatString: 0.0%
+		displayFolder: Year on year
+		lineageTag: bdd433ef-ce08-584b-ae88-38ffea961373
+
+		annotation GoldMetricId = attendance_rate_prior_year
+
+	/// How far the attendance rate moved against the same dates a year earlier, in percentage points. A different
+	/// cohort sits in each year group each year, so read it as the school's change, not the learners'.
+	measure 'Attendance Change vs Prior Year (pp)' =
+			VAR CurrentRate = [Attendance Rate]
+			VAR PriorRate = [Attendance Rate (Prior Year)]
+			RETURN
+			    IF ( NOT ISBLANK ( CurrentRate ) && NOT ISBLANK ( PriorRate ), ( CurrentRate - PriorRate ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Year on year
+		lineageTag: 9ced271d-f473-5a87-bf74-d7f3a428eb01
+
+		annotation GoldMetricId = attendance_change_prior_year
+
+	/// Chronic absence share on the same dates one year earlier, with the same threshold.
+	measure 'Chronic Absence Share (Prior Year)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			RETURN
+			    CALCULATE (
+			        [Chronic Absence Share],
+			        REMOVEFILTERS ( 'DimDate' ),
+			        DATESBETWEEN ( 'DimDate'[Date], EDATE ( RangeStart, -12 ), EDATE ( RangeEnd, -12 ) )
+			    )
+		formatString: 0.0%
+		displayFolder: Year on year
+		lineageTag: 70252d13-8f4d-553f-aaae-85daf737bea6
+
+	/// How far the chronic absence share moved against the same dates a year earlier, in percentage points.
+	measure 'Chronic Absence Change vs Prior Year (pp)' =
+			VAR CurrentShare = [Chronic Absence Share]
+			VAR PriorShare = [Chronic Absence Share (Prior Year)]
+			RETURN
+			    IF ( NOT ISBLANK ( CurrentShare ) && NOT ISBLANK ( PriorShare ), ( CurrentShare - PriorShare ) * 100 )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: Year on year
+		lineageTag: ae7537c8-d42a-5bf8-a143-65ee106fa59d
+
+	/// Learners in the classes you selected who met the attendance rule on at least one day. In a list of students, 1
+	/// means that student met it.
+	measure 'Learners Meeting Attendance Rule (Selected Classes)' =
+			VAR RangeStart = MIN ( 'DimDate'[Date] )
+			VAR RangeEnd = MAX ( 'DimDate'[Date] )
+			VAR StudentsInScope =
+			    CALCULATETABLE (
+			        VALUES ( 'BridgeStudentSection'[student_id] ),
+			        'BridgeStudentSection'[Valid from] <= RangeEnd,
+			        'BridgeStudentSection'[Valid to] > RangeStart
+			    )
+			RETURN
+			    CALCULATE (
+			        [Learners Meeting Attendance Rule],
+			        TREATAS ( StudentsInScope, 'DimStudent'[student_id] )
+			    )
+		formatString: #,##0
+		displayFolder: Class scope
+		lineageTag: 6a3065bf-73d0-56c5-8564-155dd809f585
+
+	/// Internal ID for one student on one school day.
+	column attendance_day_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: 528ce8e7-ff22-4746-b87f-f33f34affdd9
+		summarizeBy: none
+		sourceColumn: attendance_day_id
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		lineageTag: bf969a07-b837-4649-a2ae-80210a781e9e
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// Internal student ID used to join the data together.
+	column student_id
+		dataType: string
+		isHidden
+		lineageTag: 45be30b6-47c4-4e3e-b3bf-3238903a2692
+		summarizeBy: none
+		sourceColumn: student_id
+
+	/// The calendar date.
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 8011c2be-9ecc-4325-b373-9ebdff5d1c1f
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// The year group the student is in.
+	column Grade
+		dataType: string
+		lineageTag: c2a101a9-fc3e-4717-a80e-c7c354c3e614
+		summarizeBy: none
+		sourceColumn: grade
+
+	/// Set to 1 when the student was expected in school that day.
+	column expected_days
+		dataType: int64
+		isHidden
+		lineageTag: 8184661d-2dbf-47e9-84af-55d5e7bbdc92
+		summarizeBy: sum
+		sourceColumn: expected_days
+
+	/// Set to 1 when attendance was actually recorded that day.
+	column known_days
+		dataType: int64
+		isHidden
+		lineageTag: ee5299df-d50e-4f99-a4ca-27ba4cbc7eeb
+		summarizeBy: sum
+		sourceColumn: known_days
+
+	/// Set to 1 when the student was marked present.
+	column present_days
+		dataType: int64
+		isHidden
+		lineageTag: b237735d-033c-400b-8551-e4d23527b5cb
+		summarizeBy: sum
+		sourceColumn: present_days
+
+	/// Set to 1 when the student was marked absent.
+	column absent_days
+		dataType: int64
+		isHidden
+		lineageTag: 84244328-2d5e-4c5d-8a03-fb2693366d9f
+		summarizeBy: sum
+		sourceColumn: absent_days
+
+	/// Set to 1 when the student was expected but nothing was recorded.
+	column unknown_days
+		dataType: int64
+		isHidden
+		lineageTag: f9a32d9a-efd3-41bc-9e27-5e2d2b0ea63d
+		summarizeBy: sum
+		sourceColumn: unknown_days
+
+	/// School days the learner was expected in their last 20 school days, ending with this one.
+	column rolling_expected_days
+		dataType: int64
+		isHidden
+		lineageTag: 22b49c7e-0396-5e29-ad2b-b053acfd2072
+		summarizeBy: none
+		sourceColumn: rolling_expected_days
+
+	/// Absences in the learner's last 20 school days, ending with this one.
+	column rolling_absent_days
+		dataType: int64
+		isHidden
+		lineageTag: 0f082d94-07fd-5664-882a-d1d2d863fdf1
+		summarizeBy: none
+		sourceColumn: rolling_absent_days
+
+	/// True when the 20-day window is full, so the rule is not applied to the first days of the year.
+	column rolling_window_complete
+		dataType: boolean
+		isHidden
+		lineageTag: eebb6f29-8029-50f9-9a53-6a0e1f932e2b
+		summarizeBy: none
+		sourceColumn: rolling_window_complete
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: 5293042c-c604-493f-9794-b7e6a79d7ba0
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 862cde9d-eb7e-4ad8-b199-90f182d3d286
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: e78e18fe-4c77-4a5e-ad87-abfac5b3c701
+			defaultHierarchy: LocalDateTable_863fd4b8-ad04-4f71-a25f-95aa5353e44b.'Date Hierarchy'
+
+	partition FactAttendanceDay = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.FactAttendanceDay WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.FactAttendanceDay WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,120 @@
+/// One row per school.
+table DimSchool
+	lineageTag: 97810bfd-f01e-43cd-a6fb-d1eeeff439c6
+
+	/// Internal school ID used to join the data together.
+	column school_id
+		dataType: string
+		isHidden
+		isKey
+		lineageTag: ffe89b89-7de9-4298-85ab-85ffd97076c7
+		summarizeBy: none
+		sourceColumn: school_id
+
+	/// The name shown in the report.
+	column School
+		dataType: string
+		lineageTag: 20faf3eb-4025-4116-99b5-26799766d636
+		summarizeBy: none
+		sourceColumn: name
+
+	/// Internal ID of the local authority or district.
+	column district_id
+		dataType: string
+		isHidden
+		lineageTag: d3554d68-44a0-4dc2-ae2f-4fdc175e26c5
+		summarizeBy: none
+		sourceColumn: district_id
+
+	/// The school's street address.
+	column 'Street address'
+		dataType: string
+		dataCategory: Address
+		lineageTag: c0265ac4-dbd8-53f9-9e3d-ee6afadb755d
+		summarizeBy: none
+		sourceColumn: street_address
+
+	/// The town or city the school is in.
+	column City
+		dataType: string
+		dataCategory: City
+		lineageTag: 08aa8c2a-2d81-5035-81eb-c577d9efc7c5
+		summarizeBy: none
+		sourceColumn: city
+
+	/// The state or region.
+	column State
+		dataType: string
+		dataCategory: StateOrProvince
+		lineageTag: f8d9fc4c-cf38-59d5-a719-72adabba63ee
+		summarizeBy: none
+		sourceColumn: state
+
+	/// The postal code.
+	column 'Postal code'
+		dataType: string
+		dataCategory: PostalCode
+		lineageTag: a31ae7dd-d56c-564c-a806-f452031c9271
+		summarizeBy: none
+		sourceColumn: postal_code
+
+	/// The county.
+	column County
+		dataType: string
+		dataCategory: County
+		lineageTag: 3a83f1dc-9745-57f4-b173-332cc315c077
+		summarizeBy: none
+		sourceColumn: county
+
+	/// The full postal address in one line, for placing the school on a map.
+	column 'Full address' =
+			CONCATENATEX (
+			    FILTER (
+			        { 'DimSchool'[Street address], 'DimSchool'[City], TRIM ( 'DimSchool'[State] & " " & 'DimSchool'[Postal code] ) },
+			        [Value] <> ""
+			    ),
+			    [Value],
+			    ", "
+			)
+		dataType: string
+		dataCategory: Address
+		lineageTag: ca1f9cb2-6b7e-5e24-abb8-b610a81486a6
+		summarizeBy: none
+
+	/// Which version of the data this row belongs to.
+	column snapshot_id
+		dataType: string
+		isHidden
+		lineageTag: c1b52349-3d06-4ac3-880a-a562ce91b3c5
+		summarizeBy: none
+		sourceColumn: snapshot_id
+
+	/// When this data was prepared.
+	column as_of
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd hh:nn:ss
+		lineageTag: 3e76d32f-7fe3-4bd6-bd0e-77d2bfe9863a
+		summarizeBy: none
+		sourceColumn: as_of
+
+		variation Variation
+			isDefault
+			relationship: ffc6e01d-3f43-4e31-82e1-acb31b41916e
+			defaultHierarchy: LocalDateTable_ff6fd6a2-763c-41c6-9bef-7f29ba8934a1.'Date Hierarchy'
+
+	partition DimSchool = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database ( GoldSqlEndpoint, GoldDatabase ),
+				    Latest = "SELECT * FROM dbo.DimSchool WHERE snapshot_id = (SELECT TOP 1 snapshot_id FROM dbo.GoldPublication ORDER BY published_at DESC)",
+				    Pinned = "SELECT * FROM dbo.DimSchool WHERE snapshot_id = @SnapshotId",
+				    Data =
+				        if GoldSnapshotId = "" then Value.NativeQuery(Source, Latest, null, [EnableFolding = true])
+				        else Value.NativeQuery(Source, Pinned, [SnapshotId = GoldSnapshotId], [EnableFolding = true])
+				in
+				    Data
+
+	annotation PBI_ResultType = Exception
+
